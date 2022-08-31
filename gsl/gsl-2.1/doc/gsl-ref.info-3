@@ -1,4 +1,4 @@
-This is gsl-ref.info, produced by makeinfo version 5.1 from
+This is gsl-ref.info, produced by makeinfo version 6.8 from
 gsl-ref.texi.
 
 Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
@@ -20,62 +20,6 @@ INFO-DIR-SECTION Software libraries
 START-INFO-DIR-ENTRY
 * gsl-ref: (gsl-ref).                   GNU Scientific Library - Reference
 END-INFO-DIR-ENTRY
-
-
-File: gsl-ref.info,  Node: The Levy alpha-Stable Distributions,  Next: The Levy skew alpha-Stable Distribution,  Prev: The Landau Distribution,  Up: Random Number Distributions
-
-20.12 The Levy alpha-Stable Distributions
-=========================================
-
- -- Function: double gsl_ran_levy (const gsl_rng * R, double C, double
-          ALPHA)
-     This function returns a random variate from the Levy symmetric
-     stable distribution with scale C and exponent ALPHA.  The symmetric
-     stable probability distribution is defined by a Fourier transform,
-
-          p(x) = {1 \over 2 \pi} \int_{-\infty}^{+\infty} dt \exp(-it x - |c t|^alpha)
-
-     There is no explicit solution for the form of p(x) and the library
-     does not define a corresponding 'pdf' function.  For \alpha = 1 the
-     distribution reduces to the Cauchy distribution.  For \alpha = 2 it
-     is a Gaussian distribution with \sigma = \sqrt{2} c.  For \alpha <
-     1 the tails of the distribution become extremely wide.
-
-     The algorithm only works for 0 < alpha <= 2.
-
-
-
-File: gsl-ref.info,  Node: The Levy skew alpha-Stable Distribution,  Next: The Gamma Distribution,  Prev: The Levy alpha-Stable Distributions,  Up: Random Number Distributions
-
-20.13 The Levy skew alpha-Stable Distribution
-=============================================
-
- -- Function: double gsl_ran_levy_skew (const gsl_rng * R, double C,
-          double ALPHA, double BETA)
-     This function returns a random variate from the Levy skew stable
-     distribution with scale C, exponent ALPHA and skewness parameter
-     BETA.  The skewness parameter must lie in the range [-1,1].  The
-     Levy skew stable probability distribution is defined by a Fourier
-     transform,
-
-          p(x) = {1 \over 2 \pi} \int_{-\infty}^{+\infty} dt \exp(-it x - |c t|^alpha (1-i beta sign(t) tan(pi alpha/2)))
-
-     When \alpha = 1 the term \tan(\pi \alpha/2) is replaced by
-     -(2/\pi)\log|t|.  There is no explicit solution for the form of
-     p(x) and the library does not define a corresponding 'pdf'
-     function.  For \alpha = 2 the distribution reduces to a Gaussian
-     distribution with \sigma = \sqrt{2} c and the skewness parameter
-     has no effect.  For \alpha < 1 the tails of the distribution become
-     extremely wide.  The symmetric distribution corresponds to \beta =
-     0.
-
-     The algorithm only works for 0 < alpha <= 2.
-
-   The Levy alpha-stable distributions have the property that if N
-alpha-stable variates are drawn from the distribution p(c, \alpha,
-\beta) then the sum Y = X_1 + X_2 + \dots + X_N will also be distributed
-as an alpha-stable variate, p(N^(1/\alpha) c, \alpha, \beta).
-
 
 
 File: gsl-ref.info,  Node: The Gamma Distribution,  Next: The Flat (Uniform) Distribution,  Prev: The Levy skew alpha-Stable Distribution,  Up: Random Number Distributions
@@ -592,9 +536,9 @@ K, Marsaglia's lookup table can be quite large.
 method for generating discrete random variables with general
 distributions, ACM Trans on Mathematical Software 3, 253-256 (1977); see
 also Knuth, v2, 3rd ed, p120-121,139).  This requires two lookup tables,
-one floating point and one integer, but both only of size K.  After
+one floating point and one integer, but both only of size K. After
 preprocessing, the random numbers are generated in O(1) time, even for
-large K.  The preprocessing suggested by Walker requires O(K^2) effort,
+large K. The preprocessing suggested by Walker requires O(K^2) effort,
 but that is not actually necessary, and the implementation provided here
 only takes O(K) effort.  In general, more preprocessing leads to faster
 generation of the individual random numbers, but a diminishing return is
@@ -980,34 +924,34 @@ Poisson distribution with a mean of 3.
      #include <stdio.h>
      #include <gsl/gsl_rng.h>
      #include <gsl/gsl_randist.h>
-
+     
      int
      main (void)
      {
        const gsl_rng_type * T;
        gsl_rng * r;
-
+     
        int i, n = 10;
        double mu = 3.0;
-
-       /* create a generator chosen by the
+     
+       /* create a generator chosen by the 
           environment variable GSL_RNG_TYPE */
-
+     
        gsl_rng_env_setup();
-
+     
        T = gsl_rng_default;
        r = gsl_rng_alloc (T);
-
-       /* print n random variates chosen from
-          the poisson distribution with mean
+     
+       /* print n random variates chosen from 
+          the poisson distribution with mean 
           parameter mu */
-
-       for (i = 0; i < n; i++)
+     
+       for (i = 0; i < n; i++) 
          {
            unsigned int k = gsl_ran_poisson (r, mu);
            printf (" %u", k);
          }
-
+     
        printf ("\n");
        gsl_rng_free (r);
        return 0;
@@ -1036,29 +980,29 @@ The following program generates a random walk in two dimensions.
      #include <stdio.h>
      #include <gsl/gsl_rng.h>
      #include <gsl/gsl_randist.h>
-
+     
      int
      main (void)
      {
        int i;
        double x = 0, y = 0, dx, dy;
-
+     
        const gsl_rng_type * T;
        gsl_rng * r;
-
+     
        gsl_rng_env_setup();
        T = gsl_rng_default;
        r = gsl_rng_alloc (T);
-
+     
        printf ("%g %g\n", x, y);
-
+     
        for (i = 0; i < 10; i++)
          {
            gsl_ran_dir_2d (r, &dx, &dy);
-           x += dx; y += dy;
+           x += dx; y += dy; 
            printf ("%g %g\n", x, y);
          }
-
+     
        gsl_rng_free (r);
        return 0;
      }
@@ -1071,25 +1015,25 @@ distribution functions for the standard normal distribution at x=2.
 
      #include <stdio.h>
      #include <gsl/gsl_cdf.h>
-
+     
      int
      main (void)
      {
        double P, Q;
        double x = 2.0;
-
+     
        P = gsl_cdf_ugaussian_P (x);
        printf ("prob(x < %f) = %f\n", x, P);
-
+     
        Q = gsl_cdf_ugaussian_Q (x);
        printf ("prob(x > %f) = %f\n", x, Q);
-
+     
        x = gsl_cdf_ugaussian_Pinv (P);
        printf ("Pinv(%f) = %f\n", P, x);
-
+     
        x = gsl_cdf_ugaussian_Qinv (Q);
        printf ("Qinv(%f) = %f\n", Q, x);
-
+     
        return 0;
      }
 
@@ -1176,17 +1120,17 @@ STRIDE parameter specifying the spacing between elements.
 
 * Menu:
 
-* Mean and standard deviation and variance::  
-* Absolute deviation::          
-* Higher moments (skewness and kurtosis)::  
-* Autocorrelation::             
-* Covariance::                  
-* Correlation::                  
-* Weighted Samples::            
-* Maximum and Minimum values::  
-* Median and Percentiles::      
-* Example statistical programs::  
-* Statistics References and Further Reading::  
+* Mean and standard deviation and variance::
+* Absolute deviation::
+* Higher moments (skewness and kurtosis)::
+* Autocorrelation::
+* Covariance::
+* Correlation::
+* Weighted Samples::
+* Maximum and Minimum values::
+* Median and Percentiles::
+* Example statistical programs::
+* Statistics References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Mean and standard deviation and variance,  Next: Absolute deviation,  Up: Statistics
@@ -1661,21 +1605,21 @@ Here is a basic example of how to use the statistical functions:
 
      #include <stdio.h>
      #include <gsl/gsl_statistics.h>
-
+     
      int
      main(void)
      {
        double data[5] = {17.2, 18.1, 16.5, 18.3, 12.6};
        double mean, variance, largest, smallest;
-
+     
        mean     = gsl_stats_mean(data, 1, 5);
        variance = gsl_stats_variance(data, 1, 5);
        largest  = gsl_stats_max(data, 1, 5);
        smallest = gsl_stats_min(data, 1, 5);
-
+     
        printf ("The dataset is %g, %g, %g, %g, %g\n",
               data[0], data[1], data[2], data[3], data[4]);
-
+     
        printf ("The sample mean is %g\n", mean);
        printf ("The estimated variance is %g\n", variance);
        printf ("The largest value is %g\n", largest);
@@ -1696,34 +1640,34 @@ Here is a basic example of how to use the statistical functions:
      #include <stdio.h>
      #include <gsl/gsl_sort.h>
      #include <gsl/gsl_statistics.h>
-
+     
      int
      main(void)
      {
        double data[5] = {17.2, 18.1, 16.5, 18.3, 12.6};
        double median, upperq, lowerq;
-
+     
        printf ("Original dataset:  %g, %g, %g, %g, %g\n",
               data[0], data[1], data[2], data[3], data[4]);
-
+     
        gsl_sort (data, 1, 5);
-
+     
        printf ("Sorted dataset: %g, %g, %g, %g, %g\n",
               data[0], data[1], data[2], data[3], data[4]);
-
-       median
-         = gsl_stats_median_from_sorted_data (data,
+     
+       median 
+         = gsl_stats_median_from_sorted_data (data, 
                                               1, 5);
-
-       upperq
-         = gsl_stats_quantile_from_sorted_data (data,
+     
+       upperq 
+         = gsl_stats_quantile_from_sorted_data (data, 
                                                 1, 5,
                                                 0.75);
-       lowerq
-         = gsl_stats_quantile_from_sorted_data (data,
+       lowerq 
+         = gsl_stats_quantile_from_sorted_data (data, 
                                                 1, 5,
                                                 0.25);
-
+     
        printf ("The median is %g\n", median);
        printf ("The upper quartile is %g\n", upperq);
        printf ("The lower quartile is %g\n", lowerq);
@@ -1795,9 +1739,9 @@ file 'gsl_rstat.h'.
 * Running Statistics Initializing the Accumulator::
 * Running Statistics Adding Data to the Accumulator::
 * Running Statistics Current Statistics::
-* Running Statistics Quantiles::      
-* Running Statistics Example programs::  
-* Running Statistics References and Further Reading::  
+* Running Statistics Quantiles::
+* Running Statistics Example programs::
+* Running Statistics References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Running Statistics Initializing the Accumulator,  Next: Running Statistics Adding Data to the Accumulator,  Up: Running Statistics
@@ -1919,7 +1863,7 @@ Here is a basic example of how to use the statistical functions:
 
      #include <stdio.h>
      #include <gsl/gsl_rstat.h>
-
+     
      int
      main(void)
      {
@@ -1927,26 +1871,26 @@ Here is a basic example of how to use the statistical functions:
        double mean, variance, largest, smallest;
        gsl_rstat_workspace *rstat_p = gsl_rstat_alloc();
        size_t i;
-
+     
        /* add data to rstat accumulator */
        for (i = 0; i < 5; ++i)
          gsl_rstat_add(data[i], rstat_p);
-
+     
        mean     = gsl_rstat_mean(rstat_p);
        variance = gsl_rstat_variance(rstat_p);
        largest  = gsl_rstat_max(rstat_p);
        smallest = gsl_rstat_min(rstat_p);
-
+     
        printf ("The dataset is %g, %g, %g, %g, %g\n",
               data[0], data[1], data[2], data[3], data[4]);
-
+     
        printf ("The sample mean is %g\n", mean);
        printf ("The estimated variance is %g\n", variance);
        printf ("The largest value is %g\n", largest);
        printf ("The smallest value is %g\n", smallest);
-
+     
        gsl_rstat_free(rstat_p);
-
+     
        return 0;
      }
 
@@ -1970,7 +1914,7 @@ values are also computed from the sorted dataset.
      #include <gsl/gsl_rng.h>
      #include <gsl/gsl_randist.h>
      #include <gsl/gsl_sort.h>
-
+     
      int
      main(void)
      {
@@ -1983,7 +1927,7 @@ values are also computed from the sorted dataset.
        double exact_p25, exact_p50, exact_p75;
        double val_p25, val_p50, val_p75;
        size_t i;
-
+     
        /* add data to quantile accumulators; also store data for exact
         * comparisons */
        for (i = 0; i < N; ++i)
@@ -1993,34 +1937,34 @@ values are also computed from the sorted dataset.
            gsl_rstat_quantile_add(data[i], work_50);
            gsl_rstat_quantile_add(data[i], work_75);
          }
-
+     
        /* exact values */
        gsl_sort(data, 1, N);
        exact_p25 = gsl_stats_quantile_from_sorted_data(data, 1, N, 0.25);
        exact_p50 = gsl_stats_quantile_from_sorted_data(data, 1, N, 0.5);
        exact_p75 = gsl_stats_quantile_from_sorted_data(data, 1, N, 0.75);
-
+     
        /* estimated values */
        val_p25 = gsl_rstat_quantile_get(work_25);
        val_p50 = gsl_rstat_quantile_get(work_50);
        val_p75 = gsl_rstat_quantile_get(work_75);
-
+     
        printf ("The dataset is %g, %g, %g, %g, %g, ...\n",
               data[0], data[1], data[2], data[3], data[4]);
-
+     
        printf ("0.25 quartile: exact = %.5f, estimated = %.5f, error = %.6e\n",
                exact_p25, val_p25, (val_p25 - exact_p25) / exact_p25);
        printf ("0.50 quartile: exact = %.5f, estimated = %.5f, error = %.6e\n",
                exact_p50, val_p50, (val_p50 - exact_p50) / exact_p50);
        printf ("0.75 quartile: exact = %.5f, estimated = %.5f, error = %.6e\n",
                exact_p75, val_p75, (val_p75 - exact_p75) / exact_p75);
-
+     
        gsl_rstat_quantile_free(work_25);
        gsl_rstat_quantile_free(work_50);
        gsl_rstat_quantile_free(work_75);
        gsl_rng_free(r);
        free(data);
-
+     
        return 0;
      }
 
@@ -2069,28 +2013,28 @@ This can be useful for generating simulations based on real data.
 
 * Menu:
 
-* The histogram struct::        
-* Histogram allocation::        
-* Copying Histograms::          
-* Updating and accessing histogram elements::  
-* Searching histogram ranges::  
-* Histogram Statistics::        
-* Histogram Operations::        
-* Reading and writing histograms::  
-* Resampling from histograms::  
-* The histogram probability distribution struct::  
-* Example programs for histograms::  
-* Two dimensional histograms::  
-* The 2D histogram struct::     
-* 2D Histogram allocation::     
-* Copying 2D Histograms::       
-* Updating and accessing 2D histogram elements::  
-* Searching 2D histogram ranges::  
-* 2D Histogram Statistics::     
-* 2D Histogram Operations::     
-* Reading and writing 2D histograms::  
-* Resampling from 2D histograms::  
-* Example programs for 2D histograms::  
+* The histogram struct::
+* Histogram allocation::
+* Copying Histograms::
+* Updating and accessing histogram elements::
+* Searching histogram ranges::
+* Histogram Statistics::
+* Histogram Operations::
+* Reading and writing histograms::
+* Resampling from histograms::
+* The histogram probability distribution struct::
+* Example programs for histograms::
+* Two dimensional histograms::
+* The 2D histogram struct::
+* 2D Histogram allocation::
+* Copying 2D Histograms::
+* Updating and accessing 2D histogram elements::
+* Searching 2D histogram ranges::
+* 2D Histogram Statistics::
+* 2D Histogram Operations::
+* Reading and writing 2D histograms::
+* Resampling from 2D histograms::
+* Example programs for 2D histograms::
 
 
 File: gsl-ref.info,  Node: The histogram struct,  Next: Histogram allocation,  Up: Histograms
@@ -2124,6 +2068,7 @@ number-line for x,
           [ bin[0] )[ bin[1] )[ bin[2] )[ bin[3] )[ bin[4] )
        ---|---------|---------|---------|---------|---------|---  x
         r[0]      r[1]      r[2]      r[3]      r[4]      r[5]
+
 
 In this picture the values of the RANGE array are denoted by r.  On the
 left-hand side of each bin the square bracket '[' denotes an inclusive
@@ -2545,13 +2490,13 @@ read it prints out the accumulated histogram using
      #include <stdio.h>
      #include <stdlib.h>
      #include <gsl/gsl_histogram.h>
-
+     
      int
      main (int argc, char **argv)
      {
        double a, b;
        size_t n;
-
+     
        if (argc != 4)
          {
            printf ("Usage: gsl-histogram xmin xmax n\n"
@@ -2560,16 +2505,16 @@ read it prints out the accumulated histogram using
                    "to xmax\n");
            exit (0);
          }
-
+     
        a = atof (argv[1]);
        b = atof (argv[2]);
        n = atoi (argv[3]);
-
+     
        {
          double x;
          gsl_histogram * h = gsl_histogram_alloc (n);
          gsl_histogram_set_ranges_uniform (h, a, b);
-
+     
          while (fscanf (stdin, "%lg", &x) == 1)
            {
              gsl_histogram_increment (h, x);
@@ -2605,7 +2550,7 @@ simplest way to use a two dimensional histogram is to record
 two-dimensional position information, n(x,y).  Another possibility is to
 form a "joint distribution" by recording related variables.  For example
 a detector might record both the position of an event (x) and the amount
-of energy it deposited E.  These could be histogrammed as the joint
+of energy it deposited E. These could be histogrammed as the joint
 distribution n(x,E).
 
 
@@ -3059,53 +3004,54 @@ which are printed out.
      #include <stdio.h>
      #include <gsl/gsl_rng.h>
      #include <gsl/gsl_histogram2d.h>
-
+     
      int
      main (void)
      {
        const gsl_rng_type * T;
        gsl_rng * r;
-
+     
        gsl_histogram2d * h = gsl_histogram2d_alloc (10, 10);
-
-       gsl_histogram2d_set_ranges_uniform (h,
+     
+       gsl_histogram2d_set_ranges_uniform (h, 
                                            0.0, 1.0,
                                            0.0, 1.0);
-
+     
        gsl_histogram2d_accumulate (h, 0.3, 0.3, 1);
        gsl_histogram2d_accumulate (h, 0.8, 0.1, 5);
        gsl_histogram2d_accumulate (h, 0.7, 0.9, 0.5);
-
+     
        gsl_rng_env_setup ();
-
+       
        T = gsl_rng_default;
        r = gsl_rng_alloc (T);
-
+     
        {
          int i;
-         gsl_histogram2d_pdf * p
+         gsl_histogram2d_pdf * p 
            = gsl_histogram2d_pdf_alloc (h->nx, h->ny);
-
+         
          gsl_histogram2d_pdf_init (p, h);
-
+     
          for (i = 0; i < 1000; i++) {
            double x, y;
            double u = gsl_rng_uniform (r);
            double v = gsl_rng_uniform (r);
-
+            
            gsl_histogram2d_pdf_sample (p, u, v, &x, &y);
-
+           
            printf ("%g %g\n", x, y);
          }
-
+     
          gsl_histogram2d_pdf_free (p);
        }
-
+     
        gsl_histogram2d_free (h);
        gsl_rng_free (r);
-
+     
        return 0;
      }
+
 
 
 File: gsl-ref.info,  Node: N-tuples,  Next: Monte Carlo Integration,  Prev: Histograms,  Up: Top
@@ -3134,15 +3080,15 @@ event.
 
 * Menu:
 
-* The ntuple struct::           
-* Creating ntuples::            
-* Opening an existing ntuple file::  
-* Writing ntuples::             
-* Reading ntuples ::            
-* Closing an ntuple file::      
-* Histogramming ntuple values::  
-* Example ntuple programs::     
-* Ntuple References and Further Reading::  
+* The ntuple struct::
+* Creating ntuples::
+* Opening an existing ntuple file::
+* Writing ntuples::
+* Reading ntuples ::
+* Closing an ntuple file::
+* Histogramming ntuple values::
+* Example ntuple programs::
+* Ntuple References and Further Reading::
 
 
 File: gsl-ref.info,  Node: The ntuple struct,  Next: Creating ntuples,  Up: N-tuples
@@ -3285,44 +3231,44 @@ demonstration purposes, and written to the ntuple file 'test.dat'.
      #include <gsl/gsl_ntuple.h>
      #include <gsl/gsl_rng.h>
      #include <gsl/gsl_randist.h>
-
+     
      struct data
      {
        double x;
        double y;
        double z;
      };
-
+     
      int
      main (void)
      {
        const gsl_rng_type * T;
        gsl_rng * r;
-
+     
        struct data ntuple_row;
        int i;
-
-       gsl_ntuple *ntuple
-         = gsl_ntuple_create ("test.dat", &ntuple_row,
+     
+       gsl_ntuple *ntuple 
+         = gsl_ntuple_create ("test.dat", &ntuple_row, 
                               sizeof (ntuple_row));
-
+     
        gsl_rng_env_setup ();
-
-       T = gsl_rng_default;
+     
+       T = gsl_rng_default; 
        r = gsl_rng_alloc (T);
-
+     
        for (i = 0; i < 10000; i++)
          {
            ntuple_row.x = gsl_ran_ugaussian (r);
            ntuple_row.y = gsl_ran_ugaussian (r);
            ntuple_row.z = gsl_ran_ugaussian (r);
-
+           
            gsl_ntuple_write (ntuple);
          }
-
+       
        gsl_ntuple_close (ntuple);
        gsl_rng_free (r);
-
+     
        return 0;
      }
 
@@ -3334,74 +3280,74 @@ E^2=x^2+y^2+z^2, and select only those which exceed a lower limit of
      #include <math.h>
      #include <gsl/gsl_ntuple.h>
      #include <gsl/gsl_histogram.h>
-
+     
      struct data
      {
        double x;
        double y;
        double z;
      };
-
+     
      int sel_func (void *ntuple_data, void *params);
      double val_func (void *ntuple_data, void *params);
-
+     
      int
      main (void)
      {
        struct data ntuple_row;
-
-       gsl_ntuple *ntuple
+     
+       gsl_ntuple *ntuple 
          = gsl_ntuple_open ("test.dat", &ntuple_row,
                             sizeof (ntuple_row));
        double lower = 1.5;
-
+     
        gsl_ntuple_select_fn S;
        gsl_ntuple_value_fn V;
-
+     
        gsl_histogram *h = gsl_histogram_alloc (100);
        gsl_histogram_set_ranges_uniform(h, 0.0, 10.0);
-
+     
        S.function = &sel_func;
        S.params = &lower;
-
+     
        V.function = &val_func;
        V.params = 0;
-
+     
        gsl_ntuple_project (h, ntuple, &V, &S);
        gsl_histogram_fprintf (stdout, h, "%f", "%f");
        gsl_histogram_free (h);
        gsl_ntuple_close (ntuple);
-
+     
        return 0;
      }
-
+     
      int
      sel_func (void *ntuple_data, void *params)
      {
-       struct data * data = (struct data *) ntuple_data;
+       struct data * data = (struct data *) ntuple_data;  
        double x, y, z, E2, scale;
        scale = *(double *) params;
-
+       
        x = data->x;
        y = data->y;
        z = data->z;
-
+     
        E2 = x * x + y * y + z * z;
-
+     
        return E2 > scale;
      }
-
+     
      double
      val_func (void *ntuple_data, void *params)
      {
        (void)(params); /* avoid unused parameter warning */
-       struct data * data = (struct data *) ntuple_data;
+       struct data * data = (struct data *) ntuple_data;  
        double x, y, z;
-
+     
        x = data->x;
        y = data->y;
        z = data->z;
-
+     
        return x * x + y * y + z * z;
      }
 
@@ -3443,12 +3389,12 @@ resulting in an underestimate of the error.
 
 * Menu:
 
-* Monte Carlo Interface::       
-* PLAIN Monte Carlo::  
-* MISER::                       
-* VEGAS::                       
-* Monte Carlo Examples::        
-* Monte Carlo Integration References and Further Reading::  
+* Monte Carlo Interface::
+* PLAIN Monte Carlo::
+* MISER::
+* VEGAS::
+* Monte Carlo Examples::
+* Monte Carlo Integration References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Monte Carlo Interface,  Next: PLAIN Monte Carlo,  Up: Monte Carlo Integration
@@ -3954,23 +3900,23 @@ special measures are needed to avoid these singularities.
      #include <gsl/gsl_monte_plain.h>
      #include <gsl/gsl_monte_miser.h>
      #include <gsl/gsl_monte_vegas.h>
-
+     
      /* Computation of the integral,
-
+     
            I = int (dx dy dz)/(2pi)^3  1/(1-cos(x)cos(y)cos(z))
-
+     
         over (-pi,-pi,-pi) to (+pi, +pi, +pi).  The exact answer
         is Gamma(1/4)^4/(4 pi^3).  This example is taken from
         C.Itzykson, J.M.Drouffe, "Statistical Field Theory -
         Volume 1", Section 1.1, p21, which cites the original
         paper M.L.Glasser, I.J.Zucker, Proc.Natl.Acad.Sci.USA 74
         1800 (1977) */
-
-     /* For simplicity we compute the integral over the region
+     
+     /* For simplicity we compute the integral over the region 
         (0,0,0) -> (pi,pi,pi) and multiply by 8 */
-
+     
      double exact = 1.3932039296856768591842462603255;
-
+     
      double
      g (double *k, size_t dim, void *params)
      {
@@ -3979,7 +3925,7 @@ special measures are needed to avoid these singularities.
        double A = 1.0 / (M_PI * M_PI * M_PI);
        return A / (1.0 - cos (k[0]) * cos (k[1]) * cos (k[2]));
      }
-
+     
      void
      display_results (char *title, double result, double error)
      {
@@ -3990,54 +3936,54 @@ special measures are needed to avoid these singularities.
        printf ("error  = % .6f = %.2g sigma\n", result - exact,
                fabs (result - exact) / error);
      }
-
+     
      int
      main (void)
      {
        double res, err;
-
+     
        double xl[3] = { 0, 0, 0 };
        double xu[3] = { M_PI, M_PI, M_PI };
-
+     
        const gsl_rng_type *T;
        gsl_rng *r;
-
+     
        gsl_monte_function G = { &g, 3, 0 };
-
+     
        size_t calls = 500000;
-
+     
        gsl_rng_env_setup ();
-
+     
        T = gsl_rng_default;
        r = gsl_rng_alloc (T);
-
+     
        {
          gsl_monte_plain_state *s = gsl_monte_plain_alloc (3);
-         gsl_monte_plain_integrate (&G, xl, xu, 3, calls, r, s,
+         gsl_monte_plain_integrate (&G, xl, xu, 3, calls, r, s, 
                                     &res, &err);
          gsl_monte_plain_free (s);
-
+     
          display_results ("plain", res, err);
        }
-
+     
        {
          gsl_monte_miser_state *s = gsl_monte_miser_alloc (3);
          gsl_monte_miser_integrate (&G, xl, xu, 3, calls, r, s,
                                     &res, &err);
          gsl_monte_miser_free (s);
-
+     
          display_results ("miser", res, err);
        }
-
+     
        {
          gsl_monte_vegas_state *s = gsl_monte_vegas_alloc (3);
-
+     
          gsl_monte_vegas_integrate (&G, xl, xu, 3, 10000, r, s,
                                     &res, &err);
          display_results ("vegas warm-up", res, err);
-
+     
          printf ("converging...\n");
-
+     
          do
            {
              gsl_monte_vegas_integrate (&G, xl, xu, 3, calls/5, r, s,
@@ -4046,14 +3992,14 @@ special measures are needed to avoid these singularities.
                      "chisq/dof = %.1f\n", res, err, gsl_monte_vegas_chisq (s));
            }
          while (fabs (gsl_monte_vegas_chisq (s) - 1.0) > 0.5);
-
+     
          display_results ("vegas final", res, err);
-
+     
          gsl_monte_vegas_free (s);
        }
-
+     
        gsl_rng_free (r);
-
+     
        return 0;
      }
 
@@ -4150,10 +4096,10 @@ file 'gsl_siman.h'.
 
 * Menu:
 
-* Simulated Annealing algorithm::  
-* Simulated Annealing functions::  
-* Examples with Simulated Annealing::  
-* Simulated Annealing References and Further Reading::  
+* Simulated Annealing algorithm::
+* Simulated Annealing functions::
+* Examples with Simulated Annealing::
+* Simulated Annealing References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Simulated Annealing algorithm,  Next: Simulated Annealing functions,  Up: Simulated Annealing
@@ -4308,8 +4254,8 @@ application with little change and should make things easier.
 
 * Menu:
 
-* Trivial example::             
-* Traveling Salesman Problem::  
+* Trivial example::
+* Traveling Salesman Problem::
 
 
 File: gsl-ref.info,  Node: Trivial example,  Next: Traveling Salesman Problem,  Up: Examples with Simulated Annealing
@@ -4327,81 +4273,81 @@ minimum.
      #include <stdlib.h>
      #include <string.h>
      #include <gsl/gsl_siman.h>
-
+     
      /* set up parameters for this simulated annealing run */
-
+     
      /* how many points do we try before stepping */
-     #define N_TRIES 200
-
+     #define N_TRIES 200             
+     
      /* how many iterations for each T? */
      #define ITERS_FIXED_T 1000
-
+     
      /* max step size in random walk */
-     #define STEP_SIZE 1.0
-
+     #define STEP_SIZE 1.0            
+     
      /* Boltzmann constant */
-     #define K 1.0
-
+     #define K 1.0                   
+     
      /* initial temperature */
-     #define T_INITIAL 0.008
-
+     #define T_INITIAL 0.008         
+     
      /* damping factor for temperature */
-     #define MU_T 1.003
+     #define MU_T 1.003              
      #define T_MIN 2.0e-6
-
-     gsl_siman_params_t params
+     
+     gsl_siman_params_t params 
        = {N_TRIES, ITERS_FIXED_T, STEP_SIZE,
           K, T_INITIAL, MU_T, T_MIN};
-
+     
      /* now some functions to test in one dimension */
      double E1(void *xp)
      {
        double x = * ((double *) xp);
-
+     
        return exp(-pow((x-1.0),2.0))*sin(8*x);
      }
-
+     
      double M1(void *xp, void *yp)
      {
        double x = *((double *) xp);
        double y = *((double *) yp);
-
+     
        return fabs(x - y);
      }
-
+     
      void S1(const gsl_rng * r, void *xp, double step_size)
      {
        double old_x = *((double *) xp);
        double new_x;
-
+     
        double u = gsl_rng_uniform(r);
        new_x = u * 2 * step_size - step_size + old_x;
-
+     
        memcpy(xp, &new_x, sizeof(new_x));
      }
-
+     
      void P1(void *xp)
      {
        printf ("%12g", *((double *) xp));
      }
-
+     
      int
      main(void)
      {
        const gsl_rng_type * T;
        gsl_rng * r;
-
+     
        double x_initial = 15.5;
-
+     
        gsl_rng_env_setup();
-
+     
        T = gsl_rng_default;
        r = gsl_rng_alloc(T);
-
+     
        gsl_siman_solve(r, &x_initial, E1, S1, M1, P1,
-                       NULL, NULL, NULL,
+                       NULL, NULL, NULL, 
                        sizeof(double), params);
-
+     
        gsl_rng_free (r);
        return 0;
      }
@@ -4525,13 +4471,13 @@ retained under the original name for backwards compatibility.
 
 * Menu:
 
-* Defining the ODE System::     
-* Stepping Functions::          
-* Adaptive Step-size Control::  
-* Evolution::                   
+* Defining the ODE System::
+* Stepping Functions::
+* Adaptive Step-size Control::
+* Evolution::
 * Driver::
-* ODE Example programs::        
-* ODE References and Further Reading::  
+* ODE Example programs::
+* ODE References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Defining the ODE System,  Next: Stepping Functions,  Up: Ordinary Differential Equations
@@ -5063,7 +5009,7 @@ v).  The loop in the example prints the solution at the points t_i = 1,
      #include <gsl/gsl_errno.h>
      #include <gsl/gsl_matrix.h>
      #include <gsl/gsl_odeiv2.h>
-
+     
      int
      func (double t, const double y[], double f[],
            void *params)
@@ -5074,16 +5020,16 @@ v).  The loop in the example prints the solution at the points t_i = 1,
        f[1] = -y[0] - mu*y[1]*(y[0]*y[0] - 1);
        return GSL_SUCCESS;
      }
-
+     
      int
-     jac (double t, const double y[], double *dfdy,
+     jac (double t, const double y[], double *dfdy, 
           double dfdt[], void *params)
      {
        (void)(t); /* avoid unused parameter warning */
        double mu = *(double *)params;
-       gsl_matrix_view dfdy_mat
+       gsl_matrix_view dfdy_mat 
          = gsl_matrix_view_array (dfdy, 2, 2);
-       gsl_matrix * m = &dfdy_mat.matrix;
+       gsl_matrix * m = &dfdy_mat.matrix; 
        gsl_matrix_set (m, 0, 0, 0.0);
        gsl_matrix_set (m, 0, 1, 1.0);
        gsl_matrix_set (m, 1, 0, -2.0*mu*y[0]*y[1] - 1.0);
@@ -5092,34 +5038,34 @@ v).  The loop in the example prints the solution at the points t_i = 1,
        dfdt[1] = 0.0;
        return GSL_SUCCESS;
      }
-
+     
      int
      main (void)
      {
        double mu = 10;
        gsl_odeiv2_system sys = {func, jac, 2, &mu};
-
-       gsl_odeiv2_driver * d =
+     
+       gsl_odeiv2_driver * d = 
          gsl_odeiv2_driver_alloc_y_new (&sys, gsl_odeiv2_step_rk8pd,
      				  1e-6, 1e-6, 0.0);
        int i;
        double t = 0.0, t1 = 100.0;
        double y[2] = { 1.0, 0.0 };
-
+     
        for (i = 1; i <= 100; i++)
          {
            double ti = i * t1 / 100.0;
            int status = gsl_odeiv2_driver_apply (d, &t, ti, y);
-
+     
            if (status != GSL_SUCCESS)
      	{
      	  printf ("error, return value=%d\n", status);
      	  break;
      	}
-
+     
            printf ("%.5e %.5e %.5e\n", t, y[0], y[1]);
          }
-
+     
        gsl_odeiv2_driver_free (d);
        return 0;
      }
@@ -5131,36 +5077,36 @@ each successful step instead of equidistant time points.
      int
      main (void)
      {
-       const gsl_odeiv2_step_type * T
+       const gsl_odeiv2_step_type * T 
          = gsl_odeiv2_step_rk8pd;
-
-       gsl_odeiv2_step * s
+     
+       gsl_odeiv2_step * s 
          = gsl_odeiv2_step_alloc (T, 2);
-       gsl_odeiv2_control * c
+       gsl_odeiv2_control * c 
          = gsl_odeiv2_control_y_new (1e-6, 0.0);
-       gsl_odeiv2_evolve * e
+       gsl_odeiv2_evolve * e 
          = gsl_odeiv2_evolve_alloc (2);
-
+     
        double mu = 10;
        gsl_odeiv2_system sys = {func, jac, 2, &mu};
-
+     
        double t = 0.0, t1 = 100.0;
        double h = 1e-6;
        double y[2] = { 1.0, 0.0 };
-
+     
        while (t < t1)
          {
            int status = gsl_odeiv2_evolve_apply (e, c, s,
-                                                &sys,
+                                                &sys, 
                                                 &t, t1,
                                                 &h, y);
-
+     
            if (status != GSL_SUCCESS)
                break;
-
+     
            printf ("%.5e %.5e %.5e\n", t, y[0], y[1]);
          }
-
+     
        gsl_odeiv2_evolve_free (e);
        gsl_odeiv2_control_free (c);
        gsl_odeiv2_step_free (s);
@@ -5182,28 +5128,28 @@ with a fixed stepsize of 0.001.
      {
        double mu = 10;
        gsl_odeiv2_system sys = { func, jac, 2, &mu };
-
+     
        gsl_odeiv2_driver *d =
          gsl_odeiv2_driver_alloc_y_new (&sys, gsl_odeiv2_step_rk4,
                                         1e-3, 1e-8, 1e-8);
-
+     
        double t = 0.0;
        double y[2] = { 1.0, 0.0 };
        int i, s;
-
+     
        for (i = 0; i < 100; i++)
          {
            s = gsl_odeiv2_driver_apply_fixed_step (d, &t, 1e-3, 1000, y);
-
+     
            if (s != GSL_SUCCESS)
              {
                printf ("error: driver returned %d\n", s);
                break;
              }
-
+     
            printf ("%.5e %.5e %.5e\n", t, y[0], y[1]);
          }
-
+     
        gsl_odeiv2_driver_free (d);
        return s;
      }
@@ -5279,21 +5225,21 @@ files 'gsl_interp.h' and 'gsl_spline.h'.
 
 * Menu:
 
-* 1D Introduction to Interpolation::  
-* 1D Interpolation Functions::     
-* 1D Interpolation Types::         
-* 1D Index Look-up and Acceleration::  
-* 1D Evaluation of Interpolating Functions::  
-* 1D Higher-level Interface::      
-* 1D Interpolation Example programs::  
-* 1D Interpolation References and Further Reading::  
-* 2D Introduction to Interpolation::  
-* 2D Interpolation Functions::     
-* 2D Interpolation Grids::     
-* 2D Interpolation Types::         
-* 2D Evaluation of Interpolating Functions::  
-* 2D Higher-level Interface::      
-* 2D Interpolation Example programs::  
+* 1D Introduction to Interpolation::
+* 1D Interpolation Functions::
+* 1D Interpolation Types::
+* 1D Index Look-up and Acceleration::
+* 1D Evaluation of Interpolating Functions::
+* 1D Higher-level Interface::
+* 1D Interpolation Example programs::
+* 1D Interpolation References and Further Reading::
+* 2D Introduction to Interpolation::
+* 2D Interpolation Functions::
+* 2D Interpolation Grids::
+* 2D Interpolation Types::
+* 2D Evaluation of Interpolating Functions::
+* 2D Higher-level Interface::
+* 2D Interpolation Example programs::
 
 
 File: gsl-ref.info,  Node: 1D Introduction to Interpolation,  Next: 1D Interpolation Functions,  Up: Interpolation
@@ -5558,32 +5504,32 @@ spline functions.  It computes a cubic spline interpolation of the
      #include <math.h>
      #include <gsl/gsl_errno.h>
      #include <gsl/gsl_spline.h>
-
+     
      int
      main (void)
      {
        int i;
        double xi, yi, x[10], y[10];
-
+     
        printf ("#m=0,S=2\n");
-
+     
        for (i = 0; i < 10; i++)
          {
            x[i] = i + 0.5 * sin (i);
            y[i] = i + cos (i * i);
            printf ("%g %g\n", x[i], y[i]);
          }
-
+     
        printf ("#m=1,S=0\n");
-
+     
        {
-         gsl_interp_accel *acc
+         gsl_interp_accel *acc 
            = gsl_interp_accel_alloc ();
-         gsl_spline *spline
+         gsl_spline *spline 
            = gsl_spline_alloc (gsl_interp_cspline, 10);
-
+     
          gsl_spline_init (spline, x, y, 10);
-
+     
          for (xi = x[0]; xi < x[9]; xi += 0.01)
            {
              yi = gsl_spline_eval (spline, xi, acc);
@@ -5614,41 +5560,42 @@ same y-value for a periodic spline.
      #include <math.h>
      #include <gsl/gsl_errno.h>
      #include <gsl/gsl_spline.h>
-
+     
      int
      main (void)
      {
        int N = 4;
        double x[4] = {0.00, 0.10,  0.27,  0.30};
-       double y[4] = {0.15, 0.70, -0.10,  0.15};
+       double y[4] = {0.15, 0.70, -0.10,  0.15}; 
                   /* Note: y[0] == y[3] for periodic data */
-
+     
        gsl_interp_accel *acc = gsl_interp_accel_alloc ();
-       const gsl_interp_type *t = gsl_interp_cspline_periodic;
+       const gsl_interp_type *t = gsl_interp_cspline_periodic; 
        gsl_spline *spline = gsl_spline_alloc (t, N);
-
+     
        int i; double xi, yi;
-
+     
        printf ("#m=0,S=5\n");
        for (i = 0; i < N; i++)
          {
            printf ("%g %g\n", x[i], y[i]);
          }
-
+     
        printf ("#m=1,S=0\n");
        gsl_spline_init (spline, x, y, N);
-
+     
        for (i = 0; i <= 100; i++)
          {
            xi = (1 - i / 100.0) * x[0] + (i / 100.0) * x[N-1];
            yi = gsl_spline_eval (spline, xi, acc);
            printf ("%g %g\n", xi, yi);
          }
-
+       
        gsl_spline_free (spline);
        gsl_interp_accel_free (acc);
        return 0;
      }
+
 
    The output can be plotted with GNU 'graph'.
 
@@ -5665,16 +5612,16 @@ Akima, and Steffen interpolation types on a difficult dataset.
      #include <stdio.h>
      #include <stdlib.h>
      #include <math.h>
-
+     
      #include <gsl/gsl_math.h>
      #include <gsl/gsl_spline.h>
-
+     
      int
      main(void)
      {
        size_t i;
        const size_t N = 9;
-
+     
        /* this dataset is taken from
         * J. M. Hyman, Accurate Monotonicity preserving cubic interpolation,
         * SIAM J. Sci. Stat. Comput. 4, 4, 1983. */
@@ -5683,36 +5630,36 @@ Akima, and Steffen interpolation types on a difficult dataset.
        const double y[] = { 0.0, 2.76429e-5, 4.37498e-2,
                             0.169183, 0.469428, 0.943740,
                             0.998636, 0.999919, 0.999994 };
-
+     
        gsl_interp_accel *acc = gsl_interp_accel_alloc();
        gsl_spline *spline_cubic = gsl_spline_alloc(gsl_interp_cspline, N);
        gsl_spline *spline_akima = gsl_spline_alloc(gsl_interp_akima, N);
        gsl_spline *spline_steffen = gsl_spline_alloc(gsl_interp_steffen, N);
-
+     
        gsl_spline_init(spline_cubic, x, y, N);
        gsl_spline_init(spline_akima, x, y, N);
        gsl_spline_init(spline_steffen, x, y, N);
-
+     
        for (i = 0; i < N; ++i)
          printf("%g %g\n", x[i], y[i]);
-
+     
        printf("\n\n");
-
+     
        for (i = 0; i <= 100; ++i)
          {
            double xi = (1 - i / 100.0) * x[0] + (i / 100.0) * x[N-1];
            double yi_cubic = gsl_spline_eval(spline_cubic, xi, acc);
            double yi_akima = gsl_spline_eval(spline_akima, xi, acc);
            double yi_steffen = gsl_spline_eval(spline_steffen, xi, acc);
-
+     
            printf("%g %g %g %g\n", xi, yi_cubic, yi_akima, yi_steffen);
          }
-
+     
        gsl_spline_free(spline_cubic);
        gsl_spline_free(spline_akima);
        gsl_spline_free(spline_steffen);
        gsl_interp_accel_free(acc);
-
+     
        return 0;
      }
 
@@ -6043,11 +5990,11 @@ square, using z values of (0,1,0.5,1) going clockwise around the square.
 
      #include <stdio.h>
      #include <stdlib.h>
-
+     
      #include <gsl/gsl_math.h>
      #include <gsl/gsl_interp2d.h>
      #include <gsl/gsl_spline2d.h>
-
+     
      int
      main()
      {
@@ -6062,36 +6009,36 @@ square, using z values of (0,1,0.5,1) going clockwise around the square.
        gsl_interp_accel *xacc = gsl_interp_accel_alloc();
        gsl_interp_accel *yacc = gsl_interp_accel_alloc();
        size_t i, j;
-
+     
        /* set z grid values */
        gsl_spline2d_set(spline, za, 0, 0, 0.0);
        gsl_spline2d_set(spline, za, 0, 1, 1.0);
        gsl_spline2d_set(spline, za, 1, 1, 0.5);
        gsl_spline2d_set(spline, za, 1, 0, 1.0);
-
+     
        /* initialize interpolation */
        gsl_spline2d_init(spline, xa, ya, za, nx, ny);
-
+     
        /* interpolate N values in x and y and print out grid for plotting */
        for (i = 0; i < N; ++i)
          {
            double xi = i / (N - 1.0);
-
+     
            for (j = 0; j < N; ++j)
              {
                double yj = j / (N - 1.0);
                double zij = gsl_spline2d_eval(spline, xi, yj, xacc, yacc);
-
+     
                printf("%f %f %f\n", xi, yj, zij);
              }
            printf("\n");
          }
-
+     
        gsl_spline2d_free(spline);
        gsl_interp_accel_free(xacc);
        gsl_interp_accel_free(yacc);
        free(za);
-
+     
        return 0;
      }
 
@@ -6111,9 +6058,9 @@ These functions are declared in the header file 'gsl_deriv.h'.
 
 * Menu:
 
-* Numerical Differentiation functions::  
-* Numerical Differentiation Examples::  
-* Numerical Differentiation References::  
+* Numerical Differentiation functions::
+* Numerical Differentiation Examples::
+* Numerical Differentiation References::
 
 
 File: gsl-ref.info,  Node: Numerical Differentiation functions,  Next: Numerical Differentiation Examples,  Up: Numerical Differentiation
@@ -6181,34 +6128,34 @@ the derivative at x=0 is computed using 'gsl_deriv_forward'.
      #include <stdio.h>
      #include <gsl/gsl_math.h>
      #include <gsl/gsl_deriv.h>
-
+     
      double f (double x, void * params)
      {
        (void)(params); /* avoid unused parameter warning */
        return pow (x, 1.5);
      }
-
+     
      int
      main (void)
      {
        gsl_function F;
        double result, abserr;
-
+     
        F.function = &f;
        F.params = 0;
-
+     
        printf ("f(x) = x^(3/2)\n");
-
+     
        gsl_deriv_central (&F, 2.0, 1e-8, &result, &abserr);
        printf ("x = 2.0\n");
        printf ("f'(x) = %.10f +/- %.10f\n", result, abserr);
        printf ("exact = %.10f\n\n", 1.5 * sqrt(2.0));
-
+     
        gsl_deriv_forward (&F, 0.0, 1e-8, &result, &abserr);
        printf ("x = 0.0\n");
        printf ("f'(x) = %.10f +/- %.10f\n", result, abserr);
        printf ("exact = %.10f\n", 0.0);
-
+     
        return 0;
      }
 
@@ -6219,7 +6166,7 @@ Here is the output of the program,
      x = 2.0
      f'(x) = 2.1213203120 +/- 0.0000005006
      exact = 2.1213203436
-
+     
      x = 0.0
      f'(x) = 0.0000000160 +/- 0.0000000339
      exact = 0.0000000000
@@ -6258,13 +6205,13 @@ file 'gsl_chebyshev.h'.
 
 * Menu:
 
-* Chebyshev Definitions::       
-* Creation and Calculation of Chebyshev Series::  
-* Auxiliary Functions for Chebyshev Series::  
-* Chebyshev Series Evaluation::  
-* Derivatives and Integrals::   
-* Chebyshev Approximation Examples::  
-* Chebyshev Approximation References and Further Reading::  
+* Chebyshev Definitions::
+* Creation and Calculation of Chebyshev Series::
+* Auxiliary Functions for Chebyshev Series::
+* Chebyshev Series Evaluation::
+* Derivatives and Integrals::
+* Chebyshev Approximation Examples::
+* Chebyshev Approximation References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Chebyshev Definitions,  Next: Creation and Calculation of Chebyshev Series,  Up: Chebyshev Approximations
@@ -6401,43 +6348,43 @@ visible.
      #include <stdio.h>
      #include <gsl/gsl_math.h>
      #include <gsl/gsl_chebyshev.h>
-
+     
      double
      f (double x, void *p)
      {
        (void)(p); /* avoid unused parameter warning */
-
+     
        if (x < 0.5)
          return 0.25;
        else
          return 0.75;
      }
-
+     
      int
      main (void)
      {
-       int i, n = 10000;
-
+       int i, n = 10000; 
+     
        gsl_cheb_series *cs = gsl_cheb_alloc (40);
-
+     
        gsl_function F;
-
+     
        F.function = f;
        F.params = 0;
-
+     
        gsl_cheb_init (cs, &F, 0.0, 1.0);
-
+     
        for (i = 0; i < n; i++)
          {
            double x = i / (double)n;
            double r10 = gsl_cheb_eval_n (cs, 10, x);
            double r40 = gsl_cheb_eval (cs, x);
-           printf ("%g %g %g %g\n",
+           printf ("%g %g %g %g\n", 
                    x, GSL_FN_EVAL (&F, x), r10, r40);
          }
-
+     
        gsl_cheb_free (cs);
-
+     
        return 0;
      }
 
@@ -6474,10 +6421,10 @@ asymptotic series.
 
 * Menu:
 
-* Acceleration functions::      
-* Acceleration functions without error estimation::  
-* Example of accelerating a series::  
-* Series Acceleration References::  
+* Acceleration functions::
+* Acceleration functions without error estimation::
+* Example of accelerating a series::
+* Series Acceleration References::
 
 
 File: gsl-ref.info,  Node: Acceleration functions,  Next: Acceleration functions without error estimation,  Up: Series Acceleration
@@ -6590,9 +6537,9 @@ the series converge slowly.
      #include <stdio.h>
      #include <gsl/gsl_math.h>
      #include <gsl/gsl_sum.h>
-
+     
      #define N 20
-
+     
      int
      main (void)
      {
@@ -6600,37 +6547,37 @@ the series converge slowly.
        double sum_accel, err;
        double sum = 0;
        int n;
-
-       gsl_sum_levin_u_workspace * w
+       
+       gsl_sum_levin_u_workspace * w 
          = gsl_sum_levin_u_alloc (N);
-
+     
        const double zeta_2 = M_PI * M_PI / 6.0;
-
+       
        /* terms for zeta(2) = \sum_{n=1}^{\infty} 1/n^2 */
-
+     
        for (n = 0; n < N; n++)
          {
            double np1 = n + 1.0;
            t[n] = 1.0 / (np1 * np1);
            sum += t[n];
          }
-
+       
        gsl_sum_levin_u_accel (t, N, w, &sum_accel, &err);
-
-       printf ("term-by-term sum = % .16f using %d terms\n",
+     
+       printf ("term-by-term sum = % .16f using %d terms\n", 
                sum, N);
-
-       printf ("term-by-term sum = % .16f using %zu terms\n",
+     
+       printf ("term-by-term sum = % .16f using %zu terms\n", 
                w->sum_plain, w->terms_used);
-
+     
        printf ("exact value      = % .16f\n", zeta_2);
-       printf ("accelerated sum  = % .16f using %zu terms\n",
+       printf ("accelerated sum  = % .16f using %zu terms\n", 
                sum_accel, w->terms_used);
-
+     
        printf ("estimated error  = % .16f\n", err);
-       printf ("actual error     = % .16f\n",
+       printf ("actual error     = % .16f\n", 
                sum_accel - zeta_2);
-
+     
        gsl_sum_levin_u_free (w);
        return 0;
      }
@@ -6688,11 +6635,11 @@ header files 'gsl_wavelet.h' and 'gsl_wavelet2d.h'.
 
 * Menu:
 
-* DWT Definitions::             
-* DWT Initialization::          
-* DWT Transform Functions::     
-* DWT Examples::                
-* DWT References::              
+* DWT Definitions::
+* DWT Initialization::
+* DWT Transform Functions::
+* DWT Examples::
+* DWT References::
 
 
 File: gsl-ref.info,  Node: DWT Definitions,  Next: DWT Initialization,  Up: Wavelet Transforms
@@ -6801,8 +6748,8 @@ of the transform.
 
 * Menu:
 
-* DWT in one dimension::        
-* DWT in two dimension::        
+* DWT in one dimension::
+* DWT in two dimension::
 
 
 File: gsl-ref.info,  Node: DWT in one dimension,  Next: DWT in two dimension,  Up: DWT Transform Functions
@@ -6947,7 +6894,7 @@ transform, while setting the others to zero.
      #include <math.h>
      #include <gsl/gsl_sort.h>
      #include <gsl/gsl_wavelet.h>
-
+     
      int
      main (int argc, char **argv)
      {
@@ -6956,43 +6903,43 @@ transform, while setting the others to zero.
        double *data = malloc (n * sizeof (double));
        double *abscoeff = malloc (n * sizeof (double));
        size_t *p = malloc (n * sizeof (size_t));
-
+     
        FILE * f;
        gsl_wavelet *w;
        gsl_wavelet_workspace *work;
-
+     
        w = gsl_wavelet_alloc (gsl_wavelet_daubechies, 4);
        work = gsl_wavelet_workspace_alloc (n);
-
+     
        f = fopen (argv[1], "r");
        for (i = 0; i < n; i++)
          {
            fscanf (f, "%lg", &data[i]);
          }
        fclose (f);
-
+     
        gsl_wavelet_transform_forward (w, data, 1, n, work);
-
+     
        for (i = 0; i < n; i++)
          {
            abscoeff[i] = fabs (data[i]);
          }
-
+       
        gsl_sort_index (p, abscoeff, 1, n);
-
+       
        for (i = 0; (i + nc) < n; i++)
          data[p[i]] = 0;
-
+       
        gsl_wavelet_transform_inverse (w, data, 1, n, work);
-
+       
        for (i = 0; i < n; i++)
          {
            printf ("%g\n", data[i]);
          }
-
+       
        gsl_wavelet_free (w);
        gsl_wavelet_workspace_free (work);
-
+     
        free (data);
        free (abscoeff);
        free (p);
@@ -7070,9 +7017,9 @@ Transforms (DHTs).  The functions are declared in the header file
 
 * Menu:
 
-* Discrete Hankel Transform Definition::  
-* Discrete Hankel Transform Functions::  
-* Discrete Hankel Transform References::  
+* Discrete Hankel Transform Definition::
+* Discrete Hankel Transform Functions::
+* Discrete Hankel Transform References::
 
 
 File: gsl-ref.info,  Node: Discrete Hankel Transform Definition,  Next: Discrete Hankel Transform Functions,  Up: Discrete Hankel Transforms
@@ -7105,7 +7052,7 @@ t_n=(j_{\nu,n}/j_{\nu,M}) X in real space and at u_n=j_{\nu,n}/X in
 reciprocal space.  Here, j_{\nu,m} are the m-th zeros of the Bessel
 function J_\nu(x) arranged in ascending order.  Moreover, the discrete
 functions are assumed to be band limited, so f(t_n)=0 and F(u_n)=0 for
-n>M.  Accordingly, the function f is defined on the interval [0,X].
+n>M. Accordingly, the function f is defined on the interval [0,X].
 
    Following the work of Johnson, 1987 and Lemoine, 1994, the discrete
 Hankel transform is given by
@@ -7175,7 +7122,7 @@ File: gsl-ref.info,  Node: Discrete Hankel Transform Functions,  Next: Discrete 
 
  -- Function: double gsl_dht_x_sample (const gsl_dht * T, int N)
      This function returns the value of the N-th sample point in the
-     unit interval, (j_{\nu,n+1}/j_{\nu,M}) X.  These are the points
+     unit interval, (j_{\nu,n+1}/j_{\nu,M}) X. These are the points
      where the function f(t) is assumed to be sampled.
 
  -- Function: double gsl_dht_k_sample (const gsl_dht * T, int N)
@@ -7216,17 +7163,17 @@ finding functions and related declarations.
 
 * Menu:
 
-* Root Finding Overview::       
-* Root Finding Caveats::        
-* Initializing the Solver::     
-* Providing the function to solve::  
-* Search Bounds and Guesses::   
-* Root Finding Iteration::      
-* Search Stopping Parameters::  
-* Root Bracketing Algorithms::  
-* Root Finding Algorithms using Derivatives::  
-* Root Finding Examples::       
-* Root Finding References and Further Reading::  
+* Root Finding Overview::
+* Root Finding Caveats::
+* Initializing the Solver::
+* Providing the function to solve::
+* Search Bounds and Guesses::
+* Root Finding Iteration::
+* Search Stopping Parameters::
+* Root Bracketing Algorithms::
+* Root Finding Algorithms using Derivatives::
+* Root Finding Examples::
+* Root Finding References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Root Finding Overview,  Next: Root Finding Caveats,  Up: One dimensional Root-Finding

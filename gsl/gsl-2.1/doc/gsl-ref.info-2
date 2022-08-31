@@ -1,4 +1,4 @@
-This is gsl-ref.info, produced by makeinfo version 5.1 from
+This is gsl-ref.info, produced by makeinfo version 6.8 from
 gsl-ref.texi.
 
 Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
@@ -20,106 +20,6 @@ INFO-DIR-SECTION Software libraries
 START-INFO-DIR-ENTRY
 * gsl-ref: (gsl-ref).                   GNU Scientific Library - Reference
 END-INFO-DIR-ENTRY
-
-
-File: gsl-ref.info,  Node: Permutation Examples,  Next: Permutation References and Further Reading,  Prev: Permutations in cyclic form,  Up: Permutations
-
-9.9 Examples
-============
-
-The example program below creates a random permutation (by shuffling the
-elements of the identity) and finds its inverse.
-
-     #include <stdio.h>
-     #include <gsl/gsl_rng.h>
-     #include <gsl/gsl_randist.h>
-     #include <gsl/gsl_permutation.h>
-
-     int
-     main (void)
-     {
-       const size_t N = 10;
-       const gsl_rng_type * T;
-       gsl_rng * r;
-
-       gsl_permutation * p = gsl_permutation_alloc (N);
-       gsl_permutation * q = gsl_permutation_alloc (N);
-
-       gsl_rng_env_setup();
-       T = gsl_rng_default;
-       r = gsl_rng_alloc (T);
-
-       printf ("initial permutation:");
-       gsl_permutation_init (p);
-       gsl_permutation_fprintf (stdout, p, " %u");
-       printf ("\n");
-
-       printf (" random permutation:");
-       gsl_ran_shuffle (r, p->data, N, sizeof(size_t));
-       gsl_permutation_fprintf (stdout, p, " %u");
-       printf ("\n");
-
-       printf ("inverse permutation:");
-       gsl_permutation_inverse (q, p);
-       gsl_permutation_fprintf (stdout, q, " %u");
-       printf ("\n");
-
-       gsl_permutation_free (p);
-       gsl_permutation_free (q);
-       gsl_rng_free (r);
-
-       return 0;
-     }
-
-Here is the output from the program,
-
-     $ ./a.out
-     initial permutation: 0 1 2 3 4 5 6 7 8 9
-      random permutation: 1 3 5 2 7 6 0 4 9 8
-     inverse permutation: 6 0 3 1 7 2 5 4 9 8
-
-The random permutation 'p[i]' and its inverse 'q[i]' are related through
-the identity 'p[q[i]] = i', which can be verified from the output.
-
-   The next example program steps forwards through all possible third
-order permutations, starting from the identity,
-
-     #include <stdio.h>
-     #include <gsl/gsl_permutation.h>
-
-     int
-     main (void)
-     {
-       gsl_permutation * p = gsl_permutation_alloc (3);
-
-       gsl_permutation_init (p);
-
-       do
-        {
-           gsl_permutation_fprintf (stdout, p, " %u");
-           printf ("\n");
-        }
-       while (gsl_permutation_next(p) == GSL_SUCCESS);
-
-       gsl_permutation_free (p);
-
-       return 0;
-     }
-
-Here is the output from the program,
-
-     $ ./a.out
-      0 1 2
-      0 2 1
-      1 0 2
-      1 2 0
-      2 0 1
-      2 1 0
-
-The permutations are generated in lexicographic order.  To reverse the
-sequence, begin with the final permutation (which is the reverse of the
-identity) and replace 'gsl_permutation_next' with
-'gsl_permutation_prev'.
 
 
 File: gsl-ref.info,  Node: Permutation References and Further Reading,  Prev: Permutation Examples,  Up: Permutations
@@ -157,13 +57,13 @@ file 'gsl_combination.h'.
 
 * Menu:
 
-* The Combination struct::      
-* Combination allocation::      
-* Accessing combination elements::  
-* Combination properties::      
-* Combination functions::       
-* Reading and writing combinations::  
-* Combination Examples::        
+* The Combination struct::
+* Combination allocation::
+* Accessing combination elements::
+* Combination properties::
+* Combination functions::
+* Reading and writing combinations::
+* Combination Examples::
 * Combination References and Further Reading::
 
 
@@ -183,6 +83,7 @@ increasing order.  The 'gsl_combination' structure looks like this,
        size_t k;
        size_t *data;
      } gsl_combination;
+
 
 
 File: gsl-ref.info,  Node: Combination allocation,  Next: Accessing combination elements,  Prev: The Combination struct,  Up: Combinations
@@ -341,13 +242,13 @@ lexicographically.
 
      #include <stdio.h>
      #include <gsl/gsl_combination.h>
-
-     int
-     main (void)
+     
+     int 
+     main (void) 
      {
        gsl_combination * c;
        size_t i;
-
+     
        printf ("All subsets of {0,1,2,3} by size:\n") ;
        for (i = 0; i <= 4; i++)
          {
@@ -361,7 +262,7 @@ lexicographically.
            while (gsl_combination_next (c) == GSL_SUCCESS);
            gsl_combination_free (c);
          }
-
+     
        return 0;
      }
 
@@ -400,6 +301,7 @@ Further information on combinations can be found in,
      Donald L. Kreher, Douglas R. Stinson, 'Combinatorial Algorithms:
      Generation, Enumeration and Search', 1998, CRC Press LLC, ISBN
      084933988X
+
 
 
 File: gsl-ref.info,  Node: Multisets,  Next: Sorting,  Prev: Combinations,  Up: Top
@@ -446,6 +348,7 @@ increasing order.  The 'gsl_multiset' structure looks like this,
        size_t k;
        size_t *data;
      } gsl_multiset;
+
 
 
 File: gsl-ref.info,  Node: Multiset allocation,  Next: Accessing multiset elements,  Prev: The Multiset struct,  Up: Multisets
@@ -598,13 +501,13 @@ are ordered lexicographically.
 
      #include <stdio.h>
      #include <gsl/gsl_multiset.h>
-
+     
      int
      main (void)
      {
        gsl_multiset * c;
        size_t i;
-
+     
        printf ("All multisets of {0,1,2,3} by size:\n") ;
        for (i = 0; i <= 4; i++)
          {
@@ -618,7 +521,7 @@ are ordered lexicographically.
            while (gsl_multiset_next (c) == GSL_SUCCESS);
            gsl_multiset_free (c);
          }
-
+     
        return 0;
      }
 
@@ -718,12 +621,12 @@ when using these functions.
 
 * Menu:
 
-* Sorting objects::             
-* Sorting vectors::             
-* Selecting the k smallest or largest elements::  
-* Computing the rank::          
-* Sorting Examples::            
-* Sorting References and Further Reading::  
+* Sorting objects::
+* Sorting vectors::
+* Selecting the k smallest or largest elements::
+* Computing the rank::
+* Sorting Examples::
+* Sorting References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Sorting objects,  Next: Sorting vectors,  Up: Sorting
@@ -867,7 +770,7 @@ File: gsl-ref.info,  Node: Selecting the k smallest or largest elements,  Next: 
 =================================================
 
 The functions described in this section select the k smallest or largest
-elements of a data set of size N.  The routines use an O(kN) direct
+elements of a data set of size N. The routines use an O(kN) direct
 insertion algorithm which is suited to subsets that are small compared
 with the total size of the dataset.  For example, the routines are
 useful for selecting the 10 largest values from one million data points,
@@ -991,37 +894,37 @@ smallest numbers from 100000 uniform random variates stored in an array,
 
      #include <gsl/gsl_rng.h>
      #include <gsl/gsl_sort_double.h>
-
+     
      int
      main (void)
      {
        const gsl_rng_type * T;
        gsl_rng * r;
-
+     
        size_t i, k = 5, N = 100000;
-
+     
        double * x = malloc (N * sizeof(double));
        double * small = malloc (k * sizeof(double));
-
+     
        gsl_rng_env_setup();
-
+     
        T = gsl_rng_default;
        r = gsl_rng_alloc (T);
-
+     
        for (i = 0; i < N; i++)
          {
            x[i] = gsl_rng_uniform(r);
          }
-
+     
        gsl_sort_smallest (small, k, x, 1, N);
-
+     
        printf ("%zu smallest values from %zu\n", k, N);
-
+     
        for (i = 0; i < k; i++)
          {
            printf ("%zu: %.18f\n", i, small[i]);
          }
-
+     
        free (x);
        free (small);
        gsl_rng_free (r);
@@ -1163,9 +1066,9 @@ overlap (*note Aliasing of arrays::).
 
 * Menu:
 
-* GSL BLAS Interface::          
-* BLAS Examples::               
-* BLAS References and Further Reading::  
+* GSL BLAS Interface::
+* BLAS Examples::
+* BLAS References and Further Reading::
 
    ---------- Footnotes ----------
 
@@ -1186,9 +1089,9 @@ functionality is given in the file 'gsl_blas.h'.
 
 * Menu:
 
-* Level 1 GSL BLAS Interface::  
-* Level 2 GSL BLAS Interface::  
-* Level 3 GSL BLAS Interface::  
+* Level 1 GSL BLAS Interface::
+* Level 2 GSL BLAS Interface::
+* Level 3 GSL BLAS Interface::
 
 
 File: gsl-ref.info,  Node: Level 1 GSL BLAS Interface,  Next: Level 2 GSL BLAS Interface,  Up: GSL BLAS Interface
@@ -1704,34 +1607,34 @@ convention for arrays.
 
      #include <stdio.h>
      #include <gsl/gsl_blas.h>
-
+     
      int
      main (void)
      {
        double a[] = { 0.11, 0.12, 0.13,
                       0.21, 0.22, 0.23 };
-
+     
        double b[] = { 1011, 1012,
                       1021, 1022,
                       1031, 1032 };
-
+     
        double c[] = { 0.00, 0.00,
                       0.00, 0.00 };
-
+     
        gsl_matrix_view A = gsl_matrix_view_array(a, 2, 3);
        gsl_matrix_view B = gsl_matrix_view_array(b, 3, 2);
        gsl_matrix_view C = gsl_matrix_view_array(c, 2, 2);
-
+     
        /* Compute C = A B */
-
+     
        gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
                        1.0, &A.matrix, &B.matrix,
                        0.0, &C.matrix);
-
+     
        printf ("[ %g, %g\n", c[0], c[1]);
        printf ("  %g, %g ]\n", c[2], c[3]);
-
-       return 0;
+     
+       return 0;  
      }
 
 Here is the output from the program,
@@ -1791,23 +1694,23 @@ file 'gsl_linalg.h'.
 
 * Menu:
 
-* LU Decomposition::            
-* QR Decomposition::            
-* QR Decomposition with Column Pivoting::  
-* Singular Value Decomposition::  
-* Cholesky Decomposition::      
-* Tridiagonal Decomposition of Real Symmetric Matrices::  
-* Tridiagonal Decomposition of Hermitian Matrices::  
+* LU Decomposition::
+* QR Decomposition::
+* QR Decomposition with Column Pivoting::
+* Singular Value Decomposition::
+* Cholesky Decomposition::
+* Tridiagonal Decomposition of Real Symmetric Matrices::
+* Tridiagonal Decomposition of Hermitian Matrices::
 * Hessenberg Decomposition of Real Matrices::
 * Hessenberg-Triangular Decomposition of Real Matrices::
-* Bidiagonalization::           
-* Givens Rotations::  
-* Householder Transformations::  
-* Householder solver for linear systems::  
-* Tridiagonal Systems::         
+* Bidiagonalization::
+* Givens Rotations::
+* Householder Transformations::
+* Householder solver for linear systems::
+* Tridiagonal Systems::
 * Balancing::
-* Linear Algebra Examples::     
-* Linear Algebra References and Further Reading::  
+* Linear Algebra Examples::
+* Linear Algebra References and Further Reading::
 
 
 File: gsl-ref.info,  Node: LU Decomposition,  Next: QR Decomposition,  Up: Linear Algebra
@@ -1832,10 +1735,10 @@ matrices.
  -- Function: int gsl_linalg_complex_LU_decomp (gsl_matrix_complex * A,
           gsl_permutation * P, int * SIGNUM)
      These functions factorize the square matrix A into the LU
-     decomposition PA = LU.  On output the diagonal and upper triangular
-     part of the input matrix A contain the matrix U.  The lower
+     decomposition PA = LU. On output the diagonal and upper triangular
+     part of the input matrix A contain the matrix U. The lower
      triangular part of the input matrix (excluding the diagonal)
-     contains L.  The diagonal elements of L are unity, and are not
+     contains L. The diagonal elements of L are unity, and are not
      stored.
 
      The permutation matrix P is encoded in the permutation P on output.
@@ -1936,12 +1839,12 @@ rank.
  -- Function: int gsl_linalg_QR_decomp (gsl_matrix * A, gsl_vector *
           TAU)
      This function factorizes the M-by-N matrix A into the QR
-     decomposition A = Q R.  On output the diagonal and upper triangular
-     part of the input matrix contain the matrix R.  The vector TAU and
+     decomposition A = Q R. On output the diagonal and upper triangular
+     part of the input matrix contain the matrix R. The vector TAU and
      the columns of the lower triangular part of the matrix A contain
      the Householder coefficients and Householder vectors which encode
      the orthogonal matrix Q.  The vector TAU must be of length
-     k=\min(M,N).  The matrix Q is related to these components by, Q =
+     k=\min(M,N). The matrix Q is related to these components by, Q =
      Q_k ... Q_2 Q_1 where Q_i = I - \tau_i v_i v_i^T and v_i is the
      Householder vector v_i = (0,...,1,A(i+1,i),A(i+2,i),...,A(m,i)).
      This is the same storage scheme as used by LAPACK.
@@ -2061,8 +1964,8 @@ R P^T.
  -- Function: int gsl_linalg_QRPT_decomp (gsl_matrix * A, gsl_vector *
           TAU, gsl_permutation * P, int * SIGNUM, gsl_vector * NORM)
      This function factorizes the M-by-N matrix A into the QRP^T
-     decomposition A = Q R P^T.  On output the diagonal and upper
-     triangular part of the input matrix contain the matrix R.  The
+     decomposition A = Q R P^T. On output the diagonal and upper
+     triangular part of the input matrix contain the matrix R. The
      permutation matrix P is stored in the permutation P.  The sign of
      the permutation is given by SIGNUM.  It has the value (-1)^n, where
      n is the number of interchanges in the permutation.  The vector TAU
@@ -2167,8 +2070,8 @@ M-by-N diagonal matrix (with additional rows of zeros).
  -- Function: int gsl_linalg_SV_decomp (gsl_matrix * A, gsl_matrix * V,
           gsl_vector * S, gsl_vector * WORK)
      This function factorizes the M-by-N matrix A into the singular
-     value decomposition A = U S V^T for M >= N.  On output the matrix A
-     is replaced by U.  The diagonal elements of the singular value
+     value decomposition A = U S V^T for M >= N. On output the matrix A
+     is replaced by U. The diagonal elements of the singular value
      matrix S are stored in the vector S.  The singular values are
      non-negative and form a non-increasing sequence from S_1 to S_N.
      The matrix V contains the elements of V in untransposed form.  To
@@ -2180,13 +2083,13 @@ M-by-N diagonal matrix (with additional rows of zeros).
  -- Function: int gsl_linalg_SV_decomp_mod (gsl_matrix * A, gsl_matrix *
           X, gsl_matrix * V, gsl_vector * S, gsl_vector * WORK)
      This function computes the SVD using the modified Golub-Reinsch
-     algorithm, which is faster for M>>N.  It requires the vector WORK
-     of length N and the N-by-N matrix X as additional working space.
+     algorithm, which is faster for M>>N. It requires the vector WORK of
+     length N and the N-by-N matrix X as additional working space.
 
  -- Function: int gsl_linalg_SV_decomp_jacobi (gsl_matrix * A,
           gsl_matrix * V, gsl_vector * S)
      This function computes the SVD of the M-by-N matrix A using
-     one-sided Jacobi orthogonalization for M >= N.  The Jacobi method
+     one-sided Jacobi orthogonalization for M >= N. The Jacobi method
      can compute singular values to higher relative accuracy than
      Golub-Reinsch algorithms (see references for details).
 
@@ -2243,9 +2146,9 @@ back-substitution.
      triangular part is ignored).  On output the diagonal and lower
      triangular part of the input matrix A contain the matrix L, while
      the upper triangular part of the input matrix is overwritten with
-     L^T (the diagonal terms being identical for both L and L^T).  If
-     the matrix is not positive-definite then the decomposition will
-     fail, returning the error code 'GSL_EDOM'.
+     L^T (the diagonal terms being identical for both L and L^T). If the
+     matrix is not positive-definite then the decomposition will fail,
+     returning the error code 'GSL_EDOM'.
 
      When testing whether a matrix is positive-definite, disable the
      error handler first to avoid triggering an error.
@@ -2295,13 +2198,13 @@ where Q is an orthogonal matrix and T is a symmetric tridiagonal matrix.
  -- Function: int gsl_linalg_symmtd_decomp (gsl_matrix * A, gsl_vector *
           TAU)
      This function factorizes the symmetric square matrix A into the
-     symmetric tridiagonal decomposition Q T Q^T.  On output the
-     diagonal and subdiagonal part of the input matrix A contain the
-     tridiagonal matrix T.  The remaining lower triangular part of the
-     input matrix contains the Householder vectors which, together with
-     the Householder coefficients TAU, encode the orthogonal matrix Q.
-     This storage scheme is the same as used by LAPACK.  The upper
-     triangular part of A is not referenced.
+     symmetric tridiagonal decomposition Q T Q^T. On output the diagonal
+     and subdiagonal part of the input matrix A contain the tridiagonal
+     matrix T. The remaining lower triangular part of the input matrix
+     contains the Householder vectors which, together with the
+     Householder coefficients TAU, encode the orthogonal matrix Q. This
+     storage scheme is the same as used by LAPACK.  The upper triangular
+     part of A is not referenced.
 
  -- Function: int gsl_linalg_symmtd_unpack (const gsl_matrix * A, const
           gsl_vector * TAU, gsl_matrix * Q, gsl_vector * DIAG,
@@ -2334,14 +2237,13 @@ matrix.
  -- Function: int gsl_linalg_hermtd_decomp (gsl_matrix_complex * A,
           gsl_vector_complex * TAU)
      This function factorizes the hermitian matrix A into the symmetric
-     tridiagonal decomposition U T U^T.  On output the real parts of the
+     tridiagonal decomposition U T U^T. On output the real parts of the
      diagonal and subdiagonal part of the input matrix A contain the
-     tridiagonal matrix T.  The remaining lower triangular part of the
+     tridiagonal matrix T. The remaining lower triangular part of the
      input matrix contains the Householder vectors which, together with
-     the Householder coefficients TAU, encode the unitary matrix U.
-     This storage scheme is the same as used by LAPACK.  The upper
-     triangular part of A and imaginary parts of the diagonal are not
-     referenced.
+     the Householder coefficients TAU, encode the unitary matrix U. This
+     storage scheme is the same as used by LAPACK.  The upper triangular
+     part of A and imaginary parts of the diagonal are not referenced.
 
  -- Function: int gsl_linalg_hermtd_unpack (const gsl_matrix_complex *
           A, const gsl_vector_complex * TAU, gsl_matrix_complex * U,
@@ -2376,8 +2278,8 @@ eigenvalue problem, but has applications in other areas as well.
  -- Function: int gsl_linalg_hessenberg_decomp (gsl_matrix * A,
           gsl_vector * TAU)
      This function computes the Hessenberg decomposition of the matrix A
-     by applying the similarity transformation H = U^T A U.  On output,
-     H is stored in the upper portion of A.  The information required to
+     by applying the similarity transformation H = U^T A U. On output, H
+     is stored in the upper portion of A.  The information required to
      construct the matrix U is stored in the lower triangular portion of
      A.  U is a product of N - 2 Householder matrices.  The Householder
      vectors are stored in the lower portion of A (below the
@@ -2393,7 +2295,7 @@ eigenvalue problem, but has applications in other areas as well.
  -- Function: int gsl_linalg_hessenberg_unpack_accum (gsl_matrix * H,
           gsl_vector * TAU, gsl_matrix * V)
      This function is similar to 'gsl_linalg_hessenberg_unpack', except
-     it accumulates the matrix U into V, so that V' = VU.  The matrix V
+     it accumulates the matrix U into V, so that V' = VU. The matrix V
      must be initialized prior to calling this function.  Setting V to
      the identity matrix provides the same result as
      'gsl_linalg_hessenberg_unpack'.  If H is order N, then V must have
@@ -2447,9 +2349,9 @@ The size of U is M-by-N and the size of V is N-by-N.
  -- Function: int gsl_linalg_bidiag_decomp (gsl_matrix * A, gsl_vector *
           TAU_U, gsl_vector * TAU_V)
      This function factorizes the M-by-N matrix A into bidiagonal form U
-     B V^T.  The diagonal and superdiagonal of the matrix B are stored
-     in the diagonal and superdiagonal of A.  The orthogonal matrices U
-     and V are stored as compressed Householder vectors in the remaining
+     B V^T. The diagonal and superdiagonal of the matrix B are stored in
+     the diagonal and superdiagonal of A.  The orthogonal matrices U and
+     V are stored as compressed Householder vectors in the remaining
      elements of A.  The Householder coefficients are stored in the
      vectors TAU_U and TAU_V.  The length of TAU_U must equal the number
      of elements in the diagonal of A and the length of TAU_V should be
@@ -2684,7 +2586,7 @@ and the solution is found using LU decomposition of the matrix A.
 
      #include <stdio.h>
      #include <gsl/gsl_linalg.h>
-
+     
      int
      main (void)
      {
@@ -2692,28 +2594,28 @@ and the solution is found using LU decomposition of the matrix A.
                            0.41, 0.24, 0.99, 0.58,
                            0.14, 0.30, 0.97, 0.66,
                            0.51, 0.13, 0.19, 0.85 };
-
+     
        double b_data[] = { 1.0, 2.0, 3.0, 4.0 };
-
-       gsl_matrix_view m
+     
+       gsl_matrix_view m 
          = gsl_matrix_view_array (a_data, 4, 4);
-
+     
        gsl_vector_view b
          = gsl_vector_view_array (b_data, 4);
-
+     
        gsl_vector *x = gsl_vector_alloc (4);
-
+       
        int s;
-
+     
        gsl_permutation * p = gsl_permutation_alloc (4);
-
+     
        gsl_linalg_LU_decomp (&m.matrix, p, &s);
-
+     
        gsl_linalg_LU_solve (&m.matrix, p, &b.vector, x);
-
+     
        printf ("x = \n");
        gsl_vector_fprintf (stdout, x, "%g");
-
+     
        gsl_permutation_free (p);
        gsl_vector_free (x);
        return 0;
@@ -2721,7 +2623,7 @@ and the solution is found using LU decomposition of the matrix A.
 
 Here is the output from the program,
 
-     x =
+     x = 
      -4.05205
      -12.6056
      1.66091
@@ -2787,7 +2689,7 @@ the following papers,
      value decomposition", 'Computer Journal', Volume 30 (1987), p
      268-275.
 
-     James Demmel, Kres<imir Veselic', "Jacobi's Method is more accurate
+     James Demmel, Krešimir Veselić, "Jacobi's Method is more accurate
      than QR", 'Lapack Working Note 15' (LAWN-15), October 1989.
      Available from netlib, <http://www.netlib.org/lapack/> in the
      'lawns' or 'lawnspdf' directories.
@@ -2813,15 +2715,15 @@ file 'gsl_eigen.h'.
 
 * Menu:
 
-* Real Symmetric Matrices::     
-* Complex Hermitian Matrices::  
+* Real Symmetric Matrices::
+* Complex Hermitian Matrices::
 * Real Nonsymmetric Matrices::
 * Real Generalized Symmetric-Definite Eigensystems::
 * Complex Generalized Hermitian-Definite Eigensystems::
 * Real Generalized Nonsymmetric Eigensystems::
-* Sorting Eigenvalues and Eigenvectors::  
-* Eigenvalue and Eigenvector Examples::  
-* Eigenvalue and Eigenvector References::  
+* Sorting Eigenvalues and Eigenvectors::
+* Eigenvalue and Eigenvector Examples::
+* Eigenvalue and Eigenvector References::
 
 
 File: gsl-ref.info,  Node: Real Symmetric Matrices,  Next: Complex Hermitian Matrices,  Up: Eigensystems
@@ -2942,7 +2844,7 @@ involves computing the Schur decomposition
    where Z is an orthogonal matrix of Schur vectors and T, the Schur
 form, is quasi upper triangular with diagonal 1-by-1 blocks which are
 real eigenvalues of A, and diagonal 2-by-2 blocks whose eigenvalues are
-complex conjugate eigenvalues of A.  The algorithm used is the
+complex conjugate eigenvalues of A. The algorithm used is the
 double-shift Francis method.
 
  -- Function: gsl_eigen_nonsymm_workspace * gsl_eigen_nonsymm_alloc
@@ -2985,8 +2887,8 @@ double-shift Francis method.
 
           T = Z^(-1) A Z
 
-     with Z = D Q.  Note that Z will not be orthogonal.  For this
-     reason, balancing is not performed by default.
+     with Z = D Q. Note that Z will not be orthogonal.  For this reason,
+     balancing is not performed by default.
 
  -- Function: int gsl_eigen_nonsymm (gsl_matrix * A, gsl_vector_complex
           * EVAL, gsl_eigen_nonsymm_workspace * W)
@@ -3035,7 +2937,7 @@ double-shift Francis method.
      them using the Schur vectors.  The Schur vectors are destroyed in
      the process, but can be saved by using 'gsl_eigen_nonsymmv_Z'.  The
      computed eigenvectors are normalized to have unit magnitude.  On
-     output, the upper portion of A contains the Schur form T.  If
+     output, the upper portion of A contains the Schur form T. If
      'gsl_eigen_nonsymm' fails, no eigenvectors are computed, and an
      error code is returned.
 
@@ -3062,7 +2964,7 @@ applying the Cholesky decomposition to B:
      ( L^{-1} A L^{-t} ) L^t x = \lambda L^t x
    Therefore, the problem becomes C y = \lambda y where C = L^{-1} A
 L^{-t} is symmetric, and y = L^t x.  The standard symmetric eigensolver
-can be applied to the matrix C.  The resulting eigenvectors are
+can be applied to the matrix C. The resulting eigenvectors are
 backtransformed to find the vectors of the original problem.  The
 eigenvalues and eigenvectors of the generalized symmetric-definite
 eigenproblem are always real.
@@ -3115,7 +3017,7 @@ eigenvalues \lambda and eigenvectors x such that
    where A and B are hermitian matrices, and B is positive-definite.
 Similarly to the real case, this can be reduced to C y = \lambda y where
 C = L^{-1} A L^{-H} is hermitian, and y = L^H x.  The standard hermitian
-eigensolver can be applied to the matrix C.  The resulting eigenvectors
+eigensolver can be applied to the matrix C. The resulting eigenvectors
 are backtransformed to find the vectors of the original problem.  The
 eigenvalues of the generalized hermitian-definite eigenproblem are
 always real.
@@ -3243,7 +3145,7 @@ method due to Moler and Stewart (see references).
      If S is desired, it is stored in A on output.  If T is desired, it
      is stored in B on output.  The ordering of eigenvalues in (ALPHA,
      BETA) follows the ordering of the diagonal blocks in the Schur
-     forms S and T.  In rare cases, this function may fail to find all
+     forms S and T. In rare cases, this function may fail to find all
      eigenvalues.  If this occurs, an error code is returned.
 
  -- Function: int gsl_eigen_gen_QZ (gsl_matrix * A, gsl_matrix * B,
@@ -3274,7 +3176,7 @@ method due to Moler and Stewart (see references).
      Schur vectors.  The Schur vectors are destroyed in the process, but
      can be saved by using 'gsl_eigen_genv_QZ'.  The computed
      eigenvectors are normalized to have unit magnitude.  On output, (A,
-     B) contains the generalized Schur form (S, T).  If 'gsl_eigen_gen'
+     B) contains the generalized Schur form (S, T). If 'gsl_eigen_gen'
      fails, no eigenvectors are computed, and an error code is returned.
 
  -- Function: int gsl_eigen_genv_QZ (gsl_matrix * A, gsl_matrix * B,
@@ -3360,7 +3262,7 @@ The following program computes the eigenvalues and eigenvectors of the
      #include <stdio.h>
      #include <gsl/gsl_math.h>
      #include <gsl/gsl_eigen.h>
-
+     
      int
      main (void)
      {
@@ -3368,43 +3270,43 @@ The following program computes the eigenvalues and eigenvectors of the
                          1/2.0, 1/3.0, 1/4.0, 1/5.0,
                          1/3.0, 1/4.0, 1/5.0, 1/6.0,
                          1/4.0, 1/5.0, 1/6.0, 1/7.0 };
-
-       gsl_matrix_view m
+     
+       gsl_matrix_view m 
          = gsl_matrix_view_array (data, 4, 4);
-
+     
        gsl_vector *eval = gsl_vector_alloc (4);
        gsl_matrix *evec = gsl_matrix_alloc (4, 4);
-
-       gsl_eigen_symmv_workspace * w =
+     
+       gsl_eigen_symmv_workspace * w = 
          gsl_eigen_symmv_alloc (4);
-
+       
        gsl_eigen_symmv (&m.matrix, eval, evec, w);
-
+     
        gsl_eigen_symmv_free (w);
-
-       gsl_eigen_symmv_sort (eval, evec,
+     
+       gsl_eigen_symmv_sort (eval, evec, 
                              GSL_EIGEN_SORT_ABS_ASC);
-
+       
        {
          int i;
-
+     
          for (i = 0; i < 4; i++)
            {
-             double eval_i
+             double eval_i 
                 = gsl_vector_get (eval, i);
-             gsl_vector_view evec_i
+             gsl_vector_view evec_i 
                 = gsl_matrix_column (evec, i);
-
+     
              printf ("eigenvalue = %g\n", eval_i);
              printf ("eigenvector = \n");
-             gsl_vector_fprintf (stdout,
+             gsl_vector_fprintf (stdout, 
                                  &evec_i.vector, "%g");
            }
        }
-
+     
        gsl_vector_free (eval);
        gsl_matrix_free (evec);
-
+     
        return 0;
      }
 
@@ -3448,7 +3350,7 @@ Vandermonde matrix V(x;i,j) = x_i^{n - j} with x = (-1,-2,3,4).
      #include <stdio.h>
      #include <gsl/gsl_math.h>
      #include <gsl/gsl_eigen.h>
-
+     
      int
      main (void)
      {
@@ -3456,48 +3358,48 @@ Vandermonde matrix V(x;i,j) = x_i^{n - j} with x = (-1,-2,3,4).
                          -8.0, 4.0, -2.0, 1.0,
                          27.0, 9.0, 3.0, 1.0,
                          64.0, 16.0, 4.0, 1.0 };
-
-       gsl_matrix_view m
+     
+       gsl_matrix_view m 
          = gsl_matrix_view_array (data, 4, 4);
-
+     
        gsl_vector_complex *eval = gsl_vector_complex_alloc (4);
        gsl_matrix_complex *evec = gsl_matrix_complex_alloc (4, 4);
-
-       gsl_eigen_nonsymmv_workspace * w =
+     
+       gsl_eigen_nonsymmv_workspace * w = 
          gsl_eigen_nonsymmv_alloc (4);
-
+       
        gsl_eigen_nonsymmv (&m.matrix, eval, evec, w);
-
+     
        gsl_eigen_nonsymmv_free (w);
-
-       gsl_eigen_nonsymmv_sort (eval, evec,
+     
+       gsl_eigen_nonsymmv_sort (eval, evec, 
                                 GSL_EIGEN_SORT_ABS_DESC);
-
+       
        {
          int i, j;
-
+     
          for (i = 0; i < 4; i++)
            {
-             gsl_complex eval_i
+             gsl_complex eval_i 
                 = gsl_vector_complex_get (eval, i);
-             gsl_vector_complex_view evec_i
+             gsl_vector_complex_view evec_i 
                 = gsl_matrix_complex_column (evec, i);
-
+     
              printf ("eigenvalue = %g + %gi\n",
                      GSL_REAL(eval_i), GSL_IMAG(eval_i));
              printf ("eigenvector = \n");
              for (j = 0; j < 4; ++j)
                {
-                 gsl_complex z =
+                 gsl_complex z = 
                    gsl_vector_complex_get(&evec_i.vector, j);
                  printf("%g + %gi\n", GSL_REAL(z), GSL_IMAG(z));
                }
            }
        }
-
+     
        gsl_vector_complex_free(eval);
        gsl_matrix_complex_free(evec);
-
+     
        return 0;
      }
 
@@ -3599,14 +3501,14 @@ Reading::)
 
 * Menu:
 
-* Mathematical Definitions::    
-* Overview of complex data FFTs::  
-* Radix-2 FFT routines for complex data::  
-* Mixed-radix FFT routines for complex data::  
-* Overview of real data FFTs::  
-* Radix-2 FFT routines for real data::  
-* Mixed-radix FFT routines for real data::  
-* FFT References and Further Reading::  
+* Mathematical Definitions::
+* Overview of complex data FFTs::
+* Radix-2 FFT routines for complex data::
+* Mixed-radix FFT routines for complex data::
+* Overview of real data FFTs::
+* Radix-2 FFT routines for real data::
+* Mixed-radix FFT routines for real data::
+* FFT References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Mathematical Definitions,  Next: Overview of complex data FFTs,  Up: Fast Fourier Transforms
@@ -3800,43 +3702,43 @@ where the negative times wrap around the end of the array.
      #include <math.h>
      #include <gsl/gsl_errno.h>
      #include <gsl/gsl_fft_complex.h>
-
+     
      #define REAL(z,i) ((z)[2*(i)])
      #define IMAG(z,i) ((z)[2*(i)+1])
-
+     
      int
      main (void)
      {
        int i; double data[2*128];
-
+     
        for (i = 0; i < 128; i++)
          {
             REAL(data,i) = 0.0; IMAG(data,i) = 0.0;
          }
-
+     
        REAL(data,0) = 1.0;
-
+     
        for (i = 1; i <= 10; i++)
          {
             REAL(data,i) = REAL(data,128-i) = 1.0;
          }
-
+     
        for (i = 0; i < 128; i++)
          {
-           printf ("%d %e %e\n", i,
+           printf ("%d %e %e\n", i, 
                    REAL(data,i), IMAG(data,i));
          }
        printf ("\n");
-
+     
        gsl_fft_complex_radix2_forward (data, 1, 128);
-
+     
        for (i = 0; i < 128; i++)
          {
-           printf ("%d %e %e\n", i,
-                   REAL(data,i)/sqrt(128),
+           printf ("%d %e %e\n", i, 
+                   REAL(data,i)/sqrt(128), 
                    IMAG(data,i)/sqrt(128));
          }
-
+     
        return 0;
      }
 
@@ -4012,58 +3914,58 @@ a sample of length 630 (=2*3*3*5*7) using the mixed-radix algorithm.
      #include <math.h>
      #include <gsl/gsl_errno.h>
      #include <gsl/gsl_fft_complex.h>
-
+     
      #define REAL(z,i) ((z)[2*(i)])
      #define IMAG(z,i) ((z)[2*(i)+1])
-
+     
      int
      main (void)
      {
        int i;
        const int n = 630;
        double data[2*n];
-
+     
        gsl_fft_complex_wavetable * wavetable;
        gsl_fft_complex_workspace * workspace;
-
+     
        for (i = 0; i < n; i++)
          {
            REAL(data,i) = 0.0;
            IMAG(data,i) = 0.0;
          }
-
+     
        data[0] = 1.0;
-
+     
        for (i = 1; i <= 10; i++)
          {
            REAL(data,i) = REAL(data,n-i) = 1.0;
          }
-
+     
        for (i = 0; i < n; i++)
          {
-           printf ("%d: %e %e\n", i, REAL(data,i),
+           printf ("%d: %e %e\n", i, REAL(data,i), 
                                      IMAG(data,i));
          }
        printf ("\n");
-
+     
        wavetable = gsl_fft_complex_wavetable_alloc (n);
        workspace = gsl_fft_complex_workspace_alloc (n);
-
+     
        for (i = 0; i < (int) wavetable->nf; i++)
          {
-            printf ("# factor %d: %zu\n", i,
+            printf ("# factor %d: %zu\n", i, 
                     wavetable->factor[i]);
          }
-
-       gsl_fft_complex_forward (data, 1, n,
+     
+       gsl_fft_complex_forward (data, 1, n, 
                                 wavetable, workspace);
-
+     
        for (i = 0; i < n; i++)
          {
-           printf ("%d: %e %e\n", i, REAL(data,i),
+           printf ("%d: %e %e\n", i, REAL(data,i), 
                                      IMAG(data,i));
          }
-
+     
        gsl_fft_complex_wavetable_free (wavetable);
        gsl_fft_complex_workspace_free (workspace);
        return 0;
@@ -4430,57 +4332,57 @@ signal is also real.
      #include <gsl/gsl_errno.h>
      #include <gsl/gsl_fft_real.h>
      #include <gsl/gsl_fft_halfcomplex.h>
-
+     
      int
      main (void)
      {
        int i, n = 100;
        double data[n];
-
+     
        gsl_fft_real_wavetable * real;
        gsl_fft_halfcomplex_wavetable * hc;
        gsl_fft_real_workspace * work;
-
+     
        for (i = 0; i < n; i++)
          {
            data[i] = 0.0;
          }
-
+     
        for (i = n / 3; i < 2 * n / 3; i++)
          {
            data[i] = 1.0;
          }
-
+     
        for (i = 0; i < n; i++)
          {
            printf ("%d: %e\n", i, data[i]);
          }
        printf ("\n");
-
+     
        work = gsl_fft_real_workspace_alloc (n);
        real = gsl_fft_real_wavetable_alloc (n);
-
-       gsl_fft_real_transform (data, 1, n,
+     
+       gsl_fft_real_transform (data, 1, n, 
                                real, work);
-
+     
        gsl_fft_real_wavetable_free (real);
-
+     
        for (i = 11; i < n; i++)
          {
            data[i] = 0;
          }
-
+     
        hc = gsl_fft_halfcomplex_wavetable_alloc (n);
-
-       gsl_fft_halfcomplex_inverse (data, 1, n,
+     
+       gsl_fft_halfcomplex_inverse (data, 1, n, 
                                     hc, work);
        gsl_fft_halfcomplex_wavetable_free (hc);
-
+     
        for (i = 0; i < n; i++)
          {
            printf ("%d: %e\n", i, data[i]);
          }
-
+     
        gsl_fft_real_workspace_free (work);
        return 0;
      }
@@ -4577,21 +4479,21 @@ file 'gsl_integration.h'.
 
 * Menu:
 
-* Numerical Integration Introduction::  
-* QNG non-adaptive Gauss-Kronrod integration::  
-* QAG adaptive integration::    
-* QAGS adaptive integration with singularities::  
-* QAGP adaptive integration with known singular points::  
-* QAGI adaptive integration on infinite intervals::  
-* QAWC adaptive integration for Cauchy principal values::  
-* QAWS adaptive integration for singular functions::  
-* QAWO adaptive integration for oscillatory functions::  
-* QAWF adaptive integration for Fourier integrals::  
-* CQUAD doubly-adaptive integration::  
-* Fixed order Gauss-Legendre integration::  
-* Numerical integration error codes::  
-* Numerical integration examples::  
-* Numerical integration References and Further Reading::  
+* Numerical Integration Introduction::
+* QNG non-adaptive Gauss-Kronrod integration::
+* QAG adaptive integration::
+* QAGS adaptive integration with singularities::
+* QAGP adaptive integration with known singular points::
+* QAGI adaptive integration on infinite intervals::
+* QAWC adaptive integration for Cauchy principal values::
+* QAWS adaptive integration for singular functions::
+* QAWO adaptive integration for oscillatory functions::
+* QAWF adaptive integration for Fourier integrals::
+* CQUAD doubly-adaptive integration::
+* Fixed order Gauss-Legendre integration::
+* Numerical integration error codes::
+* Numerical integration examples::
+* Numerical integration References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Numerical Integration Introduction,  Next: QNG non-adaptive Gauss-Kronrod integration,  Up: Numerical Integration
@@ -4652,9 +4554,9 @@ order rule gives an estimate of the error in the approximation.
 
 * Menu:
 
-* Integrands without weight functions::  
-* Integrands with weight functions::  
-* Integrands with singular weight functions::  
+* Integrands without weight functions::
+* Integrands with weight functions::
+* Integrands with singular weight functions::
 
 
 File: gsl-ref.info,  Node: Integrands without weight functions,  Next: Integrands with weight functions,  Up: Numerical Integration Introduction
@@ -5274,38 +5176,38 @@ The program below computes this integral to a relative accuracy bound of
      #include <stdio.h>
      #include <math.h>
      #include <gsl/gsl_integration.h>
-
+     
      double f (double x, void * params) {
        double alpha = *(double *) params;
        double f = log(alpha*x) / sqrt(x);
        return f;
      }
-
+     
      int
      main (void)
      {
-       gsl_integration_workspace * w
+       gsl_integration_workspace * w 
          = gsl_integration_workspace_alloc (1000);
-
+       
        double result, error;
        double expected = -4.0;
        double alpha = 1.0;
-
+     
        gsl_function F;
        F.function = &f;
        F.params = &alpha;
-
+     
        gsl_integration_qags (&F, 0, 1, 0, 1e-7, 1000,
-                             w, &result, &error);
-
+                             w, &result, &error); 
+     
        printf ("result          = % .18f\n", result);
        printf ("exact result    = % .18f\n", expected);
        printf ("estimated error = % .18f\n", error);
        printf ("actual error    = % .18f\n", result - expected);
        printf ("intervals       = %zu\n", w->size);
-
+     
        gsl_integration_workspace_free (w);
-
+     
        return 0;
      }
 
@@ -5366,21 +5268,21 @@ distributions such as the Gaussian, log-normal or Poisson distributions.
 
 * Menu:
 
-* General comments on random numbers::  
-* The Random Number Generator Interface::  
-* Random number generator initialization::  
-* Sampling from a random number generator::  
-* Auxiliary random number generator functions::  
-* Random number environment variables::  
-* Copying random number generator state::   
-* Reading and writing random number generator state::   
-* Random number generator algorithms::  
-* Unix random number generators::  
-* Other random number generators::  
-* Random Number Generator Performance::  
-* Random Number Generator Examples::  
-* Random Number References and Further Reading::  
-* Random Number Acknowledgements::  
+* General comments on random numbers::
+* The Random Number Generator Interface::
+* Random number generator initialization::
+* Sampling from a random number generator::
+* Auxiliary random number generator functions::
+* Random number environment variables::
+* Copying random number generator state::
+* Reading and writing random number generator state::
+* Random number generator algorithms::
+* Unix random number generators::
+* Other random number generators::
+* Random Number Generator Performance::
+* Random Number Generator Examples::
+* Random Number References and Further Reading::
+* Random Number Acknowledgements::
 
 
 File: gsl-ref.info,  Node: General comments on random numbers,  Next: The Random Number Generator Interface,  Up: Random Number Generation
@@ -5643,23 +5545,23 @@ using the environment variables 'GSL_RNG_TYPE' and 'GSL_RNG_SEED',
 
      #include <stdio.h>
      #include <gsl/gsl_rng.h>
-
+     
      gsl_rng * r;  /* global generator */
-
+     
      int
      main (void)
      {
        const gsl_rng_type * T;
-
+     
        gsl_rng_env_setup();
-
+     
        T = gsl_rng_default;
        r = gsl_rng_alloc (T);
-
+       
        printf ("generator type: %s\n", gsl_rng_name (r));
        printf ("seed = %lu\n", gsl_rng_default_seed);
        printf ("first value = %lu\n", gsl_rng_get (r));
-
+     
        gsl_rng_free (r);
        return 0;
      }
@@ -5777,7 +5679,7 @@ randomness.
  -- Generator: gsl_rng_ranlxs2
 
      The generator 'ranlxs0' is a second-generation version of the
-     RANLUX algorithm of Lu"scher, which produces "luxury random
+     RANLUX algorithm of Lüscher, which produces "luxury random
      numbers".  This generator provides single precision output (24
      bits) at three luxury levels 'ranlxs0', 'ranlxs1' and 'ranlxs2', in
      increasing order of strength.  It uses double-precision floating
@@ -5803,7 +5705,7 @@ randomness.
  -- Generator: gsl_rng_ranlux389
 
      The 'ranlux' generator is an implementation of the original
-     algorithm developed by Lu"scher.  It uses a
+     algorithm developed by Lüscher.  It uses a
      lagged-fibonacci-with-skipping algorithm to produce "luxury random
      numbers".  It is a 24-bit generator, originally designed for
      single-precision IEEE floating point numbers.  This implementation
@@ -5813,17 +5715,17 @@ randomness.
      of the generator is about 10^171.  The algorithm has mathematically
      proven properties and it can provide truly decorrelated numbers at
      a known level of randomness.  The default level of decorrelation
-     recommended by Lu"scher is provided by 'gsl_rng_ranlux', while
+     recommended by Lüscher is provided by 'gsl_rng_ranlux', while
      'gsl_rng_ranlux389' gives the highest level of randomness, with all
      24 bits decorrelated.  Both types of generator use 24 words of
      state per generator.
 
      For more information see,
-          M. Lu"scher, "A portable high-quality random number generator
+          M. Lüscher, "A portable high-quality random number generator
           for lattice field theory calculations", 'Computer Physics
           Communications', 79 (1994) 100-110.
           F. James, "RANLUX: A Fortran implementation of the
-          high-quality pseudo-random number generator of Lu"scher",
+          high-quality pseudo-random number generator of Lüscher",
           'Computer Physics Communications', 79 (1994) 111-114
 
  -- Generator: gsl_rng_cmrg
@@ -6260,28 +6162,28 @@ to produce uniform random numbers in the range [0.0, 1.0),
 
      #include <stdio.h>
      #include <gsl/gsl_rng.h>
-
+     
      int
      main (void)
      {
        const gsl_rng_type * T;
        gsl_rng * r;
-
+     
        int i, n = 10;
-
+     
        gsl_rng_env_setup();
-
+     
        T = gsl_rng_default;
        r = gsl_rng_alloc (T);
-
-       for (i = 0; i < n; i++)
+     
+       for (i = 0; i < n; i++) 
          {
            double u = gsl_rng_uniform (r);
            printf ("%.5f\n", u);
          }
-
+     
        gsl_rng_free (r);
-
+     
        return 0;
      }
 
@@ -6362,7 +6264,7 @@ File: gsl-ref.info,  Node: Random Number Acknowledgements,  Prev: Random Number 
 Thanks to Makoto Matsumoto, Takuji Nishimura and Yoshiharu Kurita for
 making the source code to their generators (MT19937, MM&TN; TT800,
 MM&YK) available under the GNU General Public License.  Thanks to Martin
-Lu"scher for providing notes and source code for the RANLXS and RANLXD
+Lüscher for providing notes and source code for the RANLXS and RANLXD
 generators.
 
 
@@ -6384,13 +6286,13 @@ file 'gsl_qrng.h'.
 
 * Menu:
 
-* Quasi-random number generator initialization::  
-* Sampling from a quasi-random number generator::  
-* Auxiliary quasi-random number generator functions::  
-* Saving and restoring quasi-random number generator state::  
-* Quasi-random number generator algorithms::  
-* Quasi-random number generator examples::  
-* Quasi-random number references::  
+* Quasi-random number generator initialization::
+* Sampling from a quasi-random number generator::
+* Auxiliary quasi-random number generator functions::
+* Saving and restoring quasi-random number generator state::
+* Quasi-random number generator algorithms::
+* Quasi-random number generator examples::
+* Quasi-random number references::
 
 
 File: gsl-ref.info,  Node: Quasi-random number generator initialization,  Next: Sampling from a quasi-random number generator,  Up: Quasi-Random Sequences
@@ -6500,20 +6402,20 @@ Sobol sequence.
 
      #include <stdio.h>
      #include <gsl/gsl_qrng.h>
-
+     
      int
      main (void)
      {
        int i;
        gsl_qrng * q = gsl_qrng_alloc (gsl_qrng_sobol, 2);
-
+     
        for (i = 0; i < 1024; i++)
          {
            double v[2];
            gsl_qrng_get (q, v);
            printf ("%.5f %.5f\n", v[0], v[1]);
          }
-
+     
        gsl_qrng_free (q);
        return 0;
      }
@@ -6586,46 +6488,46 @@ exceeding this limit) to prevent incorrect results due to overflow.
 
 * Menu:
 
-* Random Number Distribution Introduction::  
-* The Gaussian Distribution::   
-* The Gaussian Tail Distribution::  
-* The Bivariate Gaussian Distribution::  
-* The Exponential Distribution::  
-* The Laplace Distribution::    
-* The Exponential Power Distribution::  
-* The Cauchy Distribution::     
-* The Rayleigh Distribution::   
-* The Rayleigh Tail Distribution::  
-* The Landau Distribution::     
-* The Levy alpha-Stable Distributions::  
-* The Levy skew alpha-Stable Distribution::  
-* The Gamma Distribution::      
-* The Flat (Uniform) Distribution::  
-* The Lognormal Distribution::  
-* The Chi-squared Distribution::  
-* The F-distribution::          
-* The t-distribution::          
-* The Beta Distribution::       
-* The Logistic Distribution::   
-* The Pareto Distribution::     
-* Spherical Vector Distributions::  
-* The Weibull Distribution::    
-* The Type-1 Gumbel Distribution::  
-* The Type-2 Gumbel Distribution::  
-* The Dirichlet Distribution::  
-* General Discrete Distributions::  
-* The Poisson Distribution::    
-* The Bernoulli Distribution::  
-* The Binomial Distribution::   
-* The Multinomial Distribution::  
-* The Negative Binomial Distribution::  
-* The Pascal Distribution::     
-* The Geometric Distribution::  
-* The Hypergeometric Distribution::  
-* The Logarithmic Distribution::  
-* Shuffling and Sampling::      
-* Random Number Distribution Examples::  
-* Random Number Distribution References and Further Reading::  
+* Random Number Distribution Introduction::
+* The Gaussian Distribution::
+* The Gaussian Tail Distribution::
+* The Bivariate Gaussian Distribution::
+* The Exponential Distribution::
+* The Laplace Distribution::
+* The Exponential Power Distribution::
+* The Cauchy Distribution::
+* The Rayleigh Distribution::
+* The Rayleigh Tail Distribution::
+* The Landau Distribution::
+* The Levy alpha-Stable Distributions::
+* The Levy skew alpha-Stable Distribution::
+* The Gamma Distribution::
+* The Flat (Uniform) Distribution::
+* The Lognormal Distribution::
+* The Chi-squared Distribution::
+* The F-distribution::
+* The t-distribution::
+* The Beta Distribution::
+* The Logistic Distribution::
+* The Pareto Distribution::
+* Spherical Vector Distributions::
+* The Weibull Distribution::
+* The Type-1 Gumbel Distribution::
+* The Type-2 Gumbel Distribution::
+* The Dirichlet Distribution::
+* General Discrete Distributions::
+* The Poisson Distribution::
+* The Bernoulli Distribution::
+* The Binomial Distribution::
+* The Multinomial Distribution::
+* The Negative Binomial Distribution::
+* The Pascal Distribution::
+* The Geometric Distribution::
+* The Hypergeometric Distribution::
+* The Logarithmic Distribution::
+* Shuffling and Sampling::
+* Random Number Distribution Examples::
+* Random Number Distribution References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Random Number Distribution Introduction,  Next: The Gaussian Distribution,  Up: Random Number Distributions
@@ -6984,5 +6886,61 @@ File: gsl-ref.info,  Node: The Landau Distribution,  Next: The Levy alpha-Stable
      This function computes the probability density p(x) at X for the
      Landau distribution using an approximation to the formula given
      above.
+
+
+
+File: gsl-ref.info,  Node: The Levy alpha-Stable Distributions,  Next: The Levy skew alpha-Stable Distribution,  Prev: The Landau Distribution,  Up: Random Number Distributions
+
+20.12 The Levy alpha-Stable Distributions
+=========================================
+
+ -- Function: double gsl_ran_levy (const gsl_rng * R, double C, double
+          ALPHA)
+     This function returns a random variate from the Levy symmetric
+     stable distribution with scale C and exponent ALPHA.  The symmetric
+     stable probability distribution is defined by a Fourier transform,
+
+          p(x) = {1 \over 2 \pi} \int_{-\infty}^{+\infty} dt \exp(-it x - |c t|^alpha)
+
+     There is no explicit solution for the form of p(x) and the library
+     does not define a corresponding 'pdf' function.  For \alpha = 1 the
+     distribution reduces to the Cauchy distribution.  For \alpha = 2 it
+     is a Gaussian distribution with \sigma = \sqrt{2} c.  For \alpha <
+     1 the tails of the distribution become extremely wide.
+
+     The algorithm only works for 0 < alpha <= 2.
+
+
+
+File: gsl-ref.info,  Node: The Levy skew alpha-Stable Distribution,  Next: The Gamma Distribution,  Prev: The Levy alpha-Stable Distributions,  Up: Random Number Distributions
+
+20.13 The Levy skew alpha-Stable Distribution
+=============================================
+
+ -- Function: double gsl_ran_levy_skew (const gsl_rng * R, double C,
+          double ALPHA, double BETA)
+     This function returns a random variate from the Levy skew stable
+     distribution with scale C, exponent ALPHA and skewness parameter
+     BETA.  The skewness parameter must lie in the range [-1,1].  The
+     Levy skew stable probability distribution is defined by a Fourier
+     transform,
+
+          p(x) = {1 \over 2 \pi} \int_{-\infty}^{+\infty} dt \exp(-it x - |c t|^alpha (1-i beta sign(t) tan(pi alpha/2)))
+
+     When \alpha = 1 the term \tan(\pi \alpha/2) is replaced by
+     -(2/\pi)\log|t|.  There is no explicit solution for the form of
+     p(x) and the library does not define a corresponding 'pdf'
+     function.  For \alpha = 2 the distribution reduces to a Gaussian
+     distribution with \sigma = \sqrt{2} c and the skewness parameter
+     has no effect.  For \alpha < 1 the tails of the distribution become
+     extremely wide.  The symmetric distribution corresponds to \beta =
+     0.
+
+     The algorithm only works for 0 < alpha <= 2.
+
+   The Levy alpha-stable distributions have the property that if N
+alpha-stable variates are drawn from the distribution p(c, \alpha,
+\beta) then the sum Y = X_1 + X_2 + \dots + X_N will also be distributed
+as an alpha-stable variate, p(N^(1/\alpha) c, \alpha, \beta).
 
 

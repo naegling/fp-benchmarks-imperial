@@ -1,4 +1,4 @@
-This is gsl-ref.info, produced by makeinfo version 5.1 from
+This is gsl-ref.info, produced by makeinfo version 6.8 from
 gsl-ref.texi.
 
 Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
@@ -528,10 +528,10 @@ the function parameters,
        {
          double a, b, c;
        };
-
+     
      double quadratic (double x, void *params);
      double quadratic_deriv (double x, void *params);
-     void quadratic_fdf (double x, void *params,
+     void quadratic_fdf (double x, void *params, 
                          double *y, double *dy);
 
 We place the function definitions in a separate file ('demo_fn.c'),
@@ -539,39 +539,39 @@ We place the function definitions in a separate file ('demo_fn.c'),
      double
      quadratic (double x, void *params)
      {
-       struct quadratic_params *p
+       struct quadratic_params *p 
          = (struct quadratic_params *) params;
-
+     
        double a = p->a;
        double b = p->b;
        double c = p->c;
-
+     
        return (a * x + b) * x + c;
      }
-
+     
      double
      quadratic_deriv (double x, void *params)
      {
-       struct quadratic_params *p
+       struct quadratic_params *p 
          = (struct quadratic_params *) params;
-
+     
        double a = p->a;
        double b = p->b;
-
+     
        return 2.0 * a * x + b;
      }
-
+     
      void
-     quadratic_fdf (double x, void *params,
+     quadratic_fdf (double x, void *params, 
                     double *y, double *dy)
      {
-       struct quadratic_params *p
+       struct quadratic_params *p 
          = (struct quadratic_params *) params;
-
+     
        double a = p->a;
        double b = p->b;
        double c = p->c;
-
+     
        *y = (a * x + b) * x + c;
        *dy = 2.0 * a * x + b;
      }
@@ -588,10 +588,10 @@ with solution x = \sqrt 5 = 2.236068...
      #include <gsl/gsl_errno.h>
      #include <gsl/gsl_math.h>
      #include <gsl/gsl_roots.h>
-
+     
      #include "demo_fn.h"
      #include "demo_fn.c"
-
+     
      int
      main (void)
      {
@@ -603,21 +603,21 @@ with solution x = \sqrt 5 = 2.236068...
        double x_lo = 0.0, x_hi = 5.0;
        gsl_function F;
        struct quadratic_params params = {1.0, 0.0, -5.0};
-
+     
        F.function = &quadratic;
        F.params = &params;
-
+     
        T = gsl_root_fsolver_brent;
        s = gsl_root_fsolver_alloc (T);
        gsl_root_fsolver_set (s, &F, x_lo, x_hi);
-
-       printf ("using %s method\n",
+     
+       printf ("using %s method\n", 
                gsl_root_fsolver_name (s));
-
+     
        printf ("%5s [%9s, %9s] %9s %10s %9s\n",
-               "iter", "lower", "upper", "root",
+               "iter", "lower", "upper", "root", 
                "err", "err(est)");
-
+     
        do
          {
            iter++;
@@ -627,19 +627,19 @@ with solution x = \sqrt 5 = 2.236068...
            x_hi = gsl_root_fsolver_x_upper (s);
            status = gsl_root_test_interval (x_lo, x_hi,
                                             0, 0.001);
-
+     
            if (status == GSL_SUCCESS)
              printf ("Converged:\n");
-
+     
            printf ("%5d [%.7f, %.7f] %.7f %+.7f %.7f\n",
                    iter, x_lo, x_hi,
-                   r, r - r_expected,
+                   r, r - r_expected, 
                    x_hi - x_lo);
          }
        while (status == GSL_CONTINUE && iter < max_iter);
-
+     
        gsl_root_fsolver_free (s);
-
+     
        return status;
      }
 
@@ -685,10 +685,10 @@ instead.
      #include <gsl/gsl_errno.h>
      #include <gsl/gsl_math.h>
      #include <gsl/gsl_roots.h>
-
+     
      #include "demo_fn.h"
      #include "demo_fn.c"
-
+     
      int
      main (void)
      {
@@ -699,19 +699,19 @@ instead.
        double x0, x = 5.0, r_expected = sqrt (5.0);
        gsl_function_fdf FDF;
        struct quadratic_params params = {1.0, 0.0, -5.0};
-
+     
        FDF.f = &quadratic;
        FDF.df = &quadratic_deriv;
        FDF.fdf = &quadratic_fdf;
        FDF.params = &params;
-
+     
        T = gsl_root_fdfsolver_newton;
        s = gsl_root_fdfsolver_alloc (T);
        gsl_root_fdfsolver_set (s, &FDF, x);
-
-       printf ("using %s method\n",
+     
+       printf ("using %s method\n", 
                gsl_root_fdfsolver_name (s));
-
+     
        printf ("%-5s %10s %10s %10s\n",
                "iter", "root", "err", "err(est)");
        do
@@ -721,15 +721,15 @@ instead.
            x0 = x;
            x = gsl_root_fdfsolver_root (s);
            status = gsl_root_test_delta (x, x0, 0, 1e-3);
-
+     
            if (status == GSL_SUCCESS)
              printf ("Converged:\n");
-
+     
            printf ("%5d %10.7f %+10.7f %10.7f\n",
                    iter, x, x - r_expected, x - x0);
          }
        while (status == GSL_CONTINUE && iter < max_iter);
-
+     
        gsl_root_fdfsolver_free (s);
        return status;
      }
@@ -789,15 +789,15 @@ to find the maximum of a function simply invert its sign.
 
 * Menu:
 
-* Minimization Overview::       
-* Minimization Caveats::        
-* Initializing the Minimizer::  
-* Providing the function to minimize::  
-* Minimization Iteration::      
-* Minimization Stopping Parameters::  
-* Minimization Algorithms::     
-* Minimization Examples::       
-* Minimization References and Further Reading::  
+* Minimization Overview::
+* Minimization Caveats::
+* Initializing the Minimizer::
+* Providing the function to minimize::
+* Minimization Iteration::
+* Minimization Stopping Parameters::
+* Minimization Algorithms::
+* Minimization Examples::
+* Minimization References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Minimization Overview,  Next: Minimization Caveats,  Up: One dimensional Minimization
@@ -1087,13 +1087,13 @@ interval is (0,6), with an initial guess for the minimum of 2.
      #include <gsl/gsl_errno.h>
      #include <gsl/gsl_math.h>
      #include <gsl/gsl_min.h>
-
+     
      double fn1 (double x, void * params)
      {
        (void)(params); /* avoid unused parameter warning */
        return cos(x) + 1.0;
      }
-
+     
      int
      main (void)
      {
@@ -1104,49 +1104,49 @@ interval is (0,6), with an initial guess for the minimum of 2.
        double m = 2.0, m_expected = M_PI;
        double a = 0.0, b = 6.0;
        gsl_function F;
-
+     
        F.function = &fn1;
        F.params = 0;
-
+     
        T = gsl_min_fminimizer_brent;
        s = gsl_min_fminimizer_alloc (T);
        gsl_min_fminimizer_set (s, &F, m, a, b);
-
+     
        printf ("using %s method\n",
                gsl_min_fminimizer_name (s));
-
+     
        printf ("%5s [%9s, %9s] %9s %10s %9s\n",
                "iter", "lower", "upper", "min",
                "err", "err(est)");
-
+     
        printf ("%5d [%.7f, %.7f] %.7f %+.7f %.7f\n",
                iter, a, b,
                m, m - m_expected, b - a);
-
+     
        do
          {
            iter++;
            status = gsl_min_fminimizer_iterate (s);
-
+     
            m = gsl_min_fminimizer_x_minimum (s);
            a = gsl_min_fminimizer_x_lower (s);
            b = gsl_min_fminimizer_x_upper (s);
-
-           status
+     
+           status 
              = gsl_min_test_interval (a, b, 0.001, 0.0);
-
+     
            if (status == GSL_SUCCESS)
              printf ("Converged:\n");
-
+     
            printf ("%5d [%.7f, %.7f] "
                    "%.7f %+.7f %.7f\n",
                    iter, a, b,
                    m, m - m_expected, b - a);
          }
        while (status == GSL_CONTINUE && iter < max_iter);
-
+     
        gsl_min_fminimizer_free (s);
-
+     
        return status;
      }
 
@@ -1199,15 +1199,15 @@ multidimensional root finding functions and related declarations.
 
 * Menu:
 
-* Overview of Multidimensional Root Finding::  
-* Initializing the Multidimensional Solver::  
-* Providing the multidimensional system of equations to solve::  
-* Iteration of the multidimensional solver::  
-* Search Stopping Parameters for the multidimensional solver::  
-* Algorithms using Derivatives::  
-* Algorithms without Derivatives::  
-* Example programs for Multidimensional Root finding::  
-* References and Further Reading for Multidimensional Root Finding::  
+* Overview of Multidimensional Root Finding::
+* Initializing the Multidimensional Solver::
+* Providing the multidimensional system of equations to solve::
+* Iteration of the multidimensional solver::
+* Search Stopping Parameters for the multidimensional solver::
+* Algorithms using Derivatives::
+* Algorithms without Derivatives::
+* Example programs for Multidimensional Root finding::
+* References and Further Reading for Multidimensional Root Finding::
 
 
 File: gsl-ref.info,  Node: Overview of Multidimensional Root Finding,  Next: Initializing the Multidimensional Solver,  Up: Multidimensional Root-Finding
@@ -1581,7 +1581,7 @@ When the conditions are satisfied then convergence is quadratic.
  -- Derivative Solver: gsl_multiroot_fdfsolver_hybridsj
      This is a modified version of Powell's Hybrid method as implemented
      in the HYBRJ algorithm in MINPACK.  Minpack was written by Jorge J.
-     More', Burton S. Garbow and Kenneth E. Hillstrom.  The Hybrid
+     Moré, Burton S. Garbow and Kenneth E. Hillstrom.  The Hybrid
      algorithm retains the fast convergence of Newton's method but will
      also reduce the residual when Newton's method is unreliable.
 
@@ -2013,7 +2013,7 @@ articles by Powell,
 The following papers are also relevant to the algorithms described in
 this section,
 
-     J.J. More', M.Y. Cosnard, "Numerical Solution of Nonlinear
+     J.J. Moré, M.Y. Cosnard, "Numerical Solution of Nonlinear
      Equations", 'ACM Transactions on Mathematical Software', Vol 5, No
      1, (1979), p 64-85
 
@@ -2021,7 +2021,7 @@ this section,
      Simultaneous Equations", 'Mathematics of Computation', Vol 19
      (1965), p 577-593
 
-     J.J. More', B.S. Garbow, K.E. Hillstrom, "Testing Unconstrained
+     J.J. Moré, B.S. Garbow, K.E. Hillstrom, "Testing Unconstrained
      Optimization Software", ACM Transactions on Mathematical Software,
      Vol 7, No 1 (1981), p 17-41
 
@@ -2047,16 +2047,16 @@ minimization functions and related declarations.
 
 * Menu:
 
-* Multimin Overview::           
-* Multimin Caveats::            
-* Initializing the Multidimensional Minimizer::  
-* Providing a function to minimize::  
-* Multimin Iteration::          
-* Multimin Stopping Criteria::  
-* Multimin Algorithms with Derivatives::  
-* Multimin Algorithms without Derivatives::  
-* Multimin Examples::           
-* Multimin References and Further Reading::  
+* Multimin Overview::
+* Multimin Caveats::
+* Initializing the Multidimensional Minimizer::
+* Providing a function to minimize::
+* Multimin Iteration::
+* Multimin Stopping Criteria::
+* Multimin Algorithms with Derivatives::
+* Multimin Algorithms without Derivatives::
+* Multimin Examples::
+* Multimin References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Multimin Overview,  Next: Multimin Caveats,  Up: Multidimensional Minimization
@@ -2247,43 +2247,43 @@ types:
 The following example function defines a simple two-dimensional
 paraboloid with five parameters,
 
-     /* Paraboloid centered on (p[0],p[1]), with
+     /* Paraboloid centered on (p[0],p[1]), with  
         scale factors (p[2],p[3]) and minimum p[4] */
-
+     
      double
      my_f (const gsl_vector *v, void *params)
      {
        double x, y;
        double *p = (double *)params;
-
+       
        x = gsl_vector_get(v, 0);
        y = gsl_vector_get(v, 1);
-
+      
        return p[2] * (x - p[0]) * (x - p[0]) +
-                p[3] * (y - p[1]) * (y - p[1]) + p[4];
+                p[3] * (y - p[1]) * (y - p[1]) + p[4]; 
      }
-
+     
      /* The gradient of f, df = (df/dx, df/dy). */
-     void
-     my_df (const gsl_vector *v, void *params,
+     void 
+     my_df (const gsl_vector *v, void *params, 
             gsl_vector *df)
      {
        double x, y;
        double *p = (double *)params;
-
+       
        x = gsl_vector_get(v, 0);
        y = gsl_vector_get(v, 1);
-
+      
        gsl_vector_set(df, 0, 2.0 * p[2] * (x - p[0]));
        gsl_vector_set(df, 1, 2.0 * p[3] * (y - p[1]));
      }
-
+     
      /* Compute both f and df together. */
-     void
-     my_fdf (const gsl_vector *x, void *params,
-             double *f, gsl_vector *df)
+     void 
+     my_fdf (const gsl_vector *x, void *params, 
+             double *f, gsl_vector *df) 
      {
-       *f = my_f(x, params);
+       *f = my_f(x, params); 
        my_df(x, params, df);
      }
 
@@ -2528,57 +2528,57 @@ in this chapter.
      {
        size_t iter = 0;
        int status;
-
+     
        const gsl_multimin_fdfminimizer_type *T;
        gsl_multimin_fdfminimizer *s;
-
-       /* Position of the minimum (1,2), scale factors
+     
+       /* Position of the minimum (1,2), scale factors 
           10,20, height 30. */
        double par[5] = { 1.0, 2.0, 10.0, 20.0, 30.0 };
-
+     
        gsl_vector *x;
        gsl_multimin_function_fdf my_func;
-
+     
        my_func.n = 2;
        my_func.f = my_f;
        my_func.df = my_df;
        my_func.fdf = my_fdf;
        my_func.params = par;
-
+     
        /* Starting point, x = (5,7) */
        x = gsl_vector_alloc (2);
        gsl_vector_set (x, 0, 5.0);
        gsl_vector_set (x, 1, 7.0);
-
+     
        T = gsl_multimin_fdfminimizer_conjugate_fr;
        s = gsl_multimin_fdfminimizer_alloc (T, 2);
-
+     
        gsl_multimin_fdfminimizer_set (s, &my_func, x, 0.01, 1e-4);
-
+     
        do
          {
            iter++;
            status = gsl_multimin_fdfminimizer_iterate (s);
-
+     
            if (status)
              break;
-
+     
            status = gsl_multimin_test_gradient (s->gradient, 1e-3);
-
+     
            if (status == GSL_SUCCESS)
              printf ("Minimum found at:\n");
-
+     
            printf ("%5d %.5f %.5f %10.5f\n", iter,
-                   gsl_vector_get (s->x, 0),
-                   gsl_vector_get (s->x, 1),
+                   gsl_vector_get (s->x, 0), 
+                   gsl_vector_get (s->x, 1), 
                    s->f);
-
+     
          }
        while (status == GSL_CONTINUE && iter < 100);
-
+     
        gsl_multimin_fdfminimizer_free (s);
        gsl_vector_free (x);
-
+     
        return 0;
      }
 
@@ -2614,66 +2614,66 @@ iterations would be needed for a more complicated function.
    Here is another example using the Nelder-Mead Simplex algorithm to
 minimize the same example object function, as above.
 
-     int
+     int 
      main(void)
      {
        double par[5] = {1.0, 2.0, 10.0, 20.0, 30.0};
-
-       const gsl_multimin_fminimizer_type *T =
+     
+       const gsl_multimin_fminimizer_type *T = 
          gsl_multimin_fminimizer_nmsimplex2;
        gsl_multimin_fminimizer *s = NULL;
        gsl_vector *ss, *x;
        gsl_multimin_function minex_func;
-
+     
        size_t iter = 0;
        int status;
        double size;
-
+     
        /* Starting point */
        x = gsl_vector_alloc (2);
        gsl_vector_set (x, 0, 5.0);
        gsl_vector_set (x, 1, 7.0);
-
+     
        /* Set initial step sizes to 1 */
        ss = gsl_vector_alloc (2);
        gsl_vector_set_all (ss, 1.0);
-
+     
        /* Initialize method and iterate */
        minex_func.n = 2;
        minex_func.f = my_f;
        minex_func.params = par;
-
+     
        s = gsl_multimin_fminimizer_alloc (T, 2);
        gsl_multimin_fminimizer_set (s, &minex_func, x, ss);
-
+     
        do
          {
            iter++;
            status = gsl_multimin_fminimizer_iterate(s);
-
-           if (status)
+           
+           if (status) 
              break;
-
+     
            size = gsl_multimin_fminimizer_size (s);
            status = gsl_multimin_test_size (size, 1e-2);
-
+     
            if (status == GSL_SUCCESS)
              {
                printf ("converged to minimum at\n");
              }
-
-           printf ("%5d %10.3e %10.3e f() = %7.3f size = %.3f\n",
+     
+           printf ("%5d %10.3e %10.3e f() = %7.3f size = %.3f\n", 
                    iter,
-                   gsl_vector_get (s->x, 0),
-                   gsl_vector_get (s->x, 1),
+                   gsl_vector_get (s->x, 0), 
+                   gsl_vector_get (s->x, 1), 
                    s->fval, size);
          }
        while (status == GSL_CONTINUE && iter < 100);
-
+       
        gsl_vector_free(x);
        gsl_vector_free(ss);
        gsl_multimin_fminimizer_free (s);
-
+     
        return status;
      }
 
@@ -2734,6 +2734,7 @@ The simplex algorithm is described in the following paper,
      J.A. Nelder and R. Mead, 'A simplex method for function
      minimization', Computer Journal vol. 7 (1965), 308-313.
 
+
 
 File: gsl-ref.info,  Node: Least-Squares Fitting,  Next: Nonlinear Least-Squares Fitting,  Prev: Multidimensional Minimization,  Up: Top
 
@@ -2753,8 +2754,8 @@ two-parameter regression and multiple-parameter fits.
 
 * Menu:
 
-* Fitting Overview::            
-* Linear regression::           
+* Fitting Overview::
+* Linear regression::
 * Multi-parameter regression::
 * Regularized regression::
 * Robust linear regression::
@@ -2765,7 +2766,7 @@ two-parameter regression and multiple-parameter fits.
 * Fitting Examples for regularized linear regression::
 * Fitting Examples for robust linear regression::
 * Fitting Examples for large linear systems::
-* Fitting References and Further Reading::  
+* Fitting References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Fitting Overview,  Next: Linear regression,  Up: Least-Squares Fitting
@@ -3348,7 +3349,7 @@ the partial derivatives to zero produces the system of equations
 
      \sum_i \psi(e_i) X_i = 0
 
-   where X_i is a vector containing row i of the design matrix X.  Next,
+   where X_i is a vector containing row i of the design matrix X. Next,
 we define a weight function w(e) = \psi(e)/e, and let w_i = w(e_i):
 
      \sum_i w_i e_i X_i = 0
@@ -3365,7 +3366,7 @@ solution is used, called Iteratively Reweighted Least Squares (IRLS).
      c^{(k-1)})/(t \sigma^{(k)} \sqrt{1 - h_i}), where t is a tuning
      constant depending on the choice of \psi, and h_i are the
      statistical leverages (diagonal elements of the matrix X (X^T
-     X)^{-1} X^T).  Including t and h_i in the residual calculation has
+     X)^{-1} X^T). Including t and h_i in the residual calculation has
      been shown to improve the convergence of the method.  The residual
      standard deviation is approximated as \sigma^{(k)} = MAD / 0.6745,
      where MAD is the Median-Absolute-Deviation of the n-p largest
@@ -3642,7 +3643,7 @@ calculated.  Once all of the blocks (X_i,y_i) have been accumulated into
 the final X^T X and X^T y, the system can be solved with a Cholesky
 factorization of the X^T X matrix.  The normal equations approach is the
 fastest method for solving the large least squares problem, and is
-accurate for well-conditioned matricies X.  However, for ill-conditioned
+accurate for well-conditioned matricies X. However, for ill-conditioned
 matrices, as is often the case for large systems, this method suffers
 from numerical instabilities (see Trefethen and Bau, 1997).  The number
 of operations for this method is O(np^2 + p^3/3).
@@ -3840,8 +3841,8 @@ File: gsl-ref.info,  Node: Large Linear Systems Routines,  Prev: Large Linear Sy
      RCOND, of the least squares matrix after it has been accumulated
      into the workspace WORK.  For the TSQR algorithm, this is
      accomplished by calculating the SVD of the R factor, which has the
-     same singular values as the matrix X.  This routine is currently
-     not implemented for the normal equations method.
+     same singular values as the matrix X. This routine is currently not
+     implemented for the normal equations method.
 
 
 File: gsl-ref.info,  Node: Troubleshooting,  Next: Fitting Examples for linear regression,  Prev: Large Linear Systems,  Up: Least-Squares Fitting
@@ -3850,7 +3851,7 @@ File: gsl-ref.info,  Node: Troubleshooting,  Next: Fitting Examples for linear r
 ====================
 
 When using models based on polynomials, care should be taken when
-constructing the design matrix X.  If the x values are large, then the
+constructing the design matrix X. If the x values are large, then the
 matrix X could be ill-conditioned since its columns are powers of x,
 leading to unstable least-squares solutions.  In this case it can often
 help to center and scale the x values using the mean and standard
@@ -3872,7 +3873,7 @@ standard-deviation error bars.
 
      #include <stdio.h>
      #include <gsl/gsl_fit.h>
-
+     
      int
      main (void)
      {
@@ -3880,35 +3881,35 @@ standard-deviation error bars.
        double x[4] = { 1970, 1980, 1990, 2000 };
        double y[4] = {   12,   11,   14,   13 };
        double w[4] = {  0.1,  0.2,  0.3,  0.4 };
-
+     
        double c0, c1, cov00, cov01, cov11, chisq;
-
-       gsl_fit_wlinear (x, 1, w, 1, y, 1, n,
-                        &c0, &c1, &cov00, &cov01, &cov11,
+     
+       gsl_fit_wlinear (x, 1, w, 1, y, 1, n, 
+                        &c0, &c1, &cov00, &cov01, &cov11, 
                         &chisq);
-
+     
        printf ("# best fit: Y = %g + %g X\n", c0, c1);
        printf ("# covariance matrix:\n");
-       printf ("# [ %g, %g\n#   %g, %g]\n",
+       printf ("# [ %g, %g\n#   %g, %g]\n", 
                cov00, cov01, cov01, cov11);
        printf ("# chisq = %g\n", chisq);
-
+     
        for (i = 0; i < n; i++)
-         printf ("data: %g %g %g\n",
+         printf ("data: %g %g %g\n", 
                         x[i], y[i], 1/sqrt(w[i]));
-
+     
        printf ("\n");
-
+     
        for (i = -30; i < 130; i++)
          {
            double xf = x[0] + (i/100.0) * (x[n-1] - x[0]);
            double yf, yf_err;
-
-           gsl_fit_linear_est (xf,
-                               c0, c1,
-                               cov00, cov01, cov11,
+     
+           gsl_fit_linear_est (xf, 
+                               c0, c1, 
+                               cov00, cov01, cov11, 
                                &yf, &yf_err);
-
+     
            printf ("fit: %g %g\n", xf, yf);
            printf ("hi : %g %g\n", xf, yf + yf_err);
            printf ("lo : %g %g\n", xf, yf - yf_err);
@@ -3958,7 +3959,7 @@ is the error (standard deviation) in the value Y.
 
      #include <stdio.h>
      #include <gsl/gsl_multifit.h>
-
+     
      int
      main (int argc, char **argv)
      {
@@ -3966,74 +3967,74 @@ is the error (standard deviation) in the value Y.
        double xi, yi, ei, chisq;
        gsl_matrix *X, *cov;
        gsl_vector *y, *w, *c;
-
+     
        if (argc != 2)
          {
            fprintf (stderr,"usage: fit n < data\n");
            exit (-1);
          }
-
+     
        n = atoi (argv[1]);
-
+     
        X = gsl_matrix_alloc (n, 3);
        y = gsl_vector_alloc (n);
        w = gsl_vector_alloc (n);
-
+     
        c = gsl_vector_alloc (3);
        cov = gsl_matrix_alloc (3, 3);
-
+     
        for (i = 0; i < n; i++)
          {
            int count = fscanf (stdin, "%lg %lg %lg",
                                &xi, &yi, &ei);
-
+     
            if (count != 3)
              {
                fprintf (stderr, "error reading file\n");
                exit (-1);
              }
-
+     
            printf ("%g %g +/- %g\n", xi, yi, ei);
-
+           
            gsl_matrix_set (X, i, 0, 1.0);
            gsl_matrix_set (X, i, 1, xi);
            gsl_matrix_set (X, i, 2, xi*xi);
-
+           
            gsl_vector_set (y, i, yi);
            gsl_vector_set (w, i, 1.0/(ei*ei));
          }
-
+     
        {
-         gsl_multifit_linear_workspace * work
+         gsl_multifit_linear_workspace * work 
            = gsl_multifit_linear_alloc (n, 3);
          gsl_multifit_wlinear (X, w, y, c, cov,
                                &chisq, work);
          gsl_multifit_linear_free (work);
        }
-
+     
      #define C(i) (gsl_vector_get(c,(i)))
      #define COV(i,j) (gsl_matrix_get(cov,(i),(j)))
-
+     
        {
-         printf ("# best fit: Y = %g + %g X + %g X^2\n",
+         printf ("# best fit: Y = %g + %g X + %g X^2\n", 
                  C(0), C(1), C(2));
-
+     
          printf ("# covariance matrix:\n");
          printf ("[ %+.5e, %+.5e, %+.5e  \n",
                     COV(0,0), COV(0,1), COV(0,2));
-         printf ("  %+.5e, %+.5e, %+.5e  \n",
+         printf ("  %+.5e, %+.5e, %+.5e  \n", 
                     COV(1,0), COV(1,1), COV(1,2));
-         printf ("  %+.5e, %+.5e, %+.5e ]\n",
+         printf ("  %+.5e, %+.5e, %+.5e ]\n", 
                     COV(2,0), COV(2,1), COV(2,2));
          printf ("# chisq = %g\n", chisq);
        }
-
+     
        gsl_matrix_free (X);
        gsl_vector_free (y);
        gsl_vector_free (w);
        gsl_vector_free (c);
        gsl_matrix_free (cov);
-
+     
        return 0;
      }
 
@@ -4044,30 +4045,30 @@ y = e^x in the region 0 < x < 2.
      #include <stdio.h>
      #include <math.h>
      #include <gsl/gsl_randist.h>
-
+     
      int
      main (void)
      {
        double x;
        const gsl_rng_type * T;
        gsl_rng * r;
-
+       
        gsl_rng_env_setup ();
-
+       
        T = gsl_rng_default;
        r = gsl_rng_alloc (T);
-
+     
        for (x = 0.1; x < 2; x+= 0.1)
          {
            double y0 = exp (x);
            double sigma = 0.1 * y0;
            double dy = gsl_ran_gaussian (r, sigma);
-
+     
            printf ("%g %g %g\n", x, y0 + dy, sigma);
          }
-
+     
        gsl_rng_free(r);
-
+     
        return 0;
      }
 
@@ -4143,7 +4144,7 @@ The program is given below.
      #include <gsl/gsl_rng.h>
      #include <gsl/gsl_randist.h>
      #include <gsl/gsl_multifit.h>
-
+     
      int
      main()
      {
@@ -4153,26 +4154,26 @@ The program is given below.
        gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
        gsl_matrix *X = gsl_matrix_alloc(n, p);
        gsl_vector *y = gsl_vector_alloc(n);
-
+     
        for (i = 0; i < n; ++i)
          {
            /* generate first random variable u */
            double ui = 5.0 * gsl_ran_gaussian(r, 1.0);
-
+     
            /* set v = u + noise */
            double vi = ui + gsl_ran_gaussian(r, 0.001);
-
+     
            /* set y = u + v + noise */
            double yi = ui + vi + gsl_ran_gaussian(r, 1.0);
-
+     
            /* since u =~ v, the matrix X is ill-conditioned */
            gsl_matrix_set(X, i, 0, ui);
            gsl_matrix_set(X, i, 1, vi);
-
+     
            /* rhs vector */
            gsl_vector_set(y, i, yi);
          }
-
+     
        {
          const size_t nL = 200;                   /* number of points on L-curve */
          gsl_multifit_linear_workspace *w =
@@ -4186,48 +4187,48 @@ The program is given below.
          size_t reg_idx;                          /* index of optimal lambda */
          double rcond;                            /* reciprocal condition number of X */
          double chisq, rnorm, snorm;
-
+     
          /* compute SVD of X */
          gsl_multifit_linear_svd(X, w);
-
+     
          rcond = gsl_multifit_linear_rcond(w);
          fprintf(stderr, "matrix condition number = %e\n", 1.0 / rcond);
-
+     
          /* unregularized (standard) least squares fit, lambda = 0 */
          gsl_multifit_linear_solve(0.0, X, y, c, &rnorm, &snorm, w);
          chisq = pow(rnorm, 2.0);
-
+     
          fprintf(stderr, "=== Unregularized fit ===\n");
          fprintf(stderr, "best fit: y = %g u + %g v\n",
            gsl_vector_get(c, 0), gsl_vector_get(c, 1));
          fprintf(stderr, "chisq/dof = %g\n", chisq / (n - p));
-
+     
          /* calculate L-curve and find its corner */
          gsl_multifit_linear_lcurve(y, reg_param, rho, eta, w);
          gsl_multifit_linear_lcorner(rho, eta, &reg_idx);
-
+     
          /* store optimal regularization parameter */
          lambda = gsl_vector_get(reg_param, reg_idx);
-
+     
          /* output L-curve */
          for (i = 0; i < nL; ++i)
            printf("%f %f\n", gsl_vector_get(rho, i), gsl_vector_get(eta, i));
-
+     
          /* output L-curve corner point */
          printf("\n\n%f %f\n",
                 gsl_vector_get(rho, reg_idx),
                 gsl_vector_get(eta, reg_idx));
-
+     
          /* regularize with lambda */
          gsl_multifit_linear_solve(lambda, X, y, c_reg, &rnorm, &snorm, w);
          chisq = pow(rnorm, 2.0) + pow(lambda * snorm, 2.0);
-
+     
          fprintf(stderr, "=== Regularized fit ===\n");
          fprintf(stderr, "optimal lambda: %g\n", lambda);
          fprintf(stderr, "best fit: y = %g u + %g v\n",
                  gsl_vector_get(c_reg, 0), gsl_vector_get(c_reg, 1));
          fprintf(stderr, "chisq/dof = %g\n", chisq / (n - p));
-
+     
          gsl_multifit_linear_free(w);
          gsl_vector_free(c);
          gsl_vector_free(c_reg);
@@ -4235,11 +4236,11 @@ The program is given below.
          gsl_vector_free(rho);
          gsl_vector_free(eta);
        }
-
+     
        gsl_rng_free(r);
        gsl_matrix_free(X);
        gsl_vector_free(y);
-
+     
        return 0;
      }
 
@@ -4258,22 +4259,22 @@ outliers into the dataset.  Both the robust and ordinary least squares
      #include <stdio.h>
      #include <gsl/gsl_multifit.h>
      #include <gsl/gsl_randist.h>
-
+     
      int
      dofit(const gsl_multifit_robust_type *T,
            const gsl_matrix *X, const gsl_vector *y,
            gsl_vector *c, gsl_matrix *cov)
      {
        int s;
-       gsl_multifit_robust_workspace * work
+       gsl_multifit_robust_workspace * work 
          = gsl_multifit_robust_alloc (T, X->size1, X->size2);
-
+     
        s = gsl_multifit_robust (X, y, c, cov, work);
        gsl_multifit_robust_free (work);
-
+     
        return s;
      }
-
+     
      int
      main (int argc, char **argv)
      {
@@ -4285,25 +4286,25 @@ outliers into the dataset.  Both the robust and ordinary least squares
        const double a = 1.45; /* slope */
        const double b = 3.88; /* intercept */
        gsl_rng *r;
-
+     
        if (argc != 2)
          {
            fprintf (stderr,"usage: robfit n\n");
            exit (-1);
          }
-
+     
        n = atoi (argv[1]);
-
+     
        X = gsl_matrix_alloc (n, p);
        x = gsl_vector_alloc (n);
        y = gsl_vector_alloc (n);
-
+     
        c = gsl_vector_alloc (p);
        c_ols = gsl_vector_alloc (p);
        cov = gsl_matrix_alloc (p, p);
-
+     
        r = gsl_rng_alloc(gsl_rng_default);
-
+     
        /* generate linear dataset */
        for (i = 0; i < n - 3; i++)
          {
@@ -4311,34 +4312,34 @@ outliers into the dataset.  Both the robust and ordinary least squares
            double ei = gsl_rng_uniform(r);
            double xi = -5.0 + i * dx;
            double yi = a * xi + b;
-
+     
            gsl_vector_set (x, i, xi);
            gsl_vector_set (y, i, yi + ei);
          }
-
+     
        /* add a few outliers */
        gsl_vector_set(x, n - 3, 4.7);
        gsl_vector_set(y, n - 3, -8.3);
-
+     
        gsl_vector_set(x, n - 2, 3.5);
        gsl_vector_set(y, n - 2, -6.7);
-
+     
        gsl_vector_set(x, n - 1, 4.1);
        gsl_vector_set(y, n - 1, -6.0);
-
+     
        /* construct design matrix X for linear fit */
        for (i = 0; i < n; ++i)
          {
            double xi = gsl_vector_get(x, i);
-
+     
            gsl_matrix_set (X, i, 0, 1.0);
            gsl_matrix_set (X, i, 1, xi);
          }
-
+     
        /* perform robust and OLS fit */
        dofit(gsl_multifit_robust_ols, X, y, c_ols, cov);
        dofit(gsl_multifit_robust_bisquare, X, y, c, cov);
-
+     
        /* output data and model */
        for (i = 0; i < n; ++i)
          {
@@ -4346,27 +4347,27 @@ outliers into the dataset.  Both the robust and ordinary least squares
            double yi = gsl_vector_get(y, i);
            gsl_vector_view v = gsl_matrix_row(X, i);
            double y_ols, y_rob, y_err;
-
+     
            gsl_multifit_robust_est(&v.vector, c, cov, &y_rob, &y_err);
            gsl_multifit_robust_est(&v.vector, c_ols, cov, &y_ols, &y_err);
-
+     
            printf("%g %g %g %g\n", xi, yi, y_rob, y_ols);
          }
-
+     
      #define C(i) (gsl_vector_get(c,(i)))
      #define COV(i,j) (gsl_matrix_get(cov,(i),(j)))
-
+     
        {
-         printf ("# best fit: Y = %g + %g X\n",
+         printf ("# best fit: Y = %g + %g X\n", 
                  C(0), C(1));
-
+     
          printf ("# covariance matrix:\n");
          printf ("# [ %+.5e, %+.5e\n",
                     COV(0,0), COV(0,1));
-         printf ("#   %+.5e, %+.5e\n",
+         printf ("#   %+.5e, %+.5e\n", 
                     COV(1,0), COV(1,1));
        }
-
+     
        gsl_matrix_free (X);
        gsl_vector_free (x);
        gsl_vector_free (y);
@@ -4374,7 +4375,7 @@ outliers into the dataset.  Both the robust and ordinary least squares
        gsl_vector_free (c_ols);
        gsl_matrix_free (cov);
        gsl_rng_free(r);
-
+     
        return 0;
      }
 
@@ -4411,14 +4412,14 @@ to converge to a good solution.
      #include <gsl/gsl_multifit.h>
      #include <gsl/gsl_multilarge.h>
      #include <gsl/gsl_blas.h>
-
+     
      /* function to be fitted */
      double
      func(const double t)
      {
        return exp(sin(4.0 * (t - 10.0)));
      }
-
+     
      /* construct a row of the least squares matrix */
      int
      build_row(const double t, gsl_vector *row)
@@ -4426,16 +4427,16 @@ to converge to a good solution.
        const size_t p = row->size;
        double Xj = 1.0;
        size_t j;
-
+     
        for (j = 0; j < p; ++j)
          {
            gsl_vector_set(row, j, Xj);
            Xj *= t;
          }
-
+     
        return 0;
      }
-
+     
      int
      solve_system(const gsl_multilarge_linear_type * T,
                   const double lambda, const size_t n, const size_t p,
@@ -4452,7 +4453,7 @@ to converge to a good solution.
        double rnorm, snorm, rcond;
        double t = 10.0;
        double dt = 1.0 / (n - 1.0);
-
+     
        while (rowidx < n)
          {
            size_t nleft = n - rowidx;         /* number of rows left to accumulate */
@@ -4460,49 +4461,49 @@ to converge to a good solution.
            gsl_matrix_view Xv = gsl_matrix_submatrix(X, 0, 0, nr, p);
            gsl_vector_view yv = gsl_vector_subvector(y, 0, nr);
            size_t i;
-
+     
            /* build (X,y) block with 'nr' rows */
            for (i = 0; i < nr; ++i)
              {
                gsl_vector_view row = gsl_matrix_row(&Xv.matrix, i);
                double yi = func(t);
                double ei = gsl_ran_gaussian (r, 0.3 * yi); /* noise */
-
+     
                /* construct this row of LS matrix */
                build_row(t, &row.vector);
-
+     
                /* set right hand side value with added noise */
                gsl_vector_set(&yv.vector, i, yi + ei);
-
+     
                t += dt;
              }
-
+     
            /* accumulate (X,y) block into LS system */
            gsl_multilarge_linear_accumulate(&Xv.matrix, &yv.vector, w);
-
+     
            rowidx += nr;
          }
-
+     
        /* solve large LS system and store solution in c */
        gsl_multilarge_linear_solve(lambda, c, &rnorm, &snorm, w);
-
+     
        /* compute reciprocal condition number */
        gsl_multilarge_linear_rcond(&rcond, w);
-
+     
        fprintf(stderr, "=== Method %s ===\n", gsl_multilarge_linear_name(w));
        if (rcond != 0.0)
          fprintf(stderr, "matrix condition number = %e\n", 1.0 / rcond);
        fprintf(stderr, "residual norm  = %e\n", rnorm);
        fprintf(stderr, "solution norm  = %e\n", snorm);
-
+     
        gsl_matrix_free(X);
        gsl_vector_free(y);
        gsl_multilarge_linear_free(w);
        gsl_rng_free(r);
-
+     
        return 0;
      }
-
+     
      int
      main(int argc, char *argv[])
      {
@@ -4511,39 +4512,39 @@ to converge to a good solution.
        double lambda = 0.0;      /* regularization parameter */
        gsl_vector *c_tsqr = gsl_vector_alloc(p);
        gsl_vector *c_normal = gsl_vector_alloc(p);
-
+     
        if (argc > 1)
          lambda = atof(argv[1]);
-
+     
        /* solve system with TSQR method */
        solve_system(gsl_multilarge_linear_tsqr, lambda, n, p, c_tsqr);
-
+     
        /* solve system with Normal equations method */
        solve_system(gsl_multilarge_linear_normal, lambda, n, p, c_normal);
-
+     
        /* output solutions */
        {
          gsl_vector *v = gsl_vector_alloc(p);
          double t;
-
+     
          for (t = 10.0; t <= 11.0; t += 0.01)
            {
              double f_exact = func(t);
              double f_tsqr, f_normal;
-
+     
              build_row(t, v);
              gsl_blas_ddot(v, c_tsqr, &f_tsqr);
              gsl_blas_ddot(v, c_normal, &f_normal);
-
+     
              printf("%f %e %e %e\n", t, f_exact, f_tsqr, f_normal);
            }
-
+     
          gsl_vector_free(v);
        }
-
+     
        gsl_vector_free(c_tsqr);
        gsl_vector_free(c_normal);
-
+     
        return 0;
      }
 
@@ -4624,21 +4625,21 @@ multidimensional nonlinear fitting functions and related declarations.
 
 * Menu:
 
-* Overview of Nonlinear Least-Squares Fitting::  
-* Overview of Weighted Nonlinear Least-Squares Fitting::  
-* Overview of Regularized Nonlinear Least-Squares Fitting::  
-* Initializing the Nonlinear Least-Squares Solver::  
-* Providing the Function to be Minimized::  
-* Finite Difference Jacobian::  
-* Iteration of the Minimization Algorithm::  
-* Search Stopping Parameters for Minimization Algorithms::  
+* Overview of Nonlinear Least-Squares Fitting::
+* Overview of Weighted Nonlinear Least-Squares Fitting::
+* Overview of Regularized Nonlinear Least-Squares Fitting::
+* Initializing the Nonlinear Least-Squares Solver::
+* Providing the Function to be Minimized::
+* Finite Difference Jacobian::
+* Iteration of the Minimization Algorithm::
+* Search Stopping Parameters for Minimization Algorithms::
 * High Level Driver::
-* Minimization Algorithms using Derivatives::  
-* Minimization Algorithms without Derivatives::  
-* Computing the covariance matrix of best fit parameters::  
+* Minimization Algorithms using Derivatives::
+* Minimization Algorithms without Derivatives::
+* Computing the covariance matrix of best fit parameters::
 * Troubleshooting Nonlinear Least Squares::
-* Example programs for Nonlinear Least-Squares Fitting::  
-* References and Further Reading for Nonlinear Least-Squares Fitting::  
+* Example programs for Nonlinear Least-Squares Fitting::
+* References and Further Reading for Nonlinear Least-Squares Fitting::
 
 
 File: gsl-ref.info,  Node: Overview of Nonlinear Least-Squares Fitting,  Next: Overview of Weighted Nonlinear Least-Squares Fitting,  Up: Nonlinear Least-Squares Fitting
@@ -5187,7 +5188,7 @@ initial guess must be sufficiently close to the minimum for it to work.
 
      This is a robust and efficient version of the Levenberg-Marquardt
      algorithm as implemented in the scaled LMDER routine in MINPACK.
-     Minpack was written by Jorge J. More', Burton S. Garbow and Kenneth
+     Minpack was written by Jorge J. Moré, Burton S. Garbow and Kenneth
      E. Hillstrom.
 
      The algorithm uses a generalized trust region to keep each step
@@ -5326,7 +5327,7 @@ File: gsl-ref.info,  Node: Computing the covariance matrix of best fit parameter
      For an unweighted least-squares function f_i = (Y(x, t_i) - y_i)
      the covariance matrix above should be multiplied by the variance of
      the residuals about the best-fit \sigma^2 = \sum (y_i - Y(x,t_i))^2
-     / (n-p) to give the variance-covariance matrix \sigma^2 C.  This
+     / (n-p) to give the variance-covariance matrix \sigma^2 C. This
      estimates the statistical error on the best-fit parameters from the
      scatter of the underlying data.
 
@@ -5393,25 +5394,25 @@ where x_0 = A, x_1 = \lambda and x_2 = b.  The weights are given by w_i
 = 1/\sigma_i^2.
 
      /* expfit.c -- model functions for exponential + background */
-
+     
      struct data {
        size_t n;
        double * y;
      };
-
+     
      int
-     expb_f (const gsl_vector * x, void *data,
+     expb_f (const gsl_vector * x, void *data, 
              gsl_vector * f)
      {
        size_t n = ((struct data *)data)->n;
        double *y = ((struct data *)data)->y;
-
+     
        double A = gsl_vector_get (x, 0);
        double lambda = gsl_vector_get (x, 1);
        double b = gsl_vector_get (x, 2);
-
+     
        size_t i;
-
+     
        for (i = 0; i < n; i++)
          {
            /* Model Yi = A * exp(-lambda * i) + b */
@@ -5419,21 +5420,21 @@ where x_0 = A, x_1 = \lambda and x_2 = b.  The weights are given by w_i
            double Yi = A * exp (-lambda * t) + b;
            gsl_vector_set (f, i, Yi - y[i]);
          }
-
+     
        return GSL_SUCCESS;
      }
-
+     
      int
-     expb_df (const gsl_vector * x, void *data,
+     expb_df (const gsl_vector * x, void *data, 
               gsl_matrix * J)
      {
        size_t n = ((struct data *)data)->n;
-
+     
        double A = gsl_vector_get (x, 0);
        double lambda = gsl_vector_get (x, 1);
-
+     
        size_t i;
-
+     
        for (i = 0; i < n; i++)
          {
            /* Jacobian matrix J(i,j) = dfi / dxj, */
@@ -5442,7 +5443,7 @@ where x_0 = A, x_1 = \lambda and x_2 = b.  The weights are given by w_i
            /* and the xj are the parameters (A,lambda,b) */
            double t = i;
            double e = exp(-lambda * t);
-           gsl_matrix_set (J, i, 0, e);
+           gsl_matrix_set (J, i, 0, e); 
            gsl_matrix_set (J, i, 1, -t * A * e);
            gsl_matrix_set (J, i, 2, 1.0);
          }
@@ -5462,12 +5463,12 @@ chosen as (0.0, 1.0, 0.0).
      #include <gsl/gsl_vector.h>
      #include <gsl/gsl_blas.h>
      #include <gsl/gsl_multifit_nlin.h>
-
+     
      #include "expfit.c"
-
+     
      /* number of data points to fit */
      #define N 40
-
+     
      int
      main (void)
      {
@@ -5477,7 +5478,7 @@ chosen as (0.0, 1.0, 0.0).
        size_t i;
        const size_t n = N;
        const size_t p = 3;
-
+     
        gsl_matrix *J = gsl_matrix_alloc(n, p);
        gsl_matrix *covar = gsl_matrix_alloc (p, p);
        double y[N], weights[N];
@@ -5490,57 +5491,57 @@ chosen as (0.0, 1.0, 0.0).
        gsl_rng * r;
        gsl_vector *res_f;
        double chi, chi0;
-
+     
        const double xtol = 1e-8;
        const double gtol = 1e-8;
        const double ftol = 0.0;
-
+     
        gsl_rng_env_setup();
-
+     
        type = gsl_rng_default;
        r = gsl_rng_alloc (type);
-
+     
        f.f = &expb_f;
        f.df = &expb_df;   /* set to NULL for finite-difference Jacobian */
        f.n = n;
        f.p = p;
        f.params = &d;
-
+     
        /* This is the data to be fitted */
-
+     
        for (i = 0; i < n; i++)
          {
            double t = i;
            double yi = 1.0 + 5 * exp (-0.1 * t);
            double si = 0.1 * yi;
            double dy = gsl_ran_gaussian(r, si);
-
+     
            weights[i] = 1.0 / (si * si);
            y[i] = yi + dy;
            printf ("data: %zu %g %g\n", i, y[i], si);
          };
-
+     
        s = gsl_multifit_fdfsolver_alloc (T, n, p);
-
+     
        /* initialize solver with starting point and weights */
        gsl_multifit_fdfsolver_wset (s, &f, &x.vector, &w.vector);
-
+     
        /* compute initial residual norm */
        res_f = gsl_multifit_fdfsolver_residual(s);
        chi0 = gsl_blas_dnrm2(res_f);
-
+     
        /* solve the system with a maximum of 20 iterations */
        status = gsl_multifit_fdfsolver_driver(s, 20, xtol, gtol, ftol, &info);
-
+     
        gsl_multifit_fdfsolver_jac(s, J);
        gsl_multifit_covar (J, 0.0, covar);
-
+     
        /* compute final residual norm */
        chi = gsl_blas_dnrm2(res_f);
-
+     
      #define FIT(i) gsl_vector_get(s->x, i)
      #define ERR(i) sqrt(gsl_matrix_get(covar,i,i))
-
+     
        fprintf(stderr, "summary from method '%s'\n",
                gsl_multifit_fdfsolver_name(s));
        fprintf(stderr, "number of iterations: %zu\n",
@@ -5551,20 +5552,20 @@ chosen as (0.0, 1.0, 0.0).
                (info == 1) ? "small step size" : "small gradient");
        fprintf(stderr, "initial |f(x)| = %g\n", chi0);
        fprintf(stderr, "final   |f(x)| = %g\n", chi);
-
-       {
+     
+       { 
          double dof = n - p;
-         double c = GSL_MAX_DBL(1, chi / sqrt(dof));
-
+         double c = GSL_MAX_DBL(1, chi / sqrt(dof)); 
+     
          fprintf(stderr, "chisq/dof = %g\n",  pow(chi, 2.0) / dof);
-
+     
          fprintf (stderr, "A      = %.5f +/- %.5f\n", FIT(0), c*ERR(0));
          fprintf (stderr, "lambda = %.5f +/- %.5f\n", FIT(1), c*ERR(1));
          fprintf (stderr, "b      = %.5f +/- %.5f\n", FIT(2), c*ERR(2));
        }
-
+     
        fprintf (stderr, "status = %s\n", gsl_strerror (status));
-
+     
        gsl_multifit_fdfsolver_free (s);
        gsl_matrix_free (covar);
        gsl_matrix_free (J);
@@ -5611,7 +5612,7 @@ File: gsl-ref.info,  Node: References and Further Reading for Nonlinear Least-Sq
 
 The MINPACK algorithm is described in the following article,
 
-     J.J. More', 'The Levenberg-Marquardt Algorithm: Implementation and
+     J.J. Moré, 'The Levenberg-Marquardt Algorithm: Implementation and
      Theory', Lecture Notes in Mathematics, v630 (1978), ed G. Watson.
 
 The 'lmniel' algorithm closely follows the following publications,
@@ -5629,7 +5630,7 @@ in this section,
      J. E. Dennis and R. B. Schnabel, Numerical Methods for
      Unconstrained Optimization and Nonlinear Equations, SIAM, 1996.
 
-     J.J. More', B.S. Garbow, K.E. Hillstrom, "Testing Unconstrained
+     J.J. Moré, B.S. Garbow, K.E. Hillstrom, "Testing Unconstrained
      Optimization Software", ACM Transactions on Mathematical Software,
      Vol 7, No 1 (1981), p 17-41.
 
@@ -5835,16 +5836,16 @@ generated from the curve y(x) = \cos{(x)} \exp{(-x/10)} on the interval
      #include <gsl/gsl_rng.h>
      #include <gsl/gsl_randist.h>
      #include <gsl/gsl_statistics.h>
-
+     
      /* number of data points to fit */
      #define N        200
-
+     
      /* number of fit coefficients */
      #define NCOEFFS  12
-
+     
      /* nbreak = ncoeffs + 2 - k = ncoeffs - 2 since k = 4 */
      #define NBREAK   (NCOEFFS - 2)
-
+     
      int
      main (void)
      {
@@ -5861,14 +5862,14 @@ generated from the curve y(x) = \cos{(x)} \exp{(-x/10)} on the interval
        gsl_matrix *X, *cov;
        gsl_multifit_linear_workspace *mw;
        double chisq, Rsq, dof, tss;
-
+     
        gsl_rng_env_setup();
        r = gsl_rng_alloc(gsl_rng_default);
-
+     
        /* allocate a cubic bspline workspace (k = 4) */
        bw = gsl_bspline_alloc(4, nbreak);
        B = gsl_vector_alloc(ncoeffs);
-
+     
        x = gsl_vector_alloc(n);
        y = gsl_vector_alloc(n);
        X = gsl_matrix_alloc(n, ncoeffs);
@@ -5876,7 +5877,7 @@ generated from the curve y(x) = \cos{(x)} \exp{(-x/10)} on the interval
        w = gsl_vector_alloc(n);
        cov = gsl_matrix_alloc(ncoeffs, ncoeffs);
        mw = gsl_multifit_linear_alloc(n, ncoeffs);
-
+     
        printf("#m=0,S=0\n");
        /* this is the data to be fitted */
        for (i = 0; i < n; ++i)
@@ -5884,29 +5885,29 @@ generated from the curve y(x) = \cos{(x)} \exp{(-x/10)} on the interval
            double sigma;
            double xi = (15.0 / (N - 1)) * i;
            double yi = cos(xi) * exp(-0.1 * xi);
-
+     
            sigma = 0.1 * yi;
            dy = gsl_ran_gaussian(r, sigma);
            yi += dy;
-
+     
            gsl_vector_set(x, i, xi);
            gsl_vector_set(y, i, yi);
            gsl_vector_set(w, i, 1.0 / (sigma * sigma));
-
+     
            printf("%f %f\n", xi, yi);
          }
-
+     
        /* use uniform breakpoints on [0, 15] */
        gsl_bspline_knots_uniform(0.0, 15.0, bw);
-
+     
        /* construct the fit matrix X */
        for (i = 0; i < n; ++i)
          {
            double xi = gsl_vector_get(x, i);
-
+     
            /* compute B_j(xi) for all j */
            gsl_bspline_eval(xi, B, bw);
-
+     
            /* fill in row i of X */
            for (j = 0; j < ncoeffs; ++j)
              {
@@ -5914,21 +5915,21 @@ generated from the curve y(x) = \cos{(x)} \exp{(-x/10)} on the interval
                gsl_matrix_set(X, i, j, Bj);
              }
          }
-
+     
        /* do the fit */
        gsl_multifit_wlinear(X, w, y, c, cov, &chisq, mw);
-
+     
        dof = n - ncoeffs;
        tss = gsl_stats_wtss(w->data, 1, y->data, 1, y->size);
        Rsq = 1.0 - chisq / tss;
-
-       fprintf(stderr, "chisq/dof = %e, Rsq = %f\n",
+     
+       fprintf(stderr, "chisq/dof = %e, Rsq = %f\n", 
                         chisq / dof, Rsq);
-
+     
        /* output the smoothed curve */
        {
          double xi, yi, yerr;
-
+     
          printf("#m=1,S=0\n");
          for (xi = 0.0; xi < 15.0; xi += 0.1)
            {
@@ -5937,7 +5938,7 @@ generated from the curve y(x) = \cos{(x)} \exp{(-x/10)} on the interval
              printf("%f %f\n", xi, yi);
            }
        }
-
+     
        gsl_rng_free(r);
        gsl_bspline_free(bw);
        gsl_vector_free(B);
@@ -5948,7 +5949,7 @@ generated from the curve y(x) = \cos{(x)} \exp{(-x/10)} on the interval
        gsl_vector_free(w);
        gsl_matrix_free(cov);
        gsl_multifit_linear_free(mw);
-
+     
        return 0;
      } /* main() */
 
@@ -6303,16 +6304,16 @@ start of each column in the data array.
 
      #include <stdio.h>
      #include <stdlib.h>
-
+     
      #include <gsl/gsl_spmatrix.h>
-
+     
      int
      main()
      {
        gsl_spmatrix *A = gsl_spmatrix_alloc(5, 4); /* triplet format */
        gsl_spmatrix *C;
        size_t i, j;
-
+     
        /* build the sparse matrix */
        gsl_spmatrix_set(A, 0, 2, 3.1);
        gsl_spmatrix_set(A, 0, 3, 4.6);
@@ -6322,40 +6323,40 @@ start of each column in the data array.
        gsl_spmatrix_set(A, 3, 1, 2.9);
        gsl_spmatrix_set(A, 3, 3, 8.5);
        gsl_spmatrix_set(A, 4, 0, 4.1);
-
+     
        printf("printing all matrix elements:\n");
        for (i = 0; i < 5; ++i)
          for (j = 0; j < 4; ++j)
            printf("A(%zu,%zu) = %g\n", i, j,
                   gsl_spmatrix_get(A, i, j));
-
+     
        /* print out elements in triplet format */
        printf("matrix in triplet format (i,j,Aij):\n");
        for (i = 0; i < A->nz; ++i)
          printf("(%zu, %zu, %.1f)\n", A->i[i], A->p[i], A->data[i]);
-
+     
        /* convert to compressed column format */
        C = gsl_spmatrix_compcol(A);
-
+     
        printf("matrix in compressed column format:\n");
        printf("i = [ ");
        for (i = 0; i < C->nz; ++i)
          printf("%zu, ", C->i[i]);
        printf("]\n");
-
+     
        printf("p = [ ");
        for (i = 0; i < C->size2 + 1; ++i)
          printf("%zu, ", C->p[i]);
        printf("]\n");
-
+     
        printf("d = [ ");
        for (i = 0; i < C->nz; ++i)
          printf("%g, ", C->data[i]);
        printf("]\n");
-
+     
        gsl_spmatrix_free(A);
        gsl_spmatrix_free(C);
-
+     
        return 0;
      }
 
@@ -6410,7 +6411,7 @@ File: gsl-ref.info,  Node: Sparse BLAS operations,  Next: Sparse BLAS References
  -- Function: int gsl_spblas_dgemm (const double ALPHA, const
           gsl_spmatrix * A, const gsl_spmatrix * B, gsl_spmatrix * C)
      This function computes the sparse matrix-matrix product C = \alpha
-     A B.  The matrices must be in compressed format.
+     A B. The matrices must be in compressed format.
 
 
 File: gsl-ref.info,  Node: Sparse BLAS References and Further Reading,  Prev: Sparse BLAS operations,  Up: Sparse BLAS Support
@@ -6610,12 +6611,12 @@ solution is shown in the following plot.
      #include <stdio.h>
      #include <stdlib.h>
      #include <math.h>
-
+     
      #include <gsl/gsl_math.h>
      #include <gsl/gsl_vector.h>
      #include <gsl/gsl_spmatrix.h>
      #include <gsl/gsl_splinalg.h>
-
+     
      int
      main()
      {
@@ -6627,13 +6628,13 @@ solution is shown in the following plot.
        gsl_vector *f = gsl_vector_alloc(n);        /* right hand side vector */
        gsl_vector *u = gsl_vector_alloc(n);        /* solution vector */
        size_t i;
-
+     
        /* construct the sparse matrix for the finite difference equation */
-
+     
        /* construct first row */
        gsl_spmatrix_set(A, 0, 0, -2.0);
        gsl_spmatrix_set(A, 0, 1, 1.0);
-
+     
        /* construct rows [1:n-2] */
        for (i = 1; i < n - 1; ++i)
          {
@@ -6641,14 +6642,14 @@ solution is shown in the following plot.
            gsl_spmatrix_set(A, i, i, -2.0);
            gsl_spmatrix_set(A, i, i - 1, 1.0);
          }
-
+     
        /* construct last row */
        gsl_spmatrix_set(A, n - 1, n - 1, -2.0);
        gsl_spmatrix_set(A, n - 1, n - 2, 1.0);
-
+     
        /* scale by h^2 */
        gsl_spmatrix_scale(A, 1.0 / (h * h));
-
+     
        /* construct right hand side vector */
        for (i = 0; i < n; ++i)
          {
@@ -6656,10 +6657,10 @@ solution is shown in the following plot.
            double fi = -M_PI * M_PI * sin(M_PI * xi);
            gsl_vector_set(f, i, fi);
          }
-
+     
        /* convert to compressed column format */
        C = gsl_spmatrix_compcol(A);
-
+     
        /* now solve the system with the GMRES iterative solver */
        {
          const double tol = 1.0e-6;  /* solution relative tolerance */
@@ -6670,42 +6671,42 @@ solution is shown in the following plot.
          size_t iter = 0;
          double residual;
          int status;
-
+     
          /* initial guess u = 0 */
          gsl_vector_set_zero(u);
-
+     
          /* solve the system A u = f */
          do
            {
              status = gsl_splinalg_itersolve_iterate(C, f, tol, u, work);
-
+     
              /* print out residual norm ||A*u - f|| */
              residual = gsl_splinalg_itersolve_normr(work);
              fprintf(stderr, "iter %zu residual = %.12e\n", iter, residual);
-
+     
              if (status == GSL_SUCCESS)
                fprintf(stderr, "Converged\n");
            }
          while (status == GSL_CONTINUE && ++iter < max_iter);
-
+     
          /* output solution */
          for (i = 0; i < n; ++i)
            {
              double xi = (i + 1) * h;
              double u_exact = sin(M_PI * xi);
              double u_gsl = gsl_vector_get(u, i);
-
+     
              printf("%f %.12e %.12e\n", xi, u_gsl, u_exact);
            }
-
+     
          gsl_splinalg_itersolve_free(work);
        }
-
+     
        gsl_spmatrix_free(A);
        gsl_spmatrix_free(C);
        gsl_vector_free(f);
        gsl_vector_free(u);
-
+     
        return 0;
      } /* main() */
 
@@ -6731,7 +6732,7 @@ File: gsl-ref.info,  Node: Physical Constants,  Next: IEEE floating-point arithm
 *********************
 
 This chapter describes macros for the values of physical constants, such
-as the speed of light, c, and gravitational constant, G.  The values are
+as the speed of light, c, and gravitational constant, G. The values are
 available in different unit systems, including the standard MKSA system
 (meters, kilograms, seconds, amperes) and the CGSM system (centimeters,
 grams, seconds, gauss), which is commonly used in Astronomy.
@@ -6744,24 +6745,24 @@ structure constant, which are pure numbers are defined in
 
 * Menu:
 
-* Fundamental Constants::       
-* Astronomy and Astrophysics::  
-* Atomic and Nuclear Physics::  
-* Measurement of Time::         
-* Imperial Units ::             
-* Speed and Nautical Units::    
-* Printers Units::              
-* Volume Area and Length::      
-* Mass and Weight ::            
-* Thermal Energy and Power::    
-* Pressure::                    
-* Viscosity::                   
-* Light and Illumination::      
-* Radioactivity::               
-* Force and Energy::            
-* Prefixes::                    
-* Physical Constant Examples::  
-* Physical Constant References and Further Reading::  
+* Fundamental Constants::
+* Astronomy and Astrophysics::
+* Atomic and Nuclear Physics::
+* Measurement of Time::
+* Imperial Units ::
+* Speed and Nautical Units::
+* Printers Units::
+* Volume Area and Length::
+* Mass and Weight ::
+* Thermal Energy and Power::
+* Pressure::
+* Viscosity::
+* Light and Illumination::
+* Radioactivity::
+* Force and Energy::
+* Prefixes::
+* Physical Constant Examples::
+* Physical Constant References and Further Reading::
 
    The full list of constants is described briefly below.  Consult the
 header files themselves for the values of the constants used in the
@@ -7236,27 +7237,27 @@ converted into minutes before being displayed.
 
      #include <stdio.h>
      #include <gsl/gsl_const_mksa.h>
-
+     
      int
      main (void)
      {
        double c  = GSL_CONST_MKSA_SPEED_OF_LIGHT;
        double au = GSL_CONST_MKSA_ASTRONOMICAL_UNIT;
        double minutes = GSL_CONST_MKSA_MINUTE;
-
+     
        /* distance stored in meters */
-       double r_earth = 1.00 * au;
+       double r_earth = 1.00 * au;  
        double r_mars  = 1.52 * au;
-
+     
        double t_min, t_max;
-
+     
        t_min = (r_mars - r_earth) / c;
        t_max = (r_mars + r_earth) / c;
-
+     
        printf ("light travel time from Earth to Mars:\n");
        printf ("minimum = %.1f minutes\n", t_min / minutes);
        printf ("maximum = %.1f minutes\n", t_max / minutes);
-
+     
        return 0;
      }
 
@@ -7296,9 +7297,9 @@ the header file 'gsl_ieee_utils.h'.
 
 * Menu:
 
-* Representation of floating point numbers::  
-* Setting up your IEEE environment::  
-* IEEE References and Further Reading::  
+* Representation of floating point numbers::
+* Setting up your IEEE environment::
+* IEEE References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Representation of floating point numbers,  Next: Setting up your IEEE environment,  Up: IEEE floating-point arithmetic
@@ -7393,24 +7394,24 @@ double precision is also printed.
 
      #include <stdio.h>
      #include <gsl/gsl_ieee_utils.h>
-
+     
      int
-     main (void)
+     main (void) 
      {
        float f = 1.0/3.0;
        double d = 1.0/3.0;
-
+     
        double fd = f; /* promote from float to double */
-
-       printf (" f="); gsl_ieee_printf_float(&f);
+       
+       printf (" f="); gsl_ieee_printf_float(&f); 
        printf ("\n");
-
-       printf ("fd="); gsl_ieee_printf_double(&fd);
+     
+       printf ("fd="); gsl_ieee_printf_double(&fd); 
        printf ("\n");
-
-       printf (" d="); gsl_ieee_printf_double(&d);
+     
+       printf (" d="); gsl_ieee_printf_double(&d); 
        printf ("\n");
-
+     
        return 0;
      }
 
@@ -7523,31 +7524,31 @@ summing a rapidly-decreasing series,
      #include <stdio.h>
      #include <gsl/gsl_math.h>
      #include <gsl/gsl_ieee_utils.h>
-
+     
      int
      main (void)
      {
-       double x = 1, oldsum = 0, sum = 0;
+       double x = 1, oldsum = 0, sum = 0; 
        int i = 0;
-
+     
        gsl_ieee_env_setup (); /* read GSL_IEEE_MODE */
-
-       do
+     
+       do 
          {
            i++;
-
+           
            oldsum = sum;
            sum += x;
            x = x / i;
-
+           
            printf ("i=%2d sum=%.18f error=%g\n",
                    i, sum, sum - M_E);
-
+     
            if (i > 30)
               break;
-         }
+         }  
        while (sum != oldsum);
-
+     
        return 0;
      }
 

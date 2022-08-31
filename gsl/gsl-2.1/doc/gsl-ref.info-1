@@ -1,4 +1,4 @@
-This is gsl-ref.info, produced by makeinfo version 5.1 from
+This is gsl-ref.info, produced by makeinfo version 6.8 from
 gsl-ref.texi.
 
 Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
@@ -60,61 +60,61 @@ this GNU Manual."
 
 * Menu:
 
-* Introduction::                
-* Using the library::           
-* Error Handling::              
-* Mathematical Functions::      
-* Complex Numbers::             
-* Polynomials::                 
-* Special Functions::           
-* Vectors and Matrices::        
-* Permutations::                
-* Combinations::                
-* Multisets::                   
-* Sorting::                     
-* BLAS Support::                
-* Linear Algebra::              
-* Eigensystems::                
-* Fast Fourier Transforms::     
-* Numerical Integration::       
-* Random Number Generation::    
-* Quasi-Random Sequences::      
-* Random Number Distributions::  
-* Statistics::                  
-* Running Statistics::                  
-* Histograms::                  
-* N-tuples::                    
-* Monte Carlo Integration::     
-* Simulated Annealing::         
-* Ordinary Differential Equations::  
-* Interpolation::               
-* Numerical Differentiation::   
-* Chebyshev Approximations::    
-* Series Acceleration::         
-* Wavelet Transforms::          
-* Discrete Hankel Transforms::  
-* One dimensional Root-Finding::  
-* One dimensional Minimization::  
-* Multidimensional Root-Finding::  
-* Multidimensional Minimization::  
-* Least-Squares Fitting::       
-* Nonlinear Least-Squares Fitting::  
+* Introduction::
+* Using the library::
+* Error Handling::
+* Mathematical Functions::
+* Complex Numbers::
+* Polynomials::
+* Special Functions::
+* Vectors and Matrices::
+* Permutations::
+* Combinations::
+* Multisets::
+* Sorting::
+* BLAS Support::
+* Linear Algebra::
+* Eigensystems::
+* Fast Fourier Transforms::
+* Numerical Integration::
+* Random Number Generation::
+* Quasi-Random Sequences::
+* Random Number Distributions::
+* Statistics::
+* Running Statistics::
+* Histograms::
+* N-tuples::
+* Monte Carlo Integration::
+* Simulated Annealing::
+* Ordinary Differential Equations::
+* Interpolation::
+* Numerical Differentiation::
+* Chebyshev Approximations::
+* Series Acceleration::
+* Wavelet Transforms::
+* Discrete Hankel Transforms::
+* One dimensional Root-Finding::
+* One dimensional Minimization::
+* Multidimensional Root-Finding::
+* Multidimensional Minimization::
+* Least-Squares Fitting::
+* Nonlinear Least-Squares Fitting::
 * Basis Splines::
 * Sparse Matrices::
 * Sparse BLAS Support::
 * Sparse Linear Algebra::
-* Physical Constants::          
-* IEEE floating-point arithmetic::  
-* Debugging Numerical Programs::  
-* Contributors to GSL::         
-* Autoconf Macros::             
-* GSL CBLAS Library::           
-* GNU General Public License::  
-* GNU Free Documentation License::  
-* Function Index::              
-* Variable Index::              
-* Type Index::                  
-* Concept Index::               
+* Physical Constants::
+* IEEE floating-point arithmetic::
+* Debugging Numerical Programs::
+* Contributors to GSL::
+* Autoconf Macros::
+* GSL CBLAS Library::
+* GNU General Public License::
+* GNU Free Documentation License::
+* Function Index::
+* Variable Index::
+* Type Index::
+* Concept Index::
 
 
 File: gsl-ref.info,  Node: Introduction,  Next: Using the library,  Prev: Top,  Up: Top
@@ -131,13 +131,13 @@ License.
 
 * Menu:
 
-* Routines available in GSL::   
-* GSL is Free Software::        
-* Obtaining GSL::               
-* No Warranty::                 
-* Reporting Bugs::              
-* Further Information::         
-* Conventions used in this manual::  
+* Routines available in GSL::
+* GSL is Free Software::
+* Obtaining GSL::
+* No Warranty::
+* Reporting Bugs::
+* Further Information::
+* Conventions used in this manual::
 
 
 File: gsl-ref.info,  Node: Routines available in GSL,  Next: GSL is Free Software,  Up: Introduction
@@ -354,20 +354,20 @@ introduces its conventions.
 
 * Menu:
 
-* An Example Program::          
-* Compiling and Linking::       
-* Shared Libraries::            
-* ANSI C Compliance::           
-* Inline functions::            
-* Long double::                 
-* Portability functions::       
-* Alternative optimized functions::  
-* Support for different numeric types::  
-* Compatibility with C++::      
-* Aliasing of arrays::          
-* Thread-safety::               
-* Deprecated Functions::        
-* Code Reuse::                  
+* An Example Program::
+* Compiling and Linking::
+* Shared Libraries::
+* ANSI C Compliance::
+* Inline functions::
+* Long double::
+* Portability functions::
+* Alternative optimized functions::
+* Support for different numeric types::
+* Compatibility with C++::
+* Aliasing of arrays::
+* Thread-safety::
+* Deprecated Functions::
+* Code Reuse::
 
 
 File: gsl-ref.info,  Node: An Example Program,  Next: Compiling and Linking,  Up: Using the library
@@ -380,7 +380,7 @@ computing the value of the Bessel function J_0(x) for x=5,
 
      #include <stdio.h>
      #include <gsl/gsl_sf_bessel.h>
-
+     
      int
      main (void)
      {
@@ -429,8 +429,8 @@ can actually be omitted when GSL is installed in its default location.
 
 * Menu:
 
-* Linking programs with the library::  
-* Linking with an alternative BLAS library::  
+* Linking programs with the library::
+* Linking with an alternative BLAS library::
 
 
 File: gsl-ref.info,  Node: Linking programs with the library,  Next: Linking with an alternative BLAS library,  Up: Compiling and Linking
@@ -871,11 +871,11 @@ file 'gsl_errno.h'.
 
 * Menu:
 
-* Error Reporting::             
-* Error Codes::                 
-* Error Handlers::              
-* Using GSL error reporting in your own functions::  
-* Error Reporting Examples::    
+* Error Reporting::
+* Error Codes::
+* Error Handlers::
+* Using GSL error reporting in your own functions::
+* Error Reporting Examples::
 
 
 File: gsl-ref.info,  Node: Error Reporting,  Next: Error Codes,  Up: Error Handling
@@ -1156,14 +1156,14 @@ header file 'gsl_math.h'.
 
 * Menu:
 
-* Mathematical Constants::      
-* Infinities and Not-a-number::  
-* Elementary Functions::        
-* Small integer powers::        
-* Testing the Sign of Numbers::  
-* Testing for Odd and Even Numbers::  
-* Maximum and Minimum functions::  
-* Approximate Comparison of Floating Point Numbers::  
+* Mathematical Constants::
+* Infinities and Not-a-number::
+* Elementary Functions::
+* Small integer powers::
+* Testing the Sign of Numbers::
+* Testing for Odd and Even Numbers::
+* Maximum and Minimum functions::
+* Approximate Comparison of Floating Point Numbers::
 
 
 File: gsl-ref.info,  Node: Mathematical Constants,  Next: Infinities and Not-a-number,  Up: Mathematical Functions
@@ -1482,15 +1482,15 @@ defined in 'gsl_complex_math.h'.
 
 * Menu:
 
-* Representation of complex numbers::  
-* Properties of complex numbers::  
-* Complex arithmetic operators::  
-* Elementary Complex Functions::  
-* Complex Trigonometric Functions::  
-* Inverse Complex Trigonometric Functions::  
-* Complex Hyperbolic Functions::  
-* Inverse Complex Hyperbolic Functions::  
-* Complex Number References and Further Reading::  
+* Representation of complex numbers::
+* Properties of complex numbers::
+* Complex arithmetic operators::
+* Elementary Complex Functions::
+* Complex Trigonometric Functions::
+* Inverse Complex Trigonometric Functions::
+* Complex Hyperbolic Functions::
+* Inverse Complex Hyperbolic Functions::
+* Complex Number References and Further Reading::
 
    ---------- Footnotes ----------
 
@@ -1889,13 +1889,13 @@ file 'gsl_poly.h'.
 
 * Menu:
 
-* Polynomial Evaluation::       
-* Divided Difference Representation of Polynomials::  
-* Quadratic Equations::         
-* Cubic Equations::             
-* General Polynomial Equations::  
-* Roots of Polynomials Examples::  
-* Roots of Polynomials References and Further Reading::  
+* Polynomial Evaluation::
+* Divided Difference Representation of Polynomials::
+* Quadratic Equations::
+* Cubic Equations::
+* General Polynomial Equations::
+* Roots of Polynomials Examples::
+* Roots of Polynomials References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Polynomial Evaluation,  Next: Divided Difference Representation of Polynomials,  Up: Polynomials
@@ -2140,28 +2140,28 @@ The following program will find these roots.
 
      #include <stdio.h>
      #include <gsl/gsl_poly.h>
-
+     
      int
      main (void)
      {
        int i;
        /* coefficients of P(x) =  -1 + x^5  */
-       double a[6] = { -1, 0, 0, 0, 0, 1 };
+       double a[6] = { -1, 0, 0, 0, 0, 1 };  
        double z[10];
-
-       gsl_poly_complex_workspace * w
+     
+       gsl_poly_complex_workspace * w 
            = gsl_poly_complex_workspace_alloc (6);
-
+       
        gsl_poly_complex_solve (a, 6, w, z);
-
+     
        gsl_poly_complex_workspace_free (w);
-
+     
        for (i = 0; i < 5; i++)
          {
-           printf ("z%d = %+.18f %+.18f\n",
+           printf ("z%d = %+.18f %+.18f\n", 
                    i, z[2*i], z[2*i+1]);
          }
-
+     
        return 0;
      }
 
@@ -2229,40 +2229,40 @@ set of header files can be included using the file 'gsl_sf.h'.
 
 * Menu:
 
-* Special Function Usage::      
-* The gsl_sf_result struct::    
-* Special Function Modes::      
-* Airy Functions and Derivatives::  
-* Bessel Functions::            
-* Clausen Functions::           
-* Coulomb Functions::           
-* Coupling Coefficients::       
-* Dawson Function::             
-* Debye Functions::             
-* Dilogarithm::                 
-* Elementary Operations::       
-* Elliptic Integrals::          
-* Elliptic Functions (Jacobi)::  
-* Error Functions::             
-* Exponential Functions::       
-* Exponential Integrals::       
-* Fermi-Dirac Function::        
-* Gamma and Beta Functions::    
-* Gegenbauer Functions::        
-* Hypergeometric Functions::    
-* Laguerre Functions::          
-* Lambert W Functions::         
-* Legendre Functions and Spherical Harmonics::  
-* Logarithm and Related Functions::  
+* Special Function Usage::
+* The gsl_sf_result struct::
+* Special Function Modes::
+* Airy Functions and Derivatives::
+* Bessel Functions::
+* Clausen Functions::
+* Coulomb Functions::
+* Coupling Coefficients::
+* Dawson Function::
+* Debye Functions::
+* Dilogarithm::
+* Elementary Operations::
+* Elliptic Integrals::
+* Elliptic Functions (Jacobi)::
+* Error Functions::
+* Exponential Functions::
+* Exponential Integrals::
+* Fermi-Dirac Function::
+* Gamma and Beta Functions::
+* Gegenbauer Functions::
+* Hypergeometric Functions::
+* Laguerre Functions::
+* Lambert W Functions::
+* Legendre Functions and Spherical Harmonics::
+* Logarithm and Related Functions::
 * Mathieu Functions::
-* Power Function::              
-* Psi (Digamma) Function::      
-* Synchrotron Functions::       
-* Transport Functions::         
-* Trigonometric Functions::     
-* Zeta Functions::              
-* Special Functions Examples::  
-* Special Functions References and Further Reading::  
+* Power Function::
+* Psi (Digamma) Function::
+* Synchrotron Functions::
+* Transport Functions::
+* Trigonometric Functions::
+* Zeta Functions::
+* Special Functions Examples::
+* Special Functions References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Special Function Usage,  Next: The gsl_sf_result struct,  Up: Special Functions
@@ -2370,10 +2370,10 @@ functions are defined in the header file 'gsl_sf_airy.h'.
 
 * Menu:
 
-* Airy Functions::              
-* Derivatives of Airy Functions::  
-* Zeros of Airy Functions::     
-* Zeros of Derivatives of Airy Functions::  
+* Airy Functions::
+* Derivatives of Airy Functions::
+* Zeros of Airy Functions::
+* Zeros of Derivatives of Airy Functions::
 
 
 File: gsl-ref.info,  Node: Airy Functions,  Next: Derivatives of Airy Functions,  Up: Airy Functions and Derivatives
@@ -2492,19 +2492,19 @@ defined in the header file 'gsl_sf_bessel.h'.
 
 * Menu:
 
-* Regular Cylindrical Bessel Functions::  
-* Irregular Cylindrical Bessel Functions::  
-* Regular Modified Cylindrical Bessel Functions::  
-* Irregular Modified Cylindrical Bessel Functions::  
-* Regular Spherical Bessel Functions::  
-* Irregular Spherical Bessel Functions::  
-* Regular Modified Spherical Bessel Functions::  
-* Irregular Modified Spherical Bessel Functions::  
-* Regular Bessel Function - Fractional Order::  
-* Irregular Bessel Functions - Fractional Order::  
-* Regular Modified Bessel Functions - Fractional Order::  
-* Irregular Modified Bessel Functions - Fractional Order::  
-* Zeros of Regular Bessel Functions::  
+* Regular Cylindrical Bessel Functions::
+* Irregular Cylindrical Bessel Functions::
+* Regular Modified Cylindrical Bessel Functions::
+* Irregular Modified Cylindrical Bessel Functions::
+* Regular Spherical Bessel Functions::
+* Irregular Spherical Bessel Functions::
+* Regular Modified Spherical Bessel Functions::
+* Irregular Modified Spherical Bessel Functions::
+* Regular Bessel Function - Fractional Order::
+* Irregular Bessel Functions - Fractional Order::
+* Regular Modified Bessel Functions - Fractional Order::
+* Irregular Modified Bessel Functions - Fractional Order::
+* Zeros of Regular Bessel Functions::
 
 
 File: gsl-ref.info,  Node: Regular Cylindrical Bessel Functions,  Next: Irregular Cylindrical Bessel Functions,  Up: Bessel Functions
@@ -2981,9 +2981,9 @@ available.
 
 * Menu:
 
-* Normalized Hydrogenic Bound States::  
-* Coulomb Wave Functions::      
-* Coulomb Wave Function Normalization Constant::  
+* Normalized Hydrogenic Bound States::
+* Coulomb Wave Functions::
+* Coulomb Wave Function Normalization Constant::
 
 
 File: gsl-ref.info,  Node: Normalized Hydrogenic Bound States,  Next: Coulomb Wave Functions,  Up: Coulomb Functions
@@ -3029,6 +3029,7 @@ solution can be reconstructed from the following relations,
 
      F_L'(eta,x) = fcp[k_L] * exp(exp_F)
      G_L'(eta,x) = gcp[k_L] * exp(exp_G)
+
 
  -- Function: int gsl_sf_coulomb_wave_FG_e (double ETA, double X, double
           L_F, int K, gsl_sf_result * F, gsl_sf_result * FP,
@@ -3112,9 +3113,9 @@ section are declared in the header file 'gsl_sf_coupling.h'.
 
 * Menu:
 
-* 3-j Symbols::                 
-* 6-j Symbols::                 
-* 9-j Symbols::                 
+* 3-j Symbols::
+* 6-j Symbols::
+* 9-j Symbols::
 
 
 File: gsl-ref.info,  Node: 3-j Symbols,  Next: 6-j Symbols,  Up: Coupling Coefficients
@@ -3244,8 +3245,8 @@ The functions described in this section are declared in the header file
 
 * Menu:
 
-* Real Argument::               
-* Complex Argument::            
+* Real Argument::
+* Complex Argument::
 
 
 File: gsl-ref.info,  Node: Real Argument,  Next: Complex Argument,  Up: Dilogarithm
@@ -3309,11 +3310,11 @@ be found in Abramowitz & Stegun, Chapter 17.
 
 * Menu:
 
-* Definition of Legendre Forms::  
-* Definition of Carlson Forms::  
-* Legendre Form of Complete Elliptic Integrals::  
-* Legendre Form of Incomplete Elliptic Integrals::  
-* Carlson Forms::               
+* Definition of Legendre Forms::
+* Definition of Carlson Forms::
+* Legendre Form of Complete Elliptic Integrals::
+* Legendre Form of Incomplete Elliptic Integrals::
+* Carlson Forms::
 
 
 File: gsl-ref.info,  Node: Definition of Legendre Forms,  Next: Definition of Carlson Forms,  Up: Elliptic Integrals
@@ -3490,10 +3491,10 @@ functions in this section are declared in the header file
 
 * Menu:
 
-* Error Function::              
-* Complementary Error Function::  
-* Log Complementary Error Function::  
-* Probability functions::       
+* Error Function::
+* Complementary Error Function::
+* Log Complementary Error Function::
+* Probability functions::
 
 
 File: gsl-ref.info,  Node: Error Function,  Next: Complementary Error Function,  Up: Error Functions
@@ -3571,9 +3572,9 @@ The functions described in this section are declared in the header file
 
 * Menu:
 
-* Exponential Function::        
-* Relative Exponential Functions::  
-* Exponentiation With Error Estimate::  
+* Exponential Function::
+* Relative Exponential Functions::
+* Exponentiation With Error Estimate::
 
 
 File: gsl-ref.info,  Node: Exponential Function,  Next: Relative Exponential Functions,  Up: Exponential Functions
@@ -3680,12 +3681,12 @@ Stegun, Chapter 5.  These functions are declared in the header file
 
 * Menu:
 
-* Exponential Integral::        
-* Ei(x)::                       
-* Hyperbolic Integrals::        
-* Ei_3(x)::                     
-* Trigonometric Integrals::     
-* Arctangent Integral::         
+* Exponential Integral::
+* Ei(x)::
+* Hyperbolic Integrals::
+* Ei_3(x)::
+* Trigonometric Integrals::
+* Arctangent Integral::
 
 
 File: gsl-ref.info,  Node: Exponential Integral,  Next: Ei(x),  Up: Exponential Integrals
@@ -3699,6 +3700,7 @@ File: gsl-ref.info,  Node: Exponential Integral,  Next: Ei(x),  Up: Exponential 
 
           E_1(x) := \Re \int_1^\infty dt \exp(-xt)/t.
 
+
  -- Function: double gsl_sf_expint_E2 (double X)
  -- Function: int gsl_sf_expint_E2_e (double X, gsl_sf_result * RESULT)
      These routines compute the second-order exponential integral
@@ -3706,12 +3708,14 @@ File: gsl-ref.info,  Node: Exponential Integral,  Next: Ei(x),  Up: Exponential 
 
           E_2(x) := \Re \int_1^\infty dt \exp(-xt)/t^2.
 
+
  -- Function: double gsl_sf_expint_En (int N, double X)
  -- Function: int gsl_sf_expint_En_e (int N, double X, gsl_sf_result *
           RESULT)
      These routines compute the exponential integral E_n(x) of order n,
 
           E_n(x) := \Re \int_1^\infty dt \exp(-xt)/t^n.
+
 
 
 File: gsl-ref.info,  Node: Ei(x),  Next: Hyperbolic Integrals,  Prev: Exponential Integral,  Up: Exponential Integrals
@@ -3793,8 +3797,8 @@ The functions described in this section are declared in the header file
 
 * Menu:
 
-* Complete Fermi-Dirac Integrals::  
-* Incomplete Fermi-Dirac Integrals::  
+* Complete Fermi-Dirac Integrals::
+* Incomplete Fermi-Dirac Integrals::
 
 
 File: gsl-ref.info,  Node: Complete Fermi-Dirac Integrals,  Next: Incomplete Fermi-Dirac Integrals,  Up: Fermi-Dirac Function
@@ -3887,12 +3891,12 @@ functions described in this section are declared in the header file
 
 * Menu:
 
-* Gamma Functions::             
-* Factorials::                  
-* Pochhammer Symbol::           
-* Incomplete Gamma Functions::  
-* Beta Functions::              
-* Incomplete Beta Function::    
+* Gamma Functions::
+* Factorials::
+* Pochhammer Symbol::
+* Incomplete Gamma Functions::
+* Beta Functions::
+* Incomplete Beta Function::
 
 
 File: gsl-ref.info,  Node: Gamma Functions,  Next: Factorials,  Up: Gamma and Beta Functions
@@ -4312,10 +4316,10 @@ header file 'gsl_sf_legendre.h'.
 
 * Menu:
 
-* Legendre Polynomials::        
-* Associated Legendre Polynomials and Spherical Harmonics::  
-* Conical Functions::           
-* Radial Functions for Hyperbolic Space::  
+* Legendre Polynomials::
+* Associated Legendre Polynomials and Spherical Harmonics::
+* Conical Functions::
+* Radial Functions for Hyperbolic Space::
 
 
 File: gsl-ref.info,  Node: Legendre Polynomials,  Next: Associated Legendre Polynomials and Spherical Harmonics,  Up: Legendre Functions and Spherical Harmonics
@@ -4730,10 +4734,10 @@ Stegun, Chapter 20.  These functions are defined in the header file
 
 * Menu:
 
-* Mathieu Function Workspace::  
-* Mathieu Function Characteristic Values::  
-* Angular Mathieu Functions::   
-* Radial Mathieu Functions::    
+* Mathieu Function Workspace::
+* Mathieu Function Characteristic Values::
+* Angular Mathieu Functions::
+* Radial Mathieu Functions::
 
 
 File: gsl-ref.info,  Node: Mathieu Function Workspace,  Next: Mathieu Function Characteristic Values,  Up: Mathieu Functions
@@ -4872,9 +4876,9 @@ These functions are declared in the header file 'gsl_sf_psi.h'.
 
 * Menu:
 
-* Digamma Function::            
-* Trigamma Function::           
-* Polygamma Function::          
+* Digamma Function::
+* Trigamma Function::
+* Polygamma Function::
 
 
 File: gsl-ref.info,  Node: Digamma Function,  Next: Trigamma Function,  Up: Psi (Digamma) Function
@@ -4988,12 +4992,12 @@ functions are declared in the header file 'gsl_sf_trig.h'.
 
 * Menu:
 
-* Circular Trigonometric Functions::  
-* Trigonometric Functions for Complex Arguments::  
-* Hyperbolic Trigonometric Functions::  
-* Conversion Functions::        
-* Restriction Functions::       
-* Trigonometric Functions With Error Estimates::  
+* Circular Trigonometric Functions::
+* Trigonometric Functions for Complex Arguments::
+* Hyperbolic Trigonometric Functions::
+* Conversion Functions::
+* Restriction Functions::
+* Trigonometric Functions With Error Estimates::
 
 
 File: gsl-ref.info,  Node: Circular Trigonometric Functions,  Next: Trigonometric Functions for Complex Arguments,  Up: Trigonometric Functions
@@ -5214,20 +5218,20 @@ J_0(5.0),
      #include <stdio.h>
      #include <gsl/gsl_errno.h>
      #include <gsl/gsl_sf_bessel.h>
-
+     
      int
      main (void)
      {
        double x = 5.0;
        gsl_sf_result result;
-
+     
        double expected = -0.17759677131433830434739701;
-
+       
        int status = gsl_sf_bessel_J0_e (x, &result);
-
+     
        printf ("status  = %s\n", gsl_strerror(status));
        printf ("J0(5.0) = %.18f\n"
-               "      +/- % .18f\n",
+               "      +/- % .18f\n", 
                result.val, result.err);
        printf ("exact   = %.18f\n", expected);
        return status;
@@ -5247,15 +5251,15 @@ are not accessible.
 
      #include <stdio.h>
      #include <gsl/gsl_sf_bessel.h>
-
+     
      int
      main (void)
      {
        double x = 5.0;
        double expected = -0.17759677131433830434739701;
-
+       
        double y = gsl_sf_bessel_J0 (x);
-
+     
        printf ("J0(5.0) = %.18f\n", y);
        printf ("exact   = %.18f\n", expected);
        return 0;
@@ -5321,11 +5325,11 @@ compatible with the vector and matrix formats used by BLAS routines.
 
 * Menu:
 
-* Data types::                  
-* Blocks::                      
-* Vectors::                     
-* Matrices::                    
-* Vector and Matrix References and Further Reading::  
+* Data types::
+* Blocks::
+* Vectors::
+* Matrices::
+* Vector and Matrix References and Further Reading::
 
 
 File: gsl-ref.info,  Node: Data types,  Next: Blocks,  Up: Vectors and Matrices
@@ -5384,9 +5388,9 @@ known as the "stride".
 
 * Menu:
 
-* Block allocation::            
-* Reading and writing blocks::  
-* Example programs for blocks::  
+* Block allocation::
+* Reading and writing blocks::
+* Example programs for blocks::
 
 
 File: gsl-ref.info,  Node: Block allocation,  Next: Reading and writing blocks,  Up: Blocks
@@ -5470,15 +5474,15 @@ The following program shows how to allocate a block,
 
      #include <stdio.h>
      #include <gsl/gsl_block.h>
-
+     
      int
      main (void)
      {
        gsl_block * b = gsl_block_alloc (100);
-
+       
        printf ("length of block = %zu\n", b->size);
        printf ("block data address = %p\n", b->data);
-
+     
        gsl_block_free (b);
        return 0;
      }
@@ -5530,17 +5534,17 @@ and any underlying block will not be deallocated with the vector.
 
 * Menu:
 
-* Vector allocation::           
-* Accessing vector elements::   
-* Initializing vector elements::  
-* Reading and writing vectors::  
-* Vector views::                
-* Copying vectors::             
-* Exchanging elements::         
-* Vector operations::           
-* Finding maximum and minimum elements of vectors::  
-* Vector properties::           
-* Example programs for vectors::  
+* Vector allocation::
+* Accessing vector elements::
+* Initializing vector elements::
+* Reading and writing vectors::
+* Vector views::
+* Copying vectors::
+* Exchanging elements::
+* Vector operations::
+* Finding maximum and minimum elements of vectors::
+* Vector properties::
+* Example programs for vectors::
 
 
 File: gsl-ref.info,  Node: Vector allocation,  Next: Accessing vector elements,  Up: Vectors
@@ -6011,23 +6015,23 @@ using the functions 'gsl_vector_alloc', 'gsl_vector_set' and
 
      #include <stdio.h>
      #include <gsl/gsl_vector.h>
-
+     
      int
      main (void)
      {
        int i;
        gsl_vector * v = gsl_vector_alloc (3);
-
+       
        for (i = 0; i < 3; i++)
          {
            gsl_vector_set (v, i, 1.23 + i);
          }
-
+       
        for (i = 0; i < 100; i++) /* OUT OF RANGE ERROR */
          {
            printf ("v_%d = %g\n", i, gsl_vector_get (v, i));
          }
-
+     
        gsl_vector_free (v);
        return 0;
      }
@@ -6048,24 +6052,24 @@ The next program shows how to write a vector to a file.
 
      #include <stdio.h>
      #include <gsl/gsl_vector.h>
-
+     
      int
      main (void)
      {
-       int i;
+       int i; 
        gsl_vector * v = gsl_vector_alloc (100);
-
+       
        for (i = 0; i < 100; i++)
          {
            gsl_vector_set (v, i, 1.23 + i);
          }
-
-       {
+     
+       {  
           FILE * f = fopen ("test.dat", "w");
           gsl_vector_fprintf (f, v, "%.5g");
           fclose (f);
        }
-
+     
        gsl_vector_free (v);
        return 0;
      }
@@ -6077,24 +6081,24 @@ as follows:
 
      #include <stdio.h>
      #include <gsl/gsl_vector.h>
-
+     
      int
      main (void)
      {
-       int i;
+       int i; 
        gsl_vector * v = gsl_vector_alloc (10);
-
-       {
+     
+       {  
           FILE * f = fopen ("test.dat", "r");
           gsl_vector_fscanf (f, v);
           fclose (f);
        }
-
+     
        for (i = 0; i < 10; i++)
          {
            printf ("%g\n", gsl_vector_get(v, i));
          }
-
+     
        gsl_vector_free (v);
        return 0;
      }
@@ -6158,19 +6162,19 @@ underlying block will not be freed.
 
 * Menu:
 
-* Matrix allocation::           
-* Accessing matrix elements::   
-* Initializing matrix elements::  
-* Reading and writing matrices::  
-* Matrix views::                
-* Creating row and column views::  
-* Copying matrices::            
-* Copying rows and columns::    
-* Exchanging rows and columns::  
-* Matrix operations::           
-* Finding maximum and minimum elements of matrices::  
-* Matrix properties::           
-* Example programs for matrices::  
+* Matrix allocation::
+* Accessing matrix elements::
+* Initializing matrix elements::
+* Reading and writing matrices::
+* Matrix views::
+* Creating row and column views::
+* Copying matrices::
+* Copying rows and columns::
+* Exchanging rows and columns::
+* Matrix operations::
+* Finding maximum and minimum elements of matrices::
+* Matrix properties::
+* Example programs for matrices::
 
 
 File: gsl-ref.info,  Node: Matrix allocation,  Next: Accessing matrix elements,  Up: Matrices
@@ -6764,24 +6768,24 @@ matrix using the functions 'gsl_matrix_alloc', 'gsl_matrix_set' and
 
      #include <stdio.h>
      #include <gsl/gsl_matrix.h>
-
+     
      int
      main (void)
      {
-       int i, j;
+       int i, j; 
        gsl_matrix * m = gsl_matrix_alloc (10, 3);
-
+       
        for (i = 0; i < 10; i++)
          for (j = 0; j < 3; j++)
            gsl_matrix_set (m, i, j, 0.23 + 100*i + j);
-
+       
        for (i = 0; i < 100; i++)  /* OUT OF RANGE ERROR */
          for (j = 0; j < 3; j++)
-           printf ("m(%d,%d) = %g\n", i, j,
+           printf ("m(%d,%d) = %g\n", i, j, 
                    gsl_matrix_get (m, i, j));
-
+     
        gsl_matrix_free (m);
-
+     
        return 0;
      }
 
@@ -6806,30 +6810,30 @@ The next program shows how to write a matrix to a file.
 
      #include <stdio.h>
      #include <gsl/gsl_matrix.h>
-
+     
      int
      main (void)
      {
-       int i, j, k = 0;
+       int i, j, k = 0; 
        gsl_matrix * m = gsl_matrix_alloc (100, 100);
        gsl_matrix * a = gsl_matrix_alloc (100, 100);
-
+       
        for (i = 0; i < 100; i++)
          for (j = 0; j < 100; j++)
            gsl_matrix_set (m, i, j, 0.23 + i + j);
-
-       {
+     
+       {  
           FILE * f = fopen ("test.dat", "wb");
           gsl_matrix_fwrite (f, m);
           fclose (f);
        }
-
-       {
+     
+       {  
           FILE * f = fopen ("test.dat", "rb");
           gsl_matrix_fread (f, a);
           fclose (f);
        }
-
+     
        for (i = 0; i < 100; i++)
          for (j = 0; j < 100; j++)
            {
@@ -6837,10 +6841,10 @@ The next program shows how to write a matrix to a file.
              double aij = gsl_matrix_get (a, i, j);
              if (mij != aij) k++;
            }
-
+     
        gsl_matrix_free (m);
        gsl_matrix_free (a);
-
+     
        printf ("differences = %d (should be zero)\n", k);
        return (k > 0);
      }
@@ -6857,30 +6861,30 @@ program computes the column norms of a matrix.
      #include <stdio.h>
      #include <gsl/gsl_matrix.h>
      #include <gsl/gsl_blas.h>
-
+     
      int
      main (void)
      {
        size_t i,j;
-
+     
        gsl_matrix *m = gsl_matrix_alloc (10, 10);
-
+     
        for (i = 0; i < 10; i++)
          for (j = 0; j < 10; j++)
            gsl_matrix_set (m, i, j, sin (i) + cos (j));
-
+     
        for (j = 0; j < 10; j++)
          {
            gsl_vector_view column = gsl_matrix_column (m, j);
            double d;
-
+     
            d = gsl_blas_dnrm2 (&column.vector);
-
+     
            printf ("matrix column %zu, norm = %g\n", j, d);
          }
-
+     
        gsl_matrix_free (m);
-
+     
        return 0;
      }
 
@@ -6946,16 +6950,16 @@ file 'gsl_permutation.h'.
 
 * Menu:
 
-* The Permutation struct::      
-* Permutation allocation::      
-* Accessing permutation elements::  
-* Permutation properties::      
-* Permutation functions::       
-* Applying Permutations::       
-* Reading and writing permutations::  
-* Permutations in cyclic form::  
-* Permutation Examples::        
-* Permutation References and Further Reading::  
+* The Permutation struct::
+* Permutation allocation::
+* Accessing permutation elements::
+* Permutation properties::
+* Permutation functions::
+* Applying Permutations::
+* Reading and writing permutations::
+* Permutations in cyclic form::
+* Permutation Examples::
+* Permutation References and Further Reading::
 
 
 File: gsl-ref.info,  Node: The Permutation struct,  Next: Permutation allocation,  Up: Permutations
@@ -6973,6 +6977,7 @@ elements of the permutation array are all of type 'size_t'.  The
        size_t size;
        size_t * data;
      } gsl_permutation;
+
 
 
 File: gsl-ref.info,  Node: Permutation allocation,  Next: Accessing permutation elements,  Prev: The Permutation struct,  Up: Permutations
@@ -7092,16 +7097,15 @@ File: gsl-ref.info,  Node: Applying Permutations,  Next: Reading and writing per
           gsl_vector * V)
      This function applies the permutation P to the elements of the
      vector V, considered as a row-vector acted on by a permutation
-     matrix from the right, v' = v P.  The j-th column of the
-     permutation matrix P is given by the P_j-th column of the identity
-     matrix.  The permutation P and the vector V must have the same
-     length.
+     matrix from the right, v' = v P. The j-th column of the permutation
+     matrix P is given by the P_j-th column of the identity matrix.  The
+     permutation P and the vector V must have the same length.
 
  -- Function: int gsl_permute_vector_inverse (const gsl_permutation * P,
           gsl_vector * V)
      This function applies the inverse of the permutation P to the
      elements of the vector V, considered as a row-vector acted on by an
-     inverse permutation matrix from the right, v' = v P^T.  Note that
+     inverse permutation matrix from the right, v' = v P^T. Note that
      for permutation matrices the inverse is the same as the transpose.
      The j-th column of the permutation matrix P is given by the P_j-th
      column of the identity matrix.  The permutation P and the vector V
@@ -7233,4 +7237,104 @@ many applications in the theory of permutations.
           gsl_permutation * Q)
      This function counts the number of cycles in the permutation Q,
      given in canonical form.
+
+
+File: gsl-ref.info,  Node: Permutation Examples,  Next: Permutation References and Further Reading,  Prev: Permutations in cyclic form,  Up: Permutations
+
+9.9 Examples
+============
+
+The example program below creates a random permutation (by shuffling the
+elements of the identity) and finds its inverse.
+
+     #include <stdio.h>
+     #include <gsl/gsl_rng.h>
+     #include <gsl/gsl_randist.h>
+     #include <gsl/gsl_permutation.h>
+     
+     int
+     main (void) 
+     {
+       const size_t N = 10;
+       const gsl_rng_type * T;
+       gsl_rng * r;
+     
+       gsl_permutation * p = gsl_permutation_alloc (N);
+       gsl_permutation * q = gsl_permutation_alloc (N);
+     
+       gsl_rng_env_setup();
+       T = gsl_rng_default;
+       r = gsl_rng_alloc (T);
+     
+       printf ("initial permutation:");  
+       gsl_permutation_init (p);
+       gsl_permutation_fprintf (stdout, p, " %u");
+       printf ("\n");
+     
+       printf (" random permutation:");  
+       gsl_ran_shuffle (r, p->data, N, sizeof(size_t));
+       gsl_permutation_fprintf (stdout, p, " %u");
+       printf ("\n");
+     
+       printf ("inverse permutation:");  
+       gsl_permutation_inverse (q, p);
+       gsl_permutation_fprintf (stdout, q, " %u");
+       printf ("\n");
+     
+       gsl_permutation_free (p);
+       gsl_permutation_free (q);
+       gsl_rng_free (r);
+     
+       return 0;
+     }
+
+Here is the output from the program,
+
+     $ ./a.out
+     initial permutation: 0 1 2 3 4 5 6 7 8 9
+      random permutation: 1 3 5 2 7 6 0 4 9 8
+     inverse permutation: 6 0 3 1 7 2 5 4 9 8
+
+The random permutation 'p[i]' and its inverse 'q[i]' are related through
+the identity 'p[q[i]] = i', which can be verified from the output.
+
+   The next example program steps forwards through all possible third
+order permutations, starting from the identity,
+
+     #include <stdio.h>
+     #include <gsl/gsl_permutation.h>
+     
+     int
+     main (void) 
+     {
+       gsl_permutation * p = gsl_permutation_alloc (3);
+     
+       gsl_permutation_init (p);
+     
+       do 
+        {
+           gsl_permutation_fprintf (stdout, p, " %u");
+           printf ("\n");
+        }
+       while (gsl_permutation_next(p) == GSL_SUCCESS);
+     
+       gsl_permutation_free (p);
+     
+       return 0;
+     }
+
+Here is the output from the program,
+
+     $ ./a.out
+      0 1 2
+      0 2 1
+      1 0 2
+      1 2 0
+      2 0 1
+      2 1 0
+
+The permutations are generated in lexicographic order.  To reverse the
+sequence, begin with the final permutation (which is the reverse of the
+identity) and replace 'gsl_permutation_next' with
+'gsl_permutation_prev'.
 

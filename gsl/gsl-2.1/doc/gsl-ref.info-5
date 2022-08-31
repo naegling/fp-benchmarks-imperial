@@ -1,4 +1,4 @@
-This is gsl-ref.info, produced by makeinfo version 5.1 from
+This is gsl-ref.info, produced by makeinfo version 6.8 from
 gsl-ref.texi.
 
 Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
@@ -45,11 +45,13 @@ following paper,
      Scientist Should Know About Floating-Point Arithmetic".  'ACM
      Computing Surveys', Vol. 24, No. 3 (September 1992), page 319.
 
+
    A detailed textbook on IEEE arithmetic and its practical use is
 available from SIAM Press,
 
      Michael L. Overton, 'Numerical Computing with IEEE Floating Point
      Arithmetic', SIAM Press, ISBN 0898715717.
+
 
 
 File: gsl-ref.info,  Node: Debugging Numerical Programs,  Next: Contributors to GSL,  Prev: IEEE floating-point arithmetic,  Up: Top
@@ -62,11 +64,11 @@ programs which use GSL.
 
 * Menu:
 
-* Using gdb::                   
-* Examining floating point registers::  
-* Handling floating point exceptions::  
-* GCC warning options for numerical programs::  
-* Debugging References::        
+* Using gdb::
+* Examining floating point registers::
+* Handling floating point exceptions::
+* GCC warning options for numerical programs::
+* Debugging References::
 
 
 File: gsl-ref.info,  Node: Using gdb,  Next: Examining floating point registers,  Up: Debugging Numerical Programs
@@ -365,7 +367,7 @@ Appendix B Contributors to GSL
 *Mike Booth*
      Wrote the Monte Carlo library.
 
-*Jorma Olavi Ta"htinen*
+*Jorma Olavi Tähtinen*
      Wrote the initial complex arithmetic functions.
 
 *Thomas Walter*
@@ -571,10 +573,10 @@ Reading::).
 
 * Menu:
 
-* Level 1 CBLAS Functions::     
-* Level 2 CBLAS Functions::     
-* Level 3 CBLAS Functions::     
-* GSL CBLAS Examples::          
+* Level 1 CBLAS Functions::
+* Level 2 CBLAS Functions::
+* Level 3 CBLAS Functions::
+* GSL CBLAS Examples::
 
 
 File: gsl-ref.info,  Node: Level 1 CBLAS Functions,  Next: Level 2 CBLAS Functions,  Up: GSL CBLAS Library
@@ -1247,36 +1249,36 @@ changed to 'CblasColMajor'.
 
      #include <stdio.h>
      #include <gsl/gsl_cblas.h>
-
+     
      int
      main (void)
      {
        int lda = 3;
-
+     
        float A[] = { 0.11, 0.12, 0.13,
                      0.21, 0.22, 0.23 };
-
+     
        int ldb = 2;
-
+       
        float B[] = { 1011, 1012,
                      1021, 1022,
                      1031, 1032 };
-
+     
        int ldc = 2;
-
+     
        float C[] = { 0.00, 0.00,
                      0.00, 0.00 };
-
+     
        /* Compute C = A B */
-
-       cblas_sgemm (CblasRowMajor,
+     
+       cblas_sgemm (CblasRowMajor, 
                     CblasNoTrans, CblasNoTrans, 2, 2, 3,
                     1.0, A, lda, B, ldb, 0.0, C, ldc);
-
+     
        printf ("[ %g, %g\n", C[0], C[1]);
        printf ("  %g, %g ]\n", C[2], C[3]);
-
-       return 0;
+     
+       return 0;  
      }
 
 To compile the program use the following command line,
@@ -1963,7 +1965,7 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least the
 "copyright" line and a pointer to where the full notice is found.
 
-     ONE LINE TO GIVE THE PROGRAM'S NAME AND A BRIEF IDEA 
+     ONE LINE TO GIVE THE PROGRAM'S NAME AND A BRIEF IDEA
      OF WHAT IT DOES.
      Copyright (C) YEAR NAME OF AUTHOR
 
@@ -3965,9 +3967,9 @@ Function Index
 * gsl_linalg_hermtd_decomp:              Tridiagonal Decomposition of Hermitian Matrices.
                                                               (line  14)
 * gsl_linalg_hermtd_unpack:              Tridiagonal Decomposition of Hermitian Matrices.
-                                                              (line  26)
+                                                              (line  25)
 * gsl_linalg_hermtd_unpack_T:            Tridiagonal Decomposition of Hermitian Matrices.
-                                                              (line  34)
+                                                              (line  33)
 * gsl_linalg_hessenberg_decomp:          Hessenberg Decomposition of Real Matrices.
                                                               (line  16)
 * gsl_linalg_hessenberg_set_zero:        Hessenberg Decomposition of Real Matrices.
@@ -4639,7 +4641,7 @@ Function Index
 * gsl_permutation_memcpy:                Permutation allocation.
                                                               (line  26)
 * gsl_permutation_mul:                   Applying Permutations.
-                                                              (line  35)
+                                                              (line  34)
 * gsl_permutation_next:                  Permutation functions.
                                                               (line  14)
 * gsl_permutation_prev:                  Permutation functions.
@@ -4659,7 +4661,7 @@ Function Index
 * gsl_permute_vector:                    Applying Permutations.
                                                               (line  16)
 * gsl_permute_vector_inverse:            Applying Permutations.
-                                                              (line  25)
+                                                              (line  24)
 * gsl_poly_complex_eval:                 Polynomial Evaluation.
                                                               (line  16)
 * gsl_poly_complex_solve:                General Polynomial Equations.
@@ -5406,15 +5408,15 @@ Function Index
 * gsl_sf_coulomb_CL_e:                   Coulomb Wave Function Normalization Constant.
                                                               (line   9)
 * gsl_sf_coulomb_wave_FGp_array:         Coulomb Wave Functions.
-                                                              (line  47)
+                                                              (line  48)
 * gsl_sf_coulomb_wave_FG_array:          Coulomb Wave Functions.
-                                                              (line  39)
+                                                              (line  40)
 * gsl_sf_coulomb_wave_FG_e:              Coulomb Wave Functions.
-                                                              (line  19)
+                                                              (line  20)
 * gsl_sf_coulomb_wave_F_array:           Coulomb Wave Functions.
-                                                              (line  33)
+                                                              (line  34)
 * gsl_sf_coulomb_wave_sphF_array:        Coulomb Wave Functions.
-                                                              (line  57)
+                                                              (line  58)
 * gsl_sf_coupling_3j:                    3-j Symbols.         (line   6)
 * gsl_sf_coupling_3j_e:                  3-j Symbols.         (line   8)
 * gsl_sf_coupling_6j:                    6-j Symbols.         (line   6)
@@ -5504,15 +5506,15 @@ Function Index
 * gsl_sf_expint_E1_e:                    Exponential Integral.
                                                               (line   7)
 * gsl_sf_expint_E2:                      Exponential Integral.
-                                                              (line  12)
-* gsl_sf_expint_E2_e:                    Exponential Integral.
                                                               (line  13)
+* gsl_sf_expint_E2_e:                    Exponential Integral.
+                                                              (line  14)
 * gsl_sf_expint_Ei:                      Ei(x).               (line   6)
 * gsl_sf_expint_Ei_e:                    Ei(x).               (line   7)
 * gsl_sf_expint_En:                      Exponential Integral.
-                                                              (line  19)
+                                                              (line  21)
 * gsl_sf_expint_En_e:                    Exponential Integral.
-                                                              (line  20)
+                                                              (line  22)
 * gsl_sf_expm1:                          Relative Exponential Functions.
                                                               (line   6)
 * gsl_sf_expm1_e:                        Relative Exponential Functions.
